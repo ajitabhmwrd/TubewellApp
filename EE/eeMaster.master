@@ -1,25 +1,32 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Home.master.cs" Inherits="Home" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="eeMaster.master.cs" Inherits="EE_eeMaster" %>
 
 <!DOCTYPE html>
 
 <html>
 <head runat="server">
     <title></title>
-    <link href="bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="myContent/Style/myStyle.css" rel="stylesheet" />
+    <link href="../bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../myContent/Style/myStyle.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-3.4.1.min.js"></script>
+        <script src="../bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div>
             <nav class="navbar navbar-light bg-light" style="color: #008fcc;">
                 <a class="navbar-brand" href="#">
-                    <img src="Images/Logo.png" style="width: auto; height: 70px;" /></a>
+                    <img src="../Images/Logo.png" style="width: auto; height: 70px;" /></a>
                 <div class="mr-auto">
                     <br />
                     <div style="font-weight: bold; font-size: 14px">Minor Water Resources Department</div>
                     <div class="small">Govt. of Bihar</div>
+                </div>
+                <div class="font-weight-bold small text-lg-left"  style="color: black;margin-left:70px">
+                    <asp:Label ID="lblDesignation" runat="server" Text=""></asp:Label>
+                     
                 </div>
             </nav>
 
@@ -31,14 +38,12 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="height: 30px">
                     <ul class="navbar-nav mr-auto">
-                        <%--<li class="nav-item active">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>--%>
+                        
                         <li class="nav-item active dropdown">
-                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown
+                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tube Well
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="TubewellDetail.aspx">Manage Tube Well</a>
                                 <a class="dropdown-item" href="#">Another action</a>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
@@ -46,20 +51,18 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="#">Link</a>
                         </li>
-
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="Login.aspx">Login</a>
+                            <asp:LinkButton ID="lnkLogout" runat="server" OnClick="lnkLogout_Click" CssClass="nav-link">Sign Out</asp:LinkButton>
                         </li>
                     </ul>
                 </div>
             </nav>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-        </div>
-        <script src="Scripts/jquery-3.4.1.min.js"></script>
-        <script src="bootstrap-4.3.1/js/bootstrap.min.js"></script>
+        </div>       
     </form>
+    
 </body>
 </html>
