@@ -55,38 +55,29 @@ public partial class EE_AddDistrictEmployee : System.Web.UI.Page
         {
             DataTable dt = gd.getDataTable("getDdlBlockEmp");
             bc.bindDDL(ddlDesignation, dt, "RoleName", "RoleId");
+
         }
         catch (Exception ex)
         {
         }
     }
     protected void btnSave_Click(object sender, EventArgs e)
-    {
-        //insCreateEmployee
-        //@Name nvarchar(50),
-        //@Mobile nvarchar(50),
-        //@AltMob nvarchar(50),
-        //@Designation nvarchar(50),
-        //@RoleID nvarchar(50),
-        //@DistrictID nvarchar(10),
-        //@BlockID nvarchar(10),
-        //@PanchyatID nvarchar(50),
-        //@VillageID nvarchar(50),
-        //@Status nvarchar(50),
-        //@EntryByID nvarchar(50),
-        //@EntryByIP nvarchar(50)
-        //@PostingDistrictID nvarchar(50),
-        //@PostingBlockID nvarchar(50),
+    { 
         try
         {
+            lblMessage.Text = "";
             if (Page.IsValid == false)
             {
                 return;
             }
             lblMessage.Text = "";
             SqlParameter[] prm = new SqlParameter[]{
+                    new SqlParameter("@Designation",ddlDesignation.SelectedItem.Text),
+                    new SqlParameter("@RoleID",ddlDesignation.SelectedValue),
                     new SqlParameter("@Name",txtName.Text.Trim()),
                     new SqlParameter("@DistrictID",Session["DistCode"].ToString()),
+                    new SqlParameter("@Mobile",txtMobile.Text.Trim()),
+                    new SqlParameter("@AltMob",txtAltMobile.Text.Trim()),
                     new SqlParameter("@BlockID",DBNull.Value),
                     new SqlParameter("@PostingDistrictID",ddlPostingDistrict.SelectedValue),
                     new SqlParameter("@PostingBlockID",ddlPostingBlock.SelectedValue),
@@ -101,13 +92,14 @@ public partial class EE_AddDistrictEmployee : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            lblMessage.Text = ex.ToString();
+            //lblMessage.Text = ex.ToString();
         }
     }
 
     protected void btnReset_Click(object sender, EventArgs e)
     {
-
+        lblMessage.Text = "";
+        clear();
     }
 
     public void clear()

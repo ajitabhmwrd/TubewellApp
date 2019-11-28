@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="AddBlockEmployee.aspx.cs" Inherits="EE_AddDistrictEmployee" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="UpdateEmployee.aspx.cs" Inherits="EE_UpdateEmployee" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -18,7 +18,10 @@
                     </div>
                     <div class="col-md-12 p-1">
                         <asp:Label ID="lblMessage" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
-                    </div>                    
+                    </div>     
+                    <div class="col-md-12 p-1">
+                        Employee ID = <asp:Label ID="lblEmployeeID" runat="server" Text="" ForeColor="Blue" Font-Bold="true"></asp:Label>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3 p-1">
@@ -46,14 +49,14 @@
                         <asp:TextBox ID="txtAltMobile" runat="server" CssClass="form-control" MaxLength="10"></asp:TextBox>
                     </div>    
                     <div class="col-md-3 p-1">
-                        Working District*
+                        Posting District*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" InitialValue="0" runat="server" ControlToValidate="ddlPostingDistrict" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
                         <asp:DropDownList ID="ddlPostingDistrict" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlPostingDistrict_SelectedIndexChanged">
                             <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-md-3 p-1">
-                        Working Block*
+                        Posting Block*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" InitialValue="0" runat="server" ControlToValidate="ddlPostingBlock" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
                         <asp:DropDownList ID="ddlPostingBlock" runat="server" CssClass="form-control">
                             <asp:ListItem Value="0">Select</asp:ListItem>
@@ -63,7 +66,7 @@
                 <div class="row">
                     <div class="col-md-12 p-1">
                         <asp:Button ID="btnSave" runat="server" Text="Save" CssClass="btn btn-primary btn-sm" OnClick="btnSave_Click" ValidationGroup="TubewellEntry" />
-                        <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-secondary btn-sm" OnClick="btnReset_Click" />
+                        <asp:Button ID="btnCancel" runat="server" Text="Reset" CssClass="btn btn-secondary btn-sm" OnClick="btnCancel_Click" />
                     </div>
                 </div>
             </div>
@@ -75,4 +78,5 @@
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>
+
 

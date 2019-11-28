@@ -37,7 +37,14 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="height: 30px">
-                    <ul class="navbar-nav mr-auto">                        
+                    <ul class="navbar-nav mr-auto">    
+                        <li class="nav-item active dropdown">
+                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="BlockEmpList.aspx">Add Edit AE/JE</a>                               
+                            </div>
+                        </li>
                         <li class="nav-item active dropdown">
                             <a class="nav-link dropdown-toggle " href="#" id="navbarTubwell" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tube Well
                             </a>
@@ -45,13 +52,7 @@
                                 <a class="dropdown-item" href="TubewellDetail.aspx">Manage Tube Well</a>                               
                             </div>
                         </li>
-                        <li class="nav-item active dropdown">
-                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tube Well
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="TubewellDetail.aspx">Manage Tube Well</a>                               
-                            </div>
-                        </li>
+                        
                         <li class="nav-item active">
                             <a class="nav-link" href="#">Link</a>
                         </li>
