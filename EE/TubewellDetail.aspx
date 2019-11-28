@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="TubewellDetail.aspx.cs" Inherits="EE_TubewellDetail" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:UpdatePanel ID="Update" runat="server">
@@ -68,8 +69,7 @@
                                 <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                            <ContentTemplate>
-                                                
+                                            <ContentTemplate>                                                
                                         <asp:Button ID="btnEdit" runat="server" Text="EDIT" class="btn btn-primary btn-sm" OnClick="btnEdit_Click" />
                                             </ContentTemplate>
                                             <Triggers>
@@ -89,5 +89,10 @@
             <asp:AsyncPostBackTrigger ControlID="txtSearch" EventName="TextChanged" />
         </Triggers>
     </asp:UpdatePanel>
+    <script>
+        $(document).ready(function () {
+            $('.table-responsive').doubleScroll();
+        });
+    </script>
 </asp:Content>
 

@@ -14,14 +14,9 @@ public partial class EE_eeMaster : System.Web.UI.MasterPage
     {
         try
         {
-            if (Session["RoleName"].ToString() == "EE")
+            if (Session["RoleName"].ToString() == "Admin")
             {
-                SqlParameter[] prm = new SqlParameter[]
-                {
-                    new SqlParameter("@DistCode",Session["DistCode"].ToString())
-                };
-                DataTable dt = gd.getDataTable("getDistrictByDIstCode", prm);
-                lblDesignation.Text = "Welcome " + Session["Designation"].ToString() + ", " + dt.Rows[0]["DistName"].ToString();
+                lblDesignation.Text = "Welcome " + Session["Designation"].ToString();
             }
             else
             {

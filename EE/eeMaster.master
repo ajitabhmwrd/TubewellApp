@@ -8,7 +8,7 @@
     <link href="../bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../myContent/Style/myStyle.css" rel="stylesheet" />
     <script src="../Scripts/jquery-3.4.1.min.js"></script>
-        <script src="../bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script src="../bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -37,15 +37,19 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="height: 30px">
-                    <ul class="navbar-nav mr-auto">
-                        
+                    <ul class="navbar-nav mr-auto">                        
+                        <li class="nav-item active dropdown">
+                            <a class="nav-link dropdown-toggle " href="#" id="navbarTubwell" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tube Well
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarTubwell">
+                                <a class="dropdown-item" href="TubewellDetail.aspx">Manage Tube Well</a>                               
+                            </div>
+                        </li>
                         <li class="nav-item active dropdown">
                             <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tube Well
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="TubewellDetail.aspx">Manage Tube Well</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="TubewellDetail.aspx">Manage Tube Well</a>                               
                             </div>
                         </li>
                         <li class="nav-item active">
