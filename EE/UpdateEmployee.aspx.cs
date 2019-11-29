@@ -26,10 +26,16 @@ public partial class EE_UpdateEmployee : System.Web.UI.Page
                     };
                 DataTable dt = gd.getDataTable("getBlockEmpByID", prm);
                 if (dt.Rows.Count == 1)
-                {                    
-                    bindDDLDist();
-                    
-
+                {
+                    bindddlDesig();
+                    bindDDLDist();                    
+                    txtName.Text = dt.Rows[0]["Name"].ToString();
+                    txtMobile.Text= dt.Rows[0]["Mobile"].ToString();
+                    txtAltMobile.Text= dt.Rows[0]["AltMob"].ToString();
+                    ddlDesignation.SelectedValue= dt.Rows[0]["RoleID"].ToString();
+                    ddlPostingDistrict.SelectedValue= dt.Rows[0]["PostingDistrictID"].ToString();
+                    bindDDLBlock();
+                    ddlPostingBlock.SelectedValue= dt.Rows[0]["PostingBlockID"].ToString();
                 }
                 else
                     Response.Redirect("TubewellDetail.aspx");
@@ -97,13 +103,32 @@ public partial class EE_UpdateEmployee : System.Web.UI.Page
         bindDDLBlock();
     }
 
-    protected void btnCancel_Click(object sender, EventArgs e)
+    protected void btnUpdate_Click(object sender, EventArgs e)
     {
-
-    }
-
-    protected void btnSave_Click(object sender, EventArgs e)
-    {
-
+        try
+        {
+            if (Page.IsValid == false)
+            {
+                return;
+            }
+            lblMessage.Text = "";
+            SqlParameter[] prm = new SqlParameter[]{
+                    new SqlParameter("@EmpID",lblEmployeeID.Text.Trim()),
+                    new SqlParameter("@Name",txtName.Text.Trim()),
+                    new SqlParameter("@Mobile",txtMobile.Text.Trim()),
+                    new SqlParameter("@AltMob",txtAltMobile.Text.Trim()),
+                    new SqlParameter("@Designation",ddlDesignation.SelectedItem.Text),
+                    new SqlParameter("@DistrictID",Session["DistCode"].ToString()),
+                    new SqlParameter("@PostingDistrictID",ddlPostingDistrict.SelectedValue),
+                    new SqlParameter("@PostingBlockID",ddlPostingBlock.SelectedValue),
+                    new SqlParameter("@RoleID",ddlDesignation.SelectedValue),
+                    new SqlParameter("@updByID",Session["LoginId"].ToString()),
+                    new SqlParameter("@updByIP",customVariables.GetIPAddress())
+                            };
+            lblMessage.Text = gd.insExecuteSP("updBlockEmployee", prm);
+        }
+        catch (Exception ex)
+        {
+        }
     }
 }

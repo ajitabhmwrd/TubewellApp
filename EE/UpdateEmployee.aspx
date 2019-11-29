@@ -11,7 +11,7 @@
                 <hr />
             </div>
 
-            <div class="container">
+            <div class="container" >
                 <div class="row">
                     <div class="col-md-12 p-1">
                         <a class="btn btn-primary btn-sm" href="BlockEmpList.aspx">Back To AE/JE List</a>
@@ -65,16 +65,15 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 p-1">
-                        <asp:Button ID="btnSave" runat="server" Text="Save" CssClass="btn btn-primary btn-sm" OnClick="btnSave_Click" ValidationGroup="TubewellEntry" />
-                        <asp:Button ID="btnCancel" runat="server" Text="Reset" CssClass="btn btn-secondary btn-sm" OnClick="btnCancel_Click" />
+                        <asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-primary btn-sm" OnClick="btnUpdate_Click" ValidationGroup="TubewellEntry" />
+                        <a class="btn btn-primary btn-sm" href="BlockEmpList.aspx">Cancel</a>
                     </div>
                 </div>
             </div>
         </ContentTemplate>
         <Triggers>      
             <asp:AsyncPostBackTrigger ControlID="ddlPostingDistrict" EventName="SelectedIndexChanged" />
-            <asp:AsyncPostBackTrigger  ControlID="btnSave" EventName="Click" />
-            <asp:AsyncPostBackTrigger  ControlID="btnReset" EventName="Click" />
+            <asp:AsyncPostBackTrigger  ControlID="btnUpdate" EventName="Click" />
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>
