@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 
 public partial class EE_AddDistrictEmployee : System.Web.UI.Page
 {
+
     bindControls bc = new bindControls();
     getData gd = new getData();
     protected void Page_Load(object sender, EventArgs e)
@@ -66,6 +67,7 @@ public partial class EE_AddDistrictEmployee : System.Web.UI.Page
     { 
         try
         {
+            Encryptor enc = new Encryptor(Encryptor.PrivateKey);
             lblMessage.Text = "";
             if (Page.IsValid == false)
             {
@@ -75,6 +77,7 @@ public partial class EE_AddDistrictEmployee : System.Web.UI.Page
             SqlParameter[] prm = new SqlParameter[]{
                     new SqlParameter("@Designation",ddlDesignation.SelectedItem.Text),
                     new SqlParameter("@RoleID",ddlDesignation.SelectedValue),
+                    new SqlParameter("@Password",enc.Encrypt(txtMobile.Text.Trim())),
                     new SqlParameter("@Name",txtName.Text.Trim()),
                     new SqlParameter("@DistrictID",Session["DistCode"].ToString()),
                     new SqlParameter("@Mobile",txtMobile.Text.Trim()),

@@ -71,12 +71,7 @@
                                     <ItemTemplate>
                                         <asp:Label ID="lblAltMob" runat="server" Text='<%# Bind("AltMob") %>'></asp:Label>
                                     </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Status" Visible="false">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblStatus" runat="server" Text='<%# Bind("Status") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                </asp:TemplateField>                                
                                 <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -100,10 +95,5 @@
             <asp:AsyncPostBackTrigger ControlID="txtSearch" EventName="TextChanged" />
         </Triggers>
     </asp:UpdatePanel>
-    <script>
-        $(document).ready(function () {
-            $('.table-responsive').doubleScroll();
-        });
-    </script>
 </asp:Content>
 

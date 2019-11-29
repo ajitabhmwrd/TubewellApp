@@ -68,7 +68,7 @@
                         <asp:Button ID="btnUpdate" runat="server" Text="Update" CssClass="btn btn-primary btn-sm" OnClick="btnUpdate_Click" ValidationGroup="TubewellEntry" />
                         <a class="btn btn-primary btn-sm" href="BlockEmpList.aspx">Cancel</a>
                     </div>
-                </div>
+                </div> 
             </div>
         </ContentTemplate>
         <Triggers>      
