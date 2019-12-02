@@ -11,6 +11,16 @@
     <script src="../bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <style>
+        .btn-primary {
+            background-color: #008fcc;
+        }
+        .customBgColor{
+            background-color: #008fcc;
+            color:white;  
+            font-size:12px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -45,7 +55,7 @@
                                 <a class="dropdown-item" href="BlockEmpList.aspx">Manage AE/JE</a>
                                 
                                 <a class="dropdown-item" href="BlockEmpList.aspx">Tranfer AE/JE</a> 
-                                <a class="dropdown-item" href="BlockEmpList.aspx">Assign Block AE/JE</a>                                 
+                                <a class="dropdown-item" href="AssignBlockAEJE.aspx">Assign Block AE/JE</a>                                 
                             </div>
                         </li>
                         <li class="nav-item active dropdown">

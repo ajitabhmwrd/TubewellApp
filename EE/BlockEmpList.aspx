@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-12 p-2 table-responsive">
                         <asp:GridView ID="gvBlockEmployee" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
-                            HeaderStyle-CssClass="bg-primary text-white" EmptyDataText="No Records Found"
+                            HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"
                             OnPageIndexChanging="gvEmployee_PageIndexChanging" PageSize="5" AllowPaging="false">
                             
                             <Columns>
@@ -76,7 +76,7 @@
                                     <ItemTemplate>
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                             <ContentTemplate>                                                
-                                        <asp:Button ID="btnEdit" runat="server" Text="EDIT" class="btn btn-primary btn-sm" OnClick="btnEdit_Click" />
+                                        <asp:Button ID="btnEdit" runat="server" Text="Edit" class="btn btn-primary btn-sm" OnClick="btnEdit_Click" />
                                             </ContentTemplate>
                                             <Triggers>
                                                 <asp:PostBackTrigger ControlID="btnEdit" />
