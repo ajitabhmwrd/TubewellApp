@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-md-12 p-2 table-responsive">
                         <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
-                            HeaderStyle-CssClass="bg-primary text-white" EmptyDataText="No Records Found"
+                            HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"
                             OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="5" AllowPaging="false">
                             <Columns>
                                 <asp:TemplateField HeaderText="SNo">
