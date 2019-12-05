@@ -14,7 +14,7 @@ public partial class EE_eeMaster : System.Web.UI.MasterPage
     {
         try
         {
-            if (Session["RoleName"].ToString() == "EE")
+            if (Session["RoleName"].ToString() == "JE")
             {
                 SqlParameter[] prm = new SqlParameter[]
                 {

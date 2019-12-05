@@ -1,9 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="TubewellDetail.aspx.cs" Inherits="EE_TubewellDetail" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/JE/JEMaster.master" AutoEventWireup="true" CodeFile="TubwellList.aspx.cs" Inherits="JE_TubwellList" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:UpdatePanel ID="Update" runat="server">
         <ContentTemplate>
             <br />
@@ -15,7 +14,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 p-1">
-                        <a class="btn btn-primary btn-sm" href="AddTubewell.aspx">Add new Tube Well</a>
+                        <%--<a class="btn btn-primary btn-sm" href="AddTubewell.aspx">Add new Tube Well</a>--%>
                     </div>
                     <div class="col-md-6 p-1"></div>
                     <div class="col-md-3 p-1">
@@ -66,14 +65,14 @@
                                         <asp:Label ID="lblStatus" runat="server" Text='<%# Bind("Status") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="">
+                                <asp:TemplateField HeaderText="" Visible="false">
                                     <ItemTemplate>
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                            <ContentTemplate>                                                
-                                        <asp:Button ID="btnEdit" runat="server" Text="EDIT" class="btn btn-primary btn-sm" OnClick="btnEdit_Click" />
+                                            <ContentTemplate>       
+                                                <asp:Button ID="btnInspection" runat="server" Text="Inspection Detail" class="btn btn-primary btn-sm" OnClick="btnInspection_Click" />
                                             </ContentTemplate>
                                             <Triggers>
-                                                <asp:PostBackTrigger ControlID="btnEdit" />
+                                                <asp:PostBackTrigger ControlID="btnInspection" />
                                             </Triggers>
                                         </asp:UpdatePanel>
                                     </ItemTemplate>
@@ -88,6 +87,5 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="txtSearch" EventName="TextChanged" />
         </Triggers>
-    </asp:UpdatePanel>   
+    </asp:UpdatePanel>
 </asp:Content>
-

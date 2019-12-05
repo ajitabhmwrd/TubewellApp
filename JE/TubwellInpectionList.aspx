@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="TubewellDetail.aspx.cs" Inherits="EE_TubewellDetail" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/JE/JEMaster.master" AutoEventWireup="true" CodeFile="TubwellInpectionList.aspx.cs" Inherits="JE_TubwellInpectionList" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:UpdatePanel ID="Update" runat="server">
@@ -15,7 +14,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 p-1">
-                        <a class="btn btn-primary btn-sm" href="AddTubewell.aspx">Add new Tube Well</a>
+                        <a class="btn btn-primary btn-sm" href="AddInspection.aspx">Add new Inpection</a>
                     </div>
                     <div class="col-md-6 p-1"></div>
                     <div class="col-md-3 p-1">
@@ -90,4 +89,5 @@
         </Triggers>
     </asp:UpdatePanel>   
 </asp:Content>
+
 
