@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TubewellApp", ".", "{353C9DAC-D0BB-4157-91EC-C0CA6D1883EA}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TubewellApp(1)", ".", "{353C9DAC-D0BB-4157-91EC-C0CA6D1883EA}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_50882"
 		Debug.AspNetCompiler.PhysicalPath = "..\TubewellApp\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50882\"

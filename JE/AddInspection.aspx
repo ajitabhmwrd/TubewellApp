@@ -25,6 +25,9 @@
                     <div class="col-md-3 p-1">
                         Inpection Date*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtInspectionDate" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator runat="server" ForeColor = "Red" ControlToValidate="txtInspectionDate" ValidationGroup="TubewellEntry"
+                            ValidationExpression="(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$"
+                            ErrorMessage="Invalid date."/>
                         <asp:TextBox ID="txtInspectionDate" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="col-md-9 p-1">                        

@@ -40,12 +40,12 @@ public partial class JE_AddInspection : System.Web.UI.Page
     public void bindDDLCommentType()
     {
         try
-        {            
+        {
             DataTable dt = gd.getDataTable("getCommentType");
-            bc.bindDDL(ddlCommentType1, dt, "CommentType","ID");
-            bc.bindDDL(ddlCommentType2, dt, "CommentType","ID");
-            bc.bindDDL(ddlCommentType3, dt, "CommentType","ID");
-            bc.bindDDL(ddlCommentType4, dt, "CommentType","ID");
+            bc.bindDDL(ddlCommentType1, dt, "CommentType", "ID");
+            bc.bindDDL(ddlCommentType2, dt, "CommentType", "ID");
+            bc.bindDDL(ddlCommentType3, dt, "CommentType", "ID");
+            bc.bindDDL(ddlCommentType4, dt, "CommentType", "ID");
         }
         catch (Exception ex)
         {
@@ -95,7 +95,7 @@ public partial class JE_AddInspection : System.Web.UI.Page
                     new SqlParameter("@PanchayatCode",ddlPanchayat.SelectedValue),
                     new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
                     };
-            DataTable dt = gd.getDataTable("getTubewellByVillage",prm);
+            DataTable dt = gd.getDataTable("getTubewellByVillage", prm);
             bc.bindDDL(ddlTubewell, dt, "Name", "ID");
         }
         catch (Exception ex)
@@ -130,13 +130,26 @@ public partial class JE_AddInspection : System.Web.UI.Page
                 BinaryReader br = new BinaryReader(fs);
                 image1 = br.ReadBytes((Int32)fs.Length);
             }
+            /*
+            @TubewellID nvarchar(50),
+            @InspectionDate nvarchar(50),
+            @EntryBy nvarchar(50),
+            @EntryByIP nvarchar(50),
+            @EntryByDesignation nvarchar(50),
+            @Image varbinary(max),
+            @Comment nvarchar(500),
+            @CommentType nvarchar(50)*/
             SqlParameter[] prm = new SqlParameter[]{
+                    new SqlParameter("@InspectionDate",DateTime.Parse(txtInspectionDate.Text).ToString("yyyy-MM-dd")),
                     new SqlParameter("@TubewellID",ddlTubewell.SelectedValue),
-                    new SqlParameter("@DistrictID",Session["DistCode"].ToString()),
-                    new SqlParameter("@EntryByID",Session["LoginId"].ToString()),
-                    new SqlParameter("@EntryByIP",customVariables.GetIPAddress())
-                            };
-            lblMessage.Text = gd.insExecuteSP("insCreateTubewell", prm);
+                    new SqlParameter("@Image",image1),
+                    new SqlParameter("@Comment",txtComment1.Text),
+                    new SqlParameter("@CommentType",ddlCommentType1.SelectedValue),
+                    new SqlParameter("@EntryBy",Session["LoginId"].ToString()),
+                    new SqlParameter("@EntryByIP",customVariables.GetIPAddress()),
+                    new SqlParameter("@EntryByDesignation",Session["RoleName"].ToString())
+            };
+            lblMessage.Text = gd.insExecuteSP("insTubewellInspection", prm);
             clear();
         }
         catch (Exception ex)
