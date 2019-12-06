@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -16,6 +17,7 @@ public partial class JE_AddInspection : System.Web.UI.Page
         if (!IsPostBack)
         {
             bindDDLBlock();
+            bindDDLCommentType();
         }
     }
     public void bindDDLBlock()
@@ -29,6 +31,21 @@ public partial class JE_AddInspection : System.Web.UI.Page
                     };
             DataTable dt = gd.getDataTable("getAllBlocksByJEEmpID", prm);
             bc.bindDDL(ddlBlock, dt, "BlockName", "BlockCode");
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
+    public void bindDDLCommentType()
+    {
+        try
+        {            
+            DataTable dt = gd.getDataTable("getCommentType");
+            bc.bindDDL(ddlCommentType1, dt, "CommentType","ID");
+            bc.bindDDL(ddlCommentType2, dt, "CommentType","ID");
+            bc.bindDDL(ddlCommentType3, dt, "CommentType","ID");
+            bc.bindDDL(ddlCommentType4, dt, "CommentType","ID");
         }
         catch (Exception ex)
         {
@@ -100,21 +117,24 @@ public partial class JE_AddInspection : System.Web.UI.Page
     {
         try
         {
+            Byte[] image1 = null;
             if (Page.IsValid == false)
             {
                 return;
             }
             lblMessage.Text = "";
+
+            if (fuImage1.HasFile)
+            {
+                Stream fs = fuImage1.PostedFile.InputStream;
+                BinaryReader br = new BinaryReader(fs);
+                image1 = br.ReadBytes((Int32)fs.Length);
+            }
             SqlParameter[] prm = new SqlParameter[]{
-                    //new SqlParameter("@Name",txtTubewellName.Text.Trim()),
-                    //new SqlParameter("@DistrictID",Session["DistCode"].ToString()),
-                    //new SqlParameter("@BlockID",ddlBlock.SelectedValue),
-                    //new SqlParameter("@PanchyatID",ddlPanchayat.SelectedValue),
-                    //new SqlParameter("@VillageID",ddlVillage.SelectedValue),
-                    //new SqlParameter("@Status",ddlStatus.SelectedItem.Text),
-                    //new SqlParameter("@Type",ddlType.SelectedItem.Text),
-                    //new SqlParameter("@EntryByID",Session["LoginId"].ToString()),
-                    //new SqlParameter("@EntryByIP",customVariables.GetIPAddress())
+                    new SqlParameter("@TubewellID",ddlTubewell.SelectedValue),
+                    new SqlParameter("@DistrictID",Session["DistCode"].ToString()),
+                    new SqlParameter("@EntryByID",Session["LoginId"].ToString()),
+                    new SqlParameter("@EntryByIP",customVariables.GetIPAddress())
                             };
             lblMessage.Text = gd.insExecuteSP("insCreateTubewell", prm);
             clear();
@@ -123,6 +143,7 @@ public partial class JE_AddInspection : System.Web.UI.Page
         {
         }
     }
+
 
     protected void btnReset_Click(object sender, EventArgs e)
     {
@@ -134,6 +155,7 @@ public partial class JE_AddInspection : System.Web.UI.Page
         ddlBlock.ClearSelection();
         ddlPanchayat.ClearSelection();
         ddlVillage.ClearSelection();
+        ddlTubewell.ClearSelection();
     }
 
     protected void ddlVillage_SelectedIndexChanged(object sender, EventArgs e)
