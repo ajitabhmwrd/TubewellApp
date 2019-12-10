@@ -25,6 +25,11 @@
                             HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"
                             OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="5" AllowPaging="false">
                             <Columns>
+                                <asp:TemplateField HeaderText="Inpection ID" Visible="false">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblInpectionID" runat="server" Text='<%# Bind("InpectionID") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="SNo">
                                     <ItemTemplate>
                                         <%#Container.DataItemIndex+1 %>
@@ -35,6 +40,7 @@
                                         <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                
                                 <asp:TemplateField HeaderText="Name">
                                     <ItemTemplate>
                                         <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
@@ -69,10 +75,10 @@
                                     <ItemTemplate>
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                             <ContentTemplate>                                                
-                                        <asp:Button ID="btnEdit" runat="server" Text="EDIT" class="btn btn-primary btn-sm" OnClick="btnEdit_Click" />
+                                        <asp:Button ID="btnDetail" runat="server" Text="Detail" class="btn btn-primary btn-sm" OnClick="btnDetail_Click" />
                                             </ContentTemplate>
                                             <Triggers>
-                                                <asp:PostBackTrigger ControlID="btnEdit" />
+                                                <asp:PostBackTrigger ControlID="btnDetail" />
                                             </Triggers>
                                         </asp:UpdatePanel>
                                     </ItemTemplate>

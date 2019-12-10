@@ -24,11 +24,11 @@
                 <div class="row">
                     <div class="col-md-3 p-1">
                         Inpection Date*
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtInspectionDate" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator runat="server" ForeColor = "Red" ControlToValidate="txtInspectionDate" ValidationGroup="TubewellEntry"
-                            ValidationExpression="(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$"
-                            ErrorMessage="Invalid date."/>
-                        <asp:TextBox ID="txtInspectionDate" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtInspectionDate" Text="(Required)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator runat="server" ForeColor = "Red" ControlToValidate="txtInspectionDate" ValidationGroup="TubewellEntry" Display="Dynamic"
+                            ValidationExpression="(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$"  ErrorMessage="(Invalid date)"/>
+                        <asp:TextBox ID="txtInspectionDate" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                        <cc1:CalendarExtender ID="Calendar1" PopupButtonID="txtInspectionDate" runat="server" TargetControlID="txtInspectionDate" Format="dd/MM/yyyy"> </cc1:CalendarExtender> 
                     </div>
                     <div class="col-md-9 p-1">                        
                     </div>
@@ -66,14 +66,15 @@
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ValidationExpression="([a-zA-Z0-9\s_\\.\-:])+(.jpg)$"  ValidationGroup="TubewellEntry" Font-Bold="true"
                         ControlToValidate="fuImage1" runat="server" ForeColor="Red" ErrorMessage="(.jpg file only)"
                         Display="Dynamic" />
-                        <asp:FileUpload ID="fuImage1" runat="server" />                        
+                        <asp:FileUpload ID="fuImage1" runat="server" />
                     </div>
                     <div class="col-md-3 p-1 ">
                         Image 2
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ValidationExpression="([a-zA-Z0-9\s_\\.\-:])+(.jpg)$"  ValidationGroup="TubewellEntry" Font-Bold="true"
                         ControlToValidate="fuImage2" runat="server" ForeColor="Red" ErrorMessage="(.jpg file only)"
                         Display="Dynamic" />
-                        <asp:FileUpload ID="fuImage2" runat="server" />              
+                        <asp:FileUpload ID="fuImage2" runat="server" />       
+                        
                     </div>
                     <div class="col-md-3 p-1 ">   
                         Image 3
@@ -144,9 +145,10 @@
             </div>
         </ContentTemplate>
         <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="ddlVillage" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="ddlBlock" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="ddlPanchayat" EventName="SelectedIndexChanged" />
-            <asp:AsyncPostBackTrigger  ControlID="btnSave" EventName="Click" />
+            <asp:PostBackTrigger  ControlID="btnSave" />
             <asp:AsyncPostBackTrigger  ControlID="btnReset" EventName="Click" />
         </Triggers>
     </asp:UpdatePanel>

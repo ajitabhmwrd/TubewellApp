@@ -15,7 +15,7 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-
+            bindgvTubewell();
         }
     }
     public void bindgvTubewell()
@@ -24,9 +24,10 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
-                    new SqlParameter("@DistCode",Session["DistCode"].ToString())
+                    new SqlParameter("@DistCode",Session["DistCode"].ToString()),
+                    new SqlParameter("@JEEmpID",Session["LoginId"].ToString())
                     };
-            DataTable dt = gd.getDataTable("getTubewellByDistCode", prm);
+            DataTable dt = gd.getDataTable("getTubewellInspectByJE", prm);
             bc.bindGV(gvTubewell, dt);
         }
         catch (Exception ex)
@@ -43,19 +44,19 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
 
     protected void txtSearch_TextChanged(object sender, EventArgs e)
     {
-        try
-        {
-            SqlParameter[] prm = new SqlParameter[]
-                    {
-                    new SqlParameter("@DistCode",Session["DistCode"].ToString()),
-                    new SqlParameter("@SearchKey",txtSearch.Text.Trim())
-                    };
-            DataTable dt = gd.getDataTable("getTubewellByDistCodeSearchKey", prm);
-            bc.bindGV(gvTubewell, dt);
-        }
-        catch (Exception ex)
-        {
-        }
+        //try
+        //{
+        //    SqlParameter[] prm = new SqlParameter[]
+        //            {
+        //            new SqlParameter("@DistCode",Session["DistCode"].ToString()),
+        //            new SqlParameter("@SearchKey",txtSearch.Text.Trim())
+        //            };
+        //    DataTable dt = gd.getDataTable("getTubewellByDistCodeSearchKey", prm);
+        //    bc.bindGV(gvTubewell, dt);
+        //}
+        //catch (Exception ex)
+        //{
+        //}
     }
 
     protected void btnEdit_Click(object sender, EventArgs e)
@@ -66,4 +67,12 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
         Server.Transfer("UpdateTubewell.aspx");
     }
 
+
+    protected void btnDetail_Click(object sender, EventArgs e)
+    {
+        Button btnDetail = (Button)sender;
+        GridViewRow gvr = (GridViewRow)btnDetail.NamingContainer;
+        Context.Items.Add("ID", ((Label)gvr.FindControl("lblInpectionID")).Text.ToString());
+        Server.Transfer("TubewellInspectionDetails.aspx");
+    }
 }

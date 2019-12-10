@@ -99,4 +99,44 @@ public class getData
         }
 
     }
+
+    public response insExecuteSPReturnID(string spQuery, SqlParameter[] sqlParameters)
+    {
+        string response = "Error Occured!!!";
+        string success = "0";
+        string ID;
+        try
+        {
+            
+            using (SqlConnection conn = new SqlConnection(con))
+            {
+                using (SqlCommand cmd = new SqlCommand(spQuery, conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    foreach (SqlParameter prm in sqlParameters)
+                    {
+                        cmd.Parameters.Add(prm);
+                    }
+                    SqlParameter outResponse = new SqlParameter("@response", SqlDbType.NVarChar, 200) { Direction = ParameterDirection.Output };
+                    SqlParameter outsuccess = new SqlParameter("@success", SqlDbType.NVarChar, 200) { Direction = ParameterDirection.Output };
+                    SqlParameter outID = new SqlParameter("@ID", SqlDbType.NVarChar, 200) { Direction = ParameterDirection.Output };
+                    cmd.Parameters.Add(outResponse);                    
+                    cmd.Parameters.Add(outsuccess);
+                    cmd.Parameters.Add(outID);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    response = outResponse.Value.ToString();
+                    success = outsuccess.Value.ToString();
+                    ID = outID.Value.ToString();
+                    conn.Close();
+                    return new response { success = success, message = response, ID= ID};
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            return new response{ success=success };
+        }
+
+    }
 }
