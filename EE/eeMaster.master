@@ -63,6 +63,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
                                 <a class="dropdown-item" href="TubewellDetail.aspx">Manage Tube Well</a>                               
+                                <a class="dropdown-item" href="TubewellIrrigation.aspx">Tube Well Irrigation</a>                               
                             </div>
                         </li>
                         

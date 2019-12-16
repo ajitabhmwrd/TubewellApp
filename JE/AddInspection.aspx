@@ -23,7 +23,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 p-1">
-                        Inpection Date*
+                        Inpection Date(dd/MM/yyyy)*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtInspectionDate" Text="(Required)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator runat="server" ForeColor = "Red" ControlToValidate="txtInspectionDate" ValidationGroup="TubewellEntry" Display="Dynamic"
                             ValidationExpression="(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$"  ErrorMessage="(Invalid date)"/>
