@@ -62,6 +62,44 @@
                             <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>
+                    <div class="col-md-3 p-1">
+                        Longitude
+                    <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtLongitude" ValidationGroup="TubewellEntry" Display="Dynamic"
+                            ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
+                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtLongitude" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>--%>
+                        <asp:TextBox ID="txtLongitude" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                    </div>
+                    <div class="col-md-3 p-1">
+                        Latitude
+                        <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtLatitude" ValidationGroup="TubewellEntry" Display="Dynamic"
+                            ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
+                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtLatitude" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>--%>
+                        <asp:TextBox ID="txtLatitude" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                    </div>
+                    <div class="col-md-3 p-1">
+                        Is Handed Over to Panchayat
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" InitialValue="0" runat="server" ControlToValidate="ddlIsHandedOver" Text="(Select)" ErrorMessage="Select Tube Well Status" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                        <asp:DropDownList ID="ddlIsHandedOver" runat="server" CssClass="form-control">
+                            <asp:ListItem Value="0">Select</asp:ListItem>
+                        </asp:DropDownList>                        
+                    </div>
+
+                    <div class="col-md-3 p-1">
+                        Select Hand Over Block
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" InitialValue="0" runat="server" ControlToValidate="ddlHandOverBlock" Text="(Select)" ErrorMessage="Select Tube Well Status" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                        <asp:DropDownList ID="ddlHandOverBlock" runat="server" CssClass="form-control">
+                            <asp:ListItem Value="0">Select</asp:ListItem>
+                        </asp:DropDownList>                        
+                    </div>
+
+                    <div class="col-md-3 p-1">
+                        Select Hand Over Panchayat
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" InitialValue="0" runat="server" ControlToValidate="ddlHandOverPanchayat" Text="(Select)" ErrorMessage="Select Tube Well Status" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                        <asp:DropDownList ID="ddlHandOverPanchayat" runat="server" CssClass="form-control">
+                            <asp:ListItem Value="0">Select</asp:ListItem>
+                        </asp:DropDownList>                        
+                    </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-md-12 p-1">

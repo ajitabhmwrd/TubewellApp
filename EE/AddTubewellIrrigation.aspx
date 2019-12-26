@@ -86,17 +86,17 @@
                     </div>
                     <div class="col-md-3 p-1 ">
                         Revenue Demand(In Rs.)*
-                    <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtRevenue" ValidationGroup="TubewellEntry" Display="Dynamic"
+                    <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtRevenueDemand" ValidationGroup="TubewellEntry" Display="Dynamic"
                         ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
-                        <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtRevenue" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
-                        <asp:TextBox ID="txtRevenue" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtRevenueDemand" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
+                        <asp:TextBox ID="txtRevenueDemand" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="col-md-3 p-1 ">
                         Revenue Collection (In Rs.)*
-                    <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtCollection" ValidationGroup="TubewellEntry" Display="Dynamic"
+                    <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtRevenueCollection" ValidationGroup="TubewellEntry" Display="Dynamic"
                         ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
-                        <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtCollection" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
-                        <asp:TextBox ID="txtCollection" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtRevenueCollection" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
+                        <asp:TextBox ID="txtRevenueCollection" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="col-md-3 p-1 ">
                         Deposited into Bank (In Rs.)*

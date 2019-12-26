@@ -29,39 +29,65 @@
                                         <%#Container.DataItemIndex+1 %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="ID">
+                                <asp:TemplateField HeaderText="ID" Visible="false">
                                     <ItemTemplate>
                                         <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
                                     </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Name">
+                                </asp:TemplateField>                                
+                                    <asp:TemplateField HeaderText="Name">
                                     <ItemTemplate>
                                         <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Tube well ID">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblTubewellID" runat="server" Text='<%# Bind("TubewellID") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>                                
                                 <asp:TemplateField HeaderText="Block">
                                     <ItemTemplate>
                                         <asp:Label ID="lblBlockName" runat="server" Text='<%# Bind("BlockName") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Panchayat">
+                               <%-- <asp:TemplateField HeaderText="Panchayat">
                                     <ItemTemplate>
                                         <asp:Label ID="lblPanchayatName" runat="server" Text='<%# Bind("PanchayatName") %>'></asp:Label>
                                     </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Village">
+                                </asp:TemplateField>--%>
+                                <%--<asp:TemplateField HeaderText="Village">
                                     <ItemTemplate>
                                         <asp:Label ID="lblVILLNAME" runat="server" Text='<%# Bind("VILLNAME") %>'></asp:Label>
                                     </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Type">
+                                </asp:TemplateField>--%>
+                                <asp:TemplateField HeaderText="Area (In Decimal)">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblType" runat="server" Text='<%# Bind("Type") %>'></asp:Label>
+                                        <asp:Label ID="lblAreaDecimal" runat="server" Text='<%# Bind("AreaDecimal") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Status">
+                                <asp:TemplateField HeaderText="Irrigation Time">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblStatus" runat="server" Text='<%# Bind("Status") %>'></asp:Label>
+                                        <asp:Label ID="lblDuration" runat="server" Text='<%# Bind("Duration") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>    
+                                <asp:TemplateField HeaderText="Revenue Demand<br/> (In Rs)">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblRevenueDemandRs" runat="server" Text='<%# Bind("RevenueDemandRs") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>          
+                                
+                                <asp:TemplateField HeaderText="Revenue Collection<br/> (In Rs)">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblRevenueCollectionRs" runat="server" Text='<%# Bind("RevenueCollectionRs") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Deposited In Bank<br/> (In Rs)">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblDepositedAmountInBank" runat="server" Text='<%# Bind("DepositedAmountInBank") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Irrigation Date">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblIrrigationDate" runat="server" Text='<%# Eval("IrrigationDate", "{0:dd/MM/yyyy}") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="" Visible="false">

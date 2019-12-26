@@ -24,10 +24,9 @@ public partial class JE_TubewellIrrigation : System.Web.UI.Page
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
-                    new SqlParameter("@DistCode",Session["DistCode"].ToString()),
-                    new SqlParameter("@JEEmpID",Session["LoginId"].ToString())
+                    new SqlParameter("@DistCode",Session["DistCode"].ToString())
                     };
-            DataTable dt = gd.getDataTable("getTubewellByJEEmpID", prm);
+            DataTable dt = gd.getDataTable("getTubewellIrrigationByDist", prm);
             bc.bindGV(gvTubewell, dt);
         }
         catch (Exception ex)

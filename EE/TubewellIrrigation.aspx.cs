@@ -24,9 +24,14 @@ public partial class JE_TubewellIrrigation : System.Web.UI.Page
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
-                    new SqlParameter("@DistCode",Session["DistCode"].ToString())
+                        new SqlParameter("@DistCode",Session["DistCode"].ToString())
                     };
-            DataTable dt = gd.getDataTable("getAllBlocksByDistCode", prm);
+            DataTable dt = gd.getDataTable("getTubewellIrrigationByDist", prm);
+            dt.Columns.Add("Duration");
+            foreach(DataRow dr in dt.Rows)
+            {
+                dr["Duration"] = dr["DurationHour"].ToString() + "h " + dr["DurationMinute"].ToString() + "min";
+            }
             bc.bindGV(gvTubewell, dt);
         }
         catch (Exception ex)
@@ -47,8 +52,8 @@ public partial class JE_TubewellIrrigation : System.Web.UI.Page
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
-                    new SqlParameter("@DistCode",Session["DistCode"].ToString()),
-                    new SqlParameter("@SearchKey",txtSearch.Text.Trim())
+                        new SqlParameter("@DistCode",Session["DistCode"].ToString()),
+                        new SqlParameter("@SearchKey",txtSearch.Text.Trim())
                     };
             DataTable dt = gd.getDataTable("getTubewellByJEEmpIDSearch", prm);
             bc.bindGV(gvTubewell, dt);
