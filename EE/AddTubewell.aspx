@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="AddTubewell.aspx.cs" Inherits="EE_AddTubewell" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -19,7 +21,7 @@
                     <div class="col-md-12 p-1">
                         <asp:Label ID="lblMessage" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
                     </div>
-                    
+
                 </div>
                 <div class="row">
                     <div class="col-md-3 p-1">
@@ -65,41 +67,85 @@
                     <div class="col-md-3 p-1">
                         Longitude
                     <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtLongitude" ValidationGroup="TubewellEntry" Display="Dynamic"
-                            ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
-                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtLongitude" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>--%>
+                        ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
+                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtLongitude" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>--%>
                         <asp:TextBox ID="txtLongitude" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
                     </div>
                     <div class="col-md-3 p-1">
                         Latitude
                         <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtLatitude" ValidationGroup="TubewellEntry" Display="Dynamic"
                             ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
-                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtLatitude" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>--%>
+                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtLatitude" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>--%>
                         <asp:TextBox ID="txtLatitude" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
                     </div>
                     <div class="col-md-3 p-1">
                         Is Handed Over to Panchayat
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator7" InitialValue="0" runat="server" ControlToValidate="ddlIsHandedOver" Text="(Select)" ErrorMessage="Select Tube Well Status" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                        <asp:DropDownList ID="ddlIsHandedOver" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="ddlIsHandedOver" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlIsHandedOver_SelectedIndexChanged" AutoPostBack="true">
                             <asp:ListItem Value="0">Select</asp:ListItem>
-                        </asp:DropDownList>                        
+                            <asp:ListItem Value="Y">Yes</asp:ListItem>
+                            <asp:ListItem Value="N">No</asp:ListItem>
+                        </asp:DropDownList>
                     </div>
 
                     <div class="col-md-3 p-1">
-                        Select Hand Over Block
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" InitialValue="0" runat="server" ControlToValidate="ddlHandOverBlock" Text="(Select)" ErrorMessage="Select Tube Well Status" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                        <asp:DropDownList ID="ddlHandOverBlock" runat="server" CssClass="form-control">
-                            <asp:ListItem Value="0">Select</asp:ListItem>
-                        </asp:DropDownList>                        
+                        Handed Over Date
+                        <asp:RequiredFieldValidator ID="rfvHandedOverDate" runat="server" ControlToValidate="txtHandedOverDate" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic" Font-Size="Small"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtHandedOverDate" ValidationGroup="TubewellEntry" Display="Dynamic"
+                            ValidationExpression="(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$" ErrorMessage="(Invalid)" Font-Size="Small" />
+                        <asp:TextBox ID="txtHandedOverDate" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                        <cc1:CalendarExtender ID="Calendar1" PopupButtonID="txtHandedOverDate" runat="server" TargetControlID="txtHandedOverDate" Format="dd/MM/yyyy"></cc1:CalendarExtender>
                     </div>
 
                     <div class="col-md-3 p-1">
-                        Select Hand Over Panchayat
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" InitialValue="0" runat="server" ControlToValidate="ddlHandOverPanchayat" Text="(Select)" ErrorMessage="Select Tube Well Status" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                        Select Handed Over Block
+                        <asp:RequiredFieldValidator ID="rfvHandOverBlock" InitialValue="0" runat="server" ControlToValidate="ddlHandOverBlock" Text="(Select)" ErrorMessage="Select Tube Well Status" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                        <asp:DropDownList ID="ddlHandOverBlock" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlHandOverBlock_SelectedIndexChanged" AutoPostBack="true">
+                            <asp:ListItem Value="0">Select</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+
+                    <div class="col-md-3 p-1">
+                        Select Handed Over Panchayat
+                        <asp:RequiredFieldValidator ID="rfvHandOverPanchayat" InitialValue="0" runat="server" ControlToValidate="ddlHandOverPanchayat" Text="(Select)" ErrorMessage="Select Tube Well Status" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
                         <asp:DropDownList ID="ddlHandOverPanchayat" runat="server" CssClass="form-control">
                             <asp:ListItem Value="0">Select</asp:ListItem>
-                        </asp:DropDownList>                        
+                        </asp:DropDownList>
                     </div>
-                    
+                    <div class="col-md-3 p-1">
+                        CA Number*
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtCANo" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                        <asp:TextBox ID="txtCANo" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                    </div>
+                    <div class="col-md-3 p-1">
+                        Scada Status
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" InitialValue="0" runat="server" ControlToValidate="ddlScadaStatus" Text="(Select)" ErrorMessage="Select Tube Well Status" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                        <asp:DropDownList ID="ddlScadaStatus" runat="server" CssClass="form-control">
+                            <asp:ListItem Value="0">Select</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <div class="col-md-3 p-1">
+                        Consern Farmer1 Name
+                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtCANo" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>--%>
+                        <asp:TextBox ID="txtFarmer1Name" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                    </div>
+                    <div class="col-md-3 p-1">
+                        Consern Farmer1 Mobile
+                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="txtCANo" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>--%>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtFarmer1Mobile" ErrorMessage="(Invalid)"  ValidationExpression="[0-9]{10}"  ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic"></asp:RegularExpressionValidator>  
+                        <asp:TextBox ID="txtFarmer1Mobile" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                    </div>
+                    <div class="col-md-3 p-1">
+                        Consern Farmer2 Name
+                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="txtCANo" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>--%>
+                        <asp:TextBox ID="txtFarmer2Name" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                    </div>
+                    <div class="col-md-3 p-1">
+                        Consern Farmer2 Mobile
+                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="txtCANo" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>--%>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtFarmer2Mobile" ErrorMessage="(Invalid)"  ValidationExpression="[0-9]{10}"  ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic"></asp:RegularExpressionValidator>  
+                        <asp:TextBox ID="txtFarmer2Mobile" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 p-1">
@@ -111,9 +157,11 @@
         </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="ddlBlock" EventName="SelectedIndexChanged" />
+            <asp:AsyncPostBackTrigger ControlID="ddlHandOverBlock" EventName="SelectedIndexChanged" />
+            <asp:AsyncPostBackTrigger ControlID="ddlIsHandedOver" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="ddlPanchayat" EventName="SelectedIndexChanged" />
-            <asp:AsyncPostBackTrigger  ControlID="btnSave" EventName="Click" />
-            <asp:AsyncPostBackTrigger  ControlID="btnReset" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="btnSave" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="btnReset" EventName="Click" />
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>

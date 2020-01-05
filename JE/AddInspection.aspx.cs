@@ -75,9 +75,9 @@ public partial class JE_AddInspection : System.Web.UI.Page
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
-                    new SqlParameter("@PanCode",ddlPanchayat.SelectedValue)
+                    new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
                     };
-            DataTable dt = gd.getDataTable("getAllVillageByPanCode", prm);
+            DataTable dt = gd.getDataTable("getAllVillageByBlockCode", prm);
             bc.bindDDL(ddlVillage, dt, "VILLNAME", "VILLCODE");
         }
         catch (Exception ex)

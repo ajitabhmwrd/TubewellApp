@@ -24,7 +24,7 @@
                     <div class="col-md-12 p-2 table-responsive">
                         <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
                             HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"
-                            OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="5" AllowPaging="false">
+                            OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="50" AllowPaging="true">
                             <Columns>
                                 <asp:TemplateField HeaderText="SNo">
                                     <ItemTemplate>
@@ -34,6 +34,11 @@
                                 <asp:TemplateField HeaderText="ID">
                                     <ItemTemplate>
                                         <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="CA Number">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblConsumerID" runat="server" Text='<%# Bind("ConsumerID") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Name">
@@ -70,7 +75,7 @@
                                     <ItemTemplate>
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                             <ContentTemplate>                                                
-                                        <asp:Button ID="btnEdit" runat="server" Text="EDIT" class="btn btn-primary btn-sm" OnClick="btnEdit_Click" />
+                                        <asp:Button ID="btnEdit" runat="server" Text="Edit" class="btn-primary" OnClick="btnEdit_Click"/>
                                             </ContentTemplate>
                                             <Triggers>
                                                 <asp:PostBackTrigger ControlID="btnEdit" />

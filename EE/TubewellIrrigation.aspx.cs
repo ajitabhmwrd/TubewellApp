@@ -22,17 +22,24 @@ public partial class JE_TubewellIrrigation : System.Web.UI.Page
     {
         try
         {
-            SqlParameter[] prm = new SqlParameter[]
-                    {
-                        new SqlParameter("@DistCode",Session["DistCode"].ToString())
-                    };
-            DataTable dt = gd.getDataTable("getTubewellIrrigationByDist", prm);
-            dt.Columns.Add("Duration");
-            foreach(DataRow dr in dt.Rows)
-            {
-                dr["Duration"] = dr["DurationHour"].ToString() + "h " + dr["DurationMinute"].ToString() + "min";
+            if (txtSearch.Text.Trim() != "")
+            { 
+                TubewellIrrigationSearch();
             }
-            bc.bindGV(gvTubewell, dt);
+            else
+            {
+                SqlParameter[] prm = new SqlParameter[]
+                        {
+                        new SqlParameter("@DistCode",Session["DistCode"].ToString())
+                        };
+                DataTable dt = gd.getDataTable("getTubewellIrrigationByDist", prm);
+                dt.Columns.Add("Duration");
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dr["Duration"] = dr["DurationHour"].ToString() + "h " + dr["DurationMinute"].ToString() + "min";
+                }
+                bc.bindGV(gvTubewell, dt);
+            }
         }
         catch (Exception ex)
         {
@@ -48,6 +55,10 @@ public partial class JE_TubewellIrrigation : System.Web.UI.Page
 
     protected void txtSearch_TextChanged(object sender, EventArgs e)
     {
+        TubewellIrrigationSearch();
+    }
+    public void TubewellIrrigationSearch()
+    {
         try
         {
             SqlParameter[] prm = new SqlParameter[]
@@ -55,7 +66,12 @@ public partial class JE_TubewellIrrigation : System.Web.UI.Page
                         new SqlParameter("@DistCode",Session["DistCode"].ToString()),
                         new SqlParameter("@SearchKey",txtSearch.Text.Trim())
                     };
-            DataTable dt = gd.getDataTable("getTubewellByJEEmpIDSearch", prm);
+            DataTable dt = gd.getDataTable("getTubewellIrrigationByDistSearch", prm);
+            dt.Columns.Add("Duration");
+            foreach (DataRow dr in dt.Rows)
+            {
+                dr["Duration"] = dr["DurationHour"].ToString() + "h " + dr["DurationMinute"].ToString() + "min";
+            }
             bc.bindGV(gvTubewell, dt);
         }
         catch (Exception ex)
@@ -63,11 +79,12 @@ public partial class JE_TubewellIrrigation : System.Web.UI.Page
         }
     }
 
-    protected void btnInspection_Click(object sender, EventArgs e)
+
+    protected void btnEdit_Click(object sender, EventArgs e)
     {
         Button btnEdit = (Button)sender;
         GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
         Context.Items.Add("ID", ((Label)gvr.FindControl("lblID")).Text.ToString());
-        Server.Transfer("Inpection.aspx");
+        Server.Transfer("UpdateTubewellIrrigation.aspx");
     }
 }

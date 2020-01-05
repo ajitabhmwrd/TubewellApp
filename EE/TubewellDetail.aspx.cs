@@ -22,12 +22,19 @@ public partial class EE_TubewellDetail : System.Web.UI.Page
     {
         try
         {
-            SqlParameter[] prm = new SqlParameter[]
+            if (txtSearch.Text.Trim() != "")
+            {
+                TubewellSearch();
+            }
+            else
+            {
+                SqlParameter[] prm = new SqlParameter[]
                     {
                     new SqlParameter("@DistCode",Session["DistCode"].ToString())
                     };
-            DataTable dt = gd.getDataTable("getTubewellByDistCode", prm);
-            bc.bindGV(gvTubewell, dt);
+                DataTable dt = gd.getDataTable("getTubewellByDistCode", prm);
+                bc.bindGV(gvTubewell, dt);
+            }
         }
         catch (Exception ex)
         {
@@ -42,6 +49,10 @@ public partial class EE_TubewellDetail : System.Web.UI.Page
     }
 
     protected void txtSearch_TextChanged(object sender, EventArgs e)
+    {
+        TubewellSearch();
+    }
+    public void TubewellSearch()
     {
         try
         {

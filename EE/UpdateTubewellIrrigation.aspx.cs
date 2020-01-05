@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class JE_AddTubewellIrrigation : System.Web.UI.Page
+public partial class EE_UpdateTubewellIrrigation : System.Web.UI.Page
 {
     getData gd = new getData();
     bindControls bc = new bindControls();
@@ -17,26 +17,39 @@ public partial class JE_AddTubewellIrrigation : System.Web.UI.Page
         Calendar1.EndDate = DateTime.Now;
         if (!IsPostBack)
         {
-            bindDDLBlock();
             bindHour();
             bindMinutes();
-            txtRevenueCollection.Text = "0";
-            txtBankDeposited.Text = "0";
+            getIrrigation();
         }
     }
-    public void bindDDLBlock()
+    
+    public void getIrrigation()
     {
         try
         {
+            string ID = Context.Items["ID"].ToString();
+            lblID.Text= ID.ToUpper();
             SqlParameter[] prm = new SqlParameter[]
-                    {
-                        new SqlParameter("@DistCode",Session["DistCode"].ToString())
-                    };
-            DataTable dt = gd.getDataTable("getAllBlocksByDistCode", prm);
-            bc.bindDDL(ddlBlock, dt, "BlockName", "BlockCode");
+                {
+                    new SqlParameter("@ID",ID)
+                };
+            DataTable dt = gd.getDataTable("getIrrigationByID", prm);
+            if (dt.Rows.Count == 1)
+            {
+                lblTubewellID.Text = dt.Rows[0]["TubewellID"].ToString();
+                txtIrrigationDate.Text = DateTime.Parse(dt.Rows[0]["IrrigationDate"].ToString()).ToString("dd-MM-yyyy");
+                ddlHour.SelectedValue= dt.Rows[0]["DurationHour"].ToString();
+                ddlMinutes.SelectedValue= dt.Rows[0]["DurationMinute"].ToString();
+                txtIrrigationAreaInDecimal.Text= dt.Rows[0]["AreaDecimal"].ToString();
+                txtRevenueDemand.Text= dt.Rows[0]["RevenueDemandRs"].ToString();
+                txtRevenueCollection.Text= dt.Rows[0]["RevenueCollectionRs"].ToString();
+                txtBankDeposited.Text= dt.Rows[0]["DepositedAmountInBank"].ToString();
+                txtComment.Text= dt.Rows[0]["Comment"].ToString();
+            }
         }
         catch (Exception ex)
         {
+            Response.Redirect("TubewellIrrigation.aspx");
         }
     }
 
@@ -45,16 +58,16 @@ public partial class JE_AddTubewellIrrigation : System.Web.UI.Page
         try
         {
             ddlHour.Items.Clear();
-            for (int i=0; i<=23; i++)
-            {                
-                ddlHour.Items.Insert(i, new ListItem(i.ToString(),i.ToString()));
+            for (int i = 0; i <= 23; i++)
+            {
+                ddlHour.Items.Insert(i, new ListItem(i.ToString(), i.ToString()));
             }
             ddlHour.Items.Insert(0, new ListItem("Hour", "Select"));
         }
         catch (Exception ex)
         {
         }
-        
+
     }
 
     public void bindMinutes()
@@ -74,68 +87,6 @@ public partial class JE_AddTubewellIrrigation : System.Web.UI.Page
 
     }
 
-    public void bindDDLPanchyat()
-    {
-        try
-        {
-            SqlParameter[] prm = new SqlParameter[]
-                    {
-                    new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
-                    };
-            DataTable dt = gd.getDataTable("getAllPanchaytByBlockCode", prm);
-            bc.bindDDL(ddlPanchayat, dt, "PanchayatName", "PanchayatCode");
-        }
-        catch (Exception ex)
-        {
-        }
-    }
-
-    //public void bindDDLVill()
-    //{
-    //    try
-    //    {
-    //        SqlParameter[] prm = new SqlParameter[]
-    //                {
-    //                new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
-    //                };
-    //        DataTable dt = gd.getDataTable("getAllVillageByBlockCode", prm);
-    //        bc.bindDDL(ddlVillage, dt, "VILLNAME", "VILLCODE");
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //    }
-    //}
-
-    public void bindDDLTubewell()
-    {
-        try
-        {
-            SqlParameter[] prm = new SqlParameter[]
-                    {
-                        new SqlParameter("@DistCode",Session["DistCode"].ToString()),
-                        //new SqlParameter("@VILLCODE",ddlVillage.SelectedValue),
-                        new SqlParameter("@PanchayatCode",ddlPanchayat.SelectedValue),
-                        new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
-                    };
-            DataTable dt = gd.getDataTable("getTubewellByPanchayat", prm);
-            bc.bindDDL(ddlTubewell, dt, "Name", "ID");
-        }
-        catch (Exception ex)
-        {
-        }
-    }
-
-    protected void ddlBlock_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        bindDDLPanchyat();
-    }
-
-    protected void ddlPanchayat_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        //bindDDLVill();
-        bindDDLTubewell();
-    }
-
     protected void btnSave_Click(object sender, EventArgs e)
     {
         try
@@ -148,7 +99,7 @@ public partial class JE_AddTubewellIrrigation : System.Web.UI.Page
             }
             lblMessage.Text = "";
             SqlParameter[] prm = new SqlParameter[]{
-                    new SqlParameter("@TubewellID",ddlTubewell.SelectedValue),
+                    new SqlParameter("@ID",lblID.Text),
                     new SqlParameter("@IrrigationDate",DateTime.Parse(txtIrrigationDate.Text).ToString("yyyy-MM-dd")),
                     new SqlParameter("@DurationHour",ddlHour.SelectedValue),
                     new SqlParameter("@DurationMinute",ddlMinutes.SelectedValue),
@@ -161,8 +112,7 @@ public partial class JE_AddTubewellIrrigation : System.Web.UI.Page
                     new SqlParameter("@EntryByRole",Session["RoleName"].ToString()),
                     new SqlParameter("@Comment",txtComment.Text.Trim()),
                             };
-            lblMessage.Text = gd.insExecuteSP("insTubewellIrrigation", prm);
-            clear();
+            lblMessage.Text = gd.insExecuteSP("updTubewellIrrigation", prm);
         }
         catch (Exception ex)
         {
@@ -174,17 +124,12 @@ public partial class JE_AddTubewellIrrigation : System.Web.UI.Page
     protected void btnReset_Click(object sender, EventArgs e)
     {
         lblMessage.Text = "";
-        clear();        
+        clear();
     }
     public void clear()
     {
-        ddlBlock.ClearSelection();
-        ddlPanchayat.ClearSelection();
-        //ddlVillage.ClearSelection();
-        ddlTubewell.ClearSelection();
         ddlHour.ClearSelection();
         ddlMinutes.ClearSelection();
-
         txtBankDeposited.Text = "";
         txtComment.Text = "";
         txtIrrigationAreaInDecimal.Text = "";
@@ -193,8 +138,5 @@ public partial class JE_AddTubewellIrrigation : System.Web.UI.Page
         txtRevenueDemand.Text = "";
     }
 
-    //protected void ddlVillage_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    bindDDLTubewell();
-    //}
+    
 }

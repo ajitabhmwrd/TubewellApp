@@ -22,7 +22,7 @@
                     <div class="col-md-12 p-2 table-responsive">
                         <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
                             HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"
-                            OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="5" AllowPaging="false">
+                            OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="50" AllowPaging="true">
                             <Columns>
                                 <asp:TemplateField HeaderText="SNo">
                                     <ItemTemplate>
@@ -33,17 +33,23 @@
                                     <ItemTemplate>
                                         <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
                                     </ItemTemplate>
-                                </asp:TemplateField>                                
+                                </asp:TemplateField>   
+                                <asp:TemplateField HeaderText="Tube well ID">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblTubewellID" runat="server" Text='<%# Bind("TubewellID") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>   
+                                <asp:TemplateField HeaderText="CA Number">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblConsumerID" runat="server" Text='<%# Bind("ConsumerID") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Name">
                                     <ItemTemplate>
                                         <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Tube well ID">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblTubewellID" runat="server" Text='<%# Bind("TubewellID") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>                                
+                                                             
                                 <asp:TemplateField HeaderText="Block">
                                     <ItemTemplate>
                                         <asp:Label ID="lblBlockName" runat="server" Text='<%# Bind("BlockName") %>'></asp:Label>
@@ -90,14 +96,14 @@
                                         <asp:Label ID="lblIrrigationDate" runat="server" Text='<%# Eval("IrrigationDate", "{0:dd/MM/yyyy}") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="" Visible="false">
+                                <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                             <ContentTemplate>       
-                                                <asp:Button ID="btnInspection" runat="server" Text="Inspection Detail" class="btn btn-primary btn-sm" OnClick="btnInspection_Click" />
+                                                <asp:Button ID="btnEdit" runat="server" Text="Edit" class="btn-primary" OnClick="btnEdit_Click" />
                                             </ContentTemplate>
                                             <Triggers>
-                                                <asp:PostBackTrigger ControlID="btnInspection" />
+                                                <asp:PostBackTrigger ControlID="btnEdit" />
                                             </Triggers>
                                         </asp:UpdatePanel>
                                     </ItemTemplate>

@@ -10,7 +10,6 @@
                 <span class="font-weight-bold small">Assign Block AE / JE</span>
                 <hr />
             </div>
-
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 p-1">
