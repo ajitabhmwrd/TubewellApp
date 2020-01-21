@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class JE_TubwellInpectionList : System.Web.UI.Page
+public partial class EE_OtherEmloyee : System.Web.UI.Page
 {
     getData gd = new getData();
     bindControls bc = new bindControls();
@@ -15,31 +15,30 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            bindgvTubewell();
+            bindgvEmployee();
         }
     }
-    public void bindgvTubewell()
+    public void bindgvEmployee()
     {
         try
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
-                    new SqlParameter("@DistCode",Session["DistCode"].ToString()),
-                    new SqlParameter("@JEEmpID",Session["LoginId"].ToString())
+                    new SqlParameter("@DistCode",Session["DistCode"].ToString())
                     };
-            DataTable dt = gd.getDataTable("getTubewellInspectByJE", prm);
-            bc.bindGV(gvTubewell, dt);
+            DataTable dt = gd.getDataTable("getOtherEmpByDist", prm);
+            bc.bindGV(gvBlockEmployee, dt);
         }
         catch (Exception ex)
         {
         }
     }
 
-    protected void gvTubewell_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    protected void gvEmployee_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
-        bindgvTubewell();
-        gvTubewell.PageIndex = e.NewPageIndex;
-        gvTubewell.DataBind();
+        bindgvEmployee();
+        gvBlockEmployee.PageIndex = e.NewPageIndex;
+        gvBlockEmployee.DataBind();
     }
 
     protected void txtSearch_TextChanged(object sender, EventArgs e)
@@ -49,10 +48,10 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
         //    SqlParameter[] prm = new SqlParameter[]
         //            {
         //            new SqlParameter("@DistCode",Session["DistCode"].ToString()),
-        //            new SqlParameter("@JEEmpID",Session["LoginId"].ToString())
+        //            new SqlParameter("@SearchKey",txtSearch.Text.Trim())
         //            };
-        //    DataTable dt = gd.getDataTable("getTubewellInspectByJE", prm);
-        //    bc.bindGV(gvTubewell, dt);
+        //    DataTable dt = gd.getDataTable("getBlockEmpByDistSearch", prm);
+        //    bc.bindGV(gvBlockEmployee, dt);
         //}
         //catch (Exception ex)
         //{
@@ -64,15 +63,6 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
         Button btnEdit = (Button)sender;
         GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
         Context.Items.Add("ID", ((Label)gvr.FindControl("lblID")).Text.ToString());
-        Server.Transfer("UpdateTubewell.aspx");
-    }
-
-
-    protected void btnDetail_Click(object sender, EventArgs e)
-    {
-        Button btnDetail = (Button)sender;
-        GridViewRow gvr = (GridViewRow)btnDetail.NamingContainer;
-        Context.Items.Add("ID", ((Label)gvr.FindControl("lblID")).Text.ToString());
-        Server.Transfer("TubewellInspectionDetails.aspx");
+        Server.Transfer("updateOtherEmployee.aspx");
     }
 }

@@ -7,8 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-
-public partial class EE_UpdateEmployee : System.Web.UI.Page
+public partial class EE_updateOtherEmployee : System.Web.UI.Page
 {
     bindControls bc = new bindControls();
     getData gd = new getData();
@@ -24,21 +23,20 @@ public partial class EE_UpdateEmployee : System.Web.UI.Page
                     {
                     new SqlParameter("@ID",ID)
                     };
-                DataTable dt = gd.getDataTable("getBlockEmpByID", prm);
+                DataTable dt = gd.getDataTable("getOtherEmpByID", prm);
                 if (dt.Rows.Count == 1)
                 {
                     bindddlDesig();
-                    bindDDLDist();                    
                     txtName.Text = dt.Rows[0]["Name"].ToString();
-                    txtMobile.Text= dt.Rows[0]["Mobile"].ToString();
-                    txtAltMobile.Text= dt.Rows[0]["AltMob"].ToString();
-                    ddlDesignation.SelectedValue= dt.Rows[0]["RoleID"].ToString();
-                    ddlPostingDistrict.SelectedValue= dt.Rows[0]["PostingDistrictID"].ToString();
+                    txtMobile.Text = dt.Rows[0]["Mobile"].ToString();
+                    txtAltMobile.Text = dt.Rows[0]["AltMob"].ToString();
+                    ddlDesignation.SelectedValue = dt.Rows[0]["RoleID"].ToString();
                     bindDDLBlock();
-                    ddlPostingBlock.SelectedValue= dt.Rows[0]["PostingBlockID"].ToString();
-                    txtFatherName.Text= dt.Rows[0]["FatherName"].ToString();
-                    ddlGender.SelectedValue= dt.Rows[0]["Gender"].ToString();
-                    ddlEmpType.SelectedValue= dt.Rows[0]["EmployeeType"].ToString();
+                    ddlBlock.SelectedValue = dt.Rows[0]["BlockID"].ToString();
+                    bindDDLPanchyat();
+                    ddlPanchayat.SelectedValue = dt.Rows[0]["PanchyatID"].ToString();
+                    txtFatherName.Text = dt.Rows[0]["FatherName"].ToString();
+                    ddlGender.SelectedValue = dt.Rows[0]["Gender"].ToString();
                 }
                 else
                     Response.Redirect("TubewellDetail.aspx");
@@ -50,13 +48,14 @@ public partial class EE_UpdateEmployee : System.Web.UI.Page
 
         }
     }
-    public void bindDDLDist()
+
+    public void bindddlDesig()
     {
         try
         {
+            DataTable dt = gd.getDataTable("getDdlOtherEmp");
+            bc.bindDDL(ddlDesignation, dt, "RoleName", "RoleId");
 
-            DataTable dt = gd.getDataTable("getAllDistrict");
-            bc.bindDDL(ddlPostingDistrict, dt, "DistName", "DistCode");
         }
         catch (Exception ex)
         {
@@ -69,42 +68,41 @@ public partial class EE_UpdateEmployee : System.Web.UI.Page
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
-                    new SqlParameter("@DistCode",ddlPostingDistrict.SelectedValue)
+                    new SqlParameter("@DistCode",Session["DistCode"].ToString())
                     };
             DataTable dt = gd.getDataTable("getAllBlocksByDistCode", prm);
-            bc.bindDDL(ddlPostingBlock, dt, "BlockName", "BlockCode");
+            bc.bindDDL(ddlBlock, dt, "BlockName", "BlockCode");
         }
         catch (Exception ex)
         {
         }
     }
-
-    public void bindddlDesig()
+    public void bindDDLPanchyat()
     {
         try
         {
-            DataTable dt = gd.getDataTable("getDdlBlockEmp");
-            bc.bindDDL(ddlDesignation, dt, "RoleName", "RoleId");
-
+            SqlParameter[] prm = new SqlParameter[]
+                    {
+                    new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
+                    };
+            DataTable dt = gd.getDataTable("getAllPanchaytByBlockCode", prm);
+            bc.bindDDL(ddlPanchayat, dt, "PanchayatName", "PanchayatCode");
         }
         catch (Exception ex)
         {
         }
     }
+    
+    
     public void clear()
     {
         ddlDesignation.ClearSelection();
-        ddlPostingDistrict.ClearSelection();
-        ddlPostingBlock.ClearSelection();
         txtName.Text = "";
         txtMobile.Text = "";
         txtAltMobile.Text = "";
     }
 
-    protected void ddlPostingDistrict_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        bindDDLBlock();
-    }
+    
 
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
@@ -120,21 +118,26 @@ public partial class EE_UpdateEmployee : System.Web.UI.Page
                     new SqlParameter("@Name",txtName.Text.Trim()),
                     new SqlParameter("@FatherName",txtName.Text.Trim()),
                     new SqlParameter("@Gender",ddlGender.SelectedValue),
-                    new SqlParameter("@EmployeeType",ddlEmpType.SelectedValue),
                     new SqlParameter("@Mobile",txtMobile.Text.Trim()),
                     new SqlParameter("@AltMob",txtAltMobile.Text.Trim()),
                     new SqlParameter("@Designation",ddlDesignation.SelectedItem.Text),
                     new SqlParameter("@DistrictID",Session["DistCode"].ToString()),
-                    new SqlParameter("@PostingDistrictID",ddlPostingDistrict.SelectedValue),
-                    new SqlParameter("@PostingBlockID",ddlPostingBlock.SelectedValue),
+                    new SqlParameter("@BlockID",ddlBlock.SelectedValue),
+                    new SqlParameter("@PanchyatID",ddlPanchayat.SelectedValue),
+                    new SqlParameter("@VillageID",DBNull.Value),
                     new SqlParameter("@RoleID",ddlDesignation.SelectedValue),
                     new SqlParameter("@updByID",Session["LoginId"].ToString()),
                     new SqlParameter("@updByIP",customVariables.GetIPAddress())
                             };
-            lblMessage.Text = gd.insExecuteSP("updBlockEmployee", prm);
+            lblMessage.Text = gd.insExecuteSP("updOtherEmployee", prm);
         }
         catch (Exception ex)
         {
         }
+    }
+
+    protected void ddlBlock_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        bindDDLPanchyat();
     }
 }

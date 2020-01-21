@@ -69,21 +69,7 @@ public partial class JE_AddInspection : System.Web.UI.Page
         }
     }
 
-    public void bindDDLVill()
-    {
-        try
-        {
-            SqlParameter[] prm = new SqlParameter[]
-                    {
-                    new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
-                    };
-            DataTable dt = gd.getDataTable("getAllVillageByBlockCode", prm);
-            bc.bindDDL(ddlVillage, dt, "VILLNAME", "VILLCODE");
-        }
-        catch (Exception ex)
-        {
-        }
-    }
+
 
     public void bindDDLTubewell()
     {
@@ -91,12 +77,11 @@ public partial class JE_AddInspection : System.Web.UI.Page
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
-                    new SqlParameter("@DistCode",Session["DistCode"].ToString()),
-                    new SqlParameter("@VILLCODE",ddlVillage.SelectedValue),
-                    new SqlParameter("@PanchayatCode",ddlPanchayat.SelectedValue),
-                    new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
+                        new SqlParameter("@DistCode",Session["DistCode"].ToString()),
+                        new SqlParameter("@PanchayatCode",ddlPanchayat.SelectedValue),
+                        new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
                     };
-            DataTable dt = gd.getDataTable("getTubewellByVillage", prm);
+            DataTable dt = gd.getDataTable("getTubewellByPanchayat", prm);
             bc.bindDDL(ddlTubewell, dt, "Name", "ID");
         }
         catch (Exception ex)
@@ -111,7 +96,7 @@ public partial class JE_AddInspection : System.Web.UI.Page
 
     protected void ddlPanchayat_SelectedIndexChanged(object sender, EventArgs e)
     {
-        bindDDLVill();
+        bindDDLTubewell();
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
@@ -341,12 +326,8 @@ public partial class JE_AddInspection : System.Web.UI.Page
     {
         ddlBlock.ClearSelection();
         ddlPanchayat.ClearSelection();
-        ddlVillage.ClearSelection();
         ddlTubewell.ClearSelection();
     }
 
-    protected void ddlVillage_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        bindDDLTubewell();
-    }
+    
 }

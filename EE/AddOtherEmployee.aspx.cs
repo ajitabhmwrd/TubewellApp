@@ -7,30 +7,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class EE_AddDistrictEmployee : System.Web.UI.Page
+public partial class EE_AddOtherEmployee : System.Web.UI.Page
 {
-
     bindControls bc = new bindControls();
     getData gd = new getData();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             bindddlDesig();
-            bindDDLDist();
-        }
-    }
-
-    public void bindDDLDist()
-    {
-        try
-        {
-           
-            DataTable dt = gd.getDataTable("getAllDistrict");
-            bc.bindDDL(ddlPostingDistrict, dt, "DistName", "DistCode");
-        }
-        catch (Exception ex)
-        {
+            bindDDLBlock();
         }
     }
 
@@ -40,21 +26,35 @@ public partial class EE_AddDistrictEmployee : System.Web.UI.Page
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
-                    new SqlParameter("@DistCode",ddlPostingDistrict.SelectedValue)
+                    new SqlParameter("@DistCode",Session["DistCode"].ToString())
                     };
             DataTable dt = gd.getDataTable("getAllBlocksByDistCode", prm);
-            bc.bindDDL(ddlPostingBlock, dt, "BlockName", "BlockCode");
+            bc.bindDDL(ddlBlock, dt, "BlockName", "BlockCode");
         }
         catch (Exception ex)
         {
         }
     }
-
+    public void bindDDLPanchyat()
+    {
+        try
+        {
+            SqlParameter[] prm = new SqlParameter[]
+                    {
+                    new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
+                    };
+            DataTable dt = gd.getDataTable("getAllPanchaytByBlockCode", prm);
+            bc.bindDDL(ddlPanchayat, dt, "PanchayatName", "PanchayatCode");
+        }
+        catch (Exception ex)
+        {
+        }
+    }
     public void bindddlDesig()
     {
         try
         {
-            DataTable dt = gd.getDataTable("getDdlBlockEmp");
+            DataTable dt = gd.getDataTable("getDdlOtherEmp");
             bc.bindDDL(ddlDesignation, dt, "RoleName", "RoleId");
 
         }
@@ -64,7 +64,7 @@ public partial class EE_AddDistrictEmployee : System.Web.UI.Page
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
-    { 
+    {
         try
         {
             Encryptor enc = new Encryptor(Encryptor.PrivateKey);
@@ -81,18 +81,18 @@ public partial class EE_AddDistrictEmployee : System.Web.UI.Page
                     new SqlParameter("@Name",txtFatherName.Text.Trim()),
                     new SqlParameter("@FatherName",txtName.Text.Trim()),
                     new SqlParameter("@Gender",ddlGender.SelectedValue),
-                    new SqlParameter("@EmployeeType",ddlEmpType.SelectedValue),
                     new SqlParameter("@DistrictID",Session["DistCode"].ToString()),
                     new SqlParameter("@Mobile",txtMobile.Text.Trim()),
                     new SqlParameter("@AltMob",txtAltMobile.Text.Trim()),
-                    new SqlParameter("@BlockID",DBNull.Value),
-                    new SqlParameter("@PostingDistrictID",ddlPostingDistrict.SelectedValue),
-                    new SqlParameter("@PostingBlockID",ddlPostingBlock.SelectedValue),
-                    new SqlParameter("@PanchyatID",DBNull.Value),
+                    new SqlParameter("@BlockID",ddlBlock.SelectedValue),
+                    new SqlParameter("@PanchyatID",ddlPanchayat.SelectedValue),
                     new SqlParameter("@VillageID",DBNull.Value),
                     new SqlParameter("@Status","N"),
                     new SqlParameter("@EntryByID",Session["LoginId"].ToString()),
-                    new SqlParameter("@EntryByIP",customVariables.GetIPAddress())
+                    new SqlParameter("@EntryByIP",customVariables.GetIPAddress()),
+                    new SqlParameter("@EmployeeType",DBNull.Value),                    
+                    new SqlParameter("@PostingDistrictID",DBNull.Value),
+                    new SqlParameter("@PostingBlockID",DBNull.Value)
                             };
             lblMessage.Text = gd.insExecuteSP("insCreateEmployee", prm);
             clear();
@@ -112,8 +112,7 @@ public partial class EE_AddDistrictEmployee : System.Web.UI.Page
     public void clear()
     {
         ddlDesignation.ClearSelection();
-        ddlPostingDistrict.ClearSelection();
-        ddlPostingBlock.ClearSelection();
+        ddlBlock.ClearSelection();
         txtName.Text = "";
         txtMobile.Text = "";
         txtAltMobile.Text = "";
@@ -122,5 +121,10 @@ public partial class EE_AddDistrictEmployee : System.Web.UI.Page
     protected void ddlPostingDistrict_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindDDLBlock();
+    }
+
+    protected void ddlBlock_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        bindDDLPanchyat();
     }
 }

@@ -35,7 +35,30 @@
                         Name*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtName" Text="(Enter)" ErrorMessage="Enter Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtName" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
-                    </div>                    
+                    </div>        
+                    <div class="col-md-3 p-1">
+                        Father Name*
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtFatherName" Text="(Enter)" ErrorMessage="Enter Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic"></asp:RequiredFieldValidator>
+                        <asp:TextBox ID="txtFatherName" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                    </div> 
+                    <div class="col-md-3 p-1">
+                        Gender*
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" InitialValue="0" runat="server" ControlToValidate="ddlGender" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                        <asp:DropDownList ID="ddlGender" runat="server" CssClass="form-control">
+                            <asp:ListItem Value="0">Select</asp:ListItem>
+                            <asp:ListItem Value="M">Male</asp:ListItem>
+                            <asp:ListItem Value="F">Female</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <div class="col-md-3 p-1">
+                        Employee Type*
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" InitialValue="0" runat="server" ControlToValidate="ddlEmpType" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                        <asp:DropDownList ID="ddlEmpType" runat="server" CssClass="form-control">
+                            <asp:ListItem Value="0">Select</asp:ListItem>                            
+                            <asp:ListItem Value="R">Regular</asp:ListItem>                            
+                            <asp:ListItem Value="T">Temporary</asp:ListItem>                            
+                        </asp:DropDownList>
+                    </div>
                     <div class="col-md-3 p-1">
                         Mobile*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtMobile" Text="(Enter)" ErrorMessage="Enter Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic"></asp:RequiredFieldValidator>

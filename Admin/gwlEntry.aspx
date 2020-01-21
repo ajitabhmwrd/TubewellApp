@@ -5,30 +5,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">    
-    <Titles>
-        <asp:Title Text="Total marks of students">
-        </asp:Title>
-    </Titles>
-    <Series>
-        <asp:Series Name="Series1"  ChartArea="ChartArea1">
-            <Points>
-                <asp:DataPoint AxisLabel="Mark" YValues="800" />
-                <asp:DataPoint AxisLabel="Steve" YValues="900" />
-                <asp:DataPoint AxisLabel="John" YValues="700" />
-                <asp:DataPoint AxisLabel="Mary" YValues="900" />
-                <asp:DataPoint AxisLabel="Ben" YValues="600" />
-            </Points>
-        </asp:Series>
-    </Series>
-    <ChartAreas>
-        <asp:ChartArea Name="ChartArea1">
-            <AxisX Title="Student Name">
-            </AxisX>
-            <AxisY Title="Total Marks">
-            </AxisY>
-        </asp:ChartArea>
-    </ChartAreas>
-</asp:Chart>
+    
     <table border="0" cellpadding="0" cellspacing="0" width="500px" class="tablecontentR">
         <tr>
             <th align="center" colspan="2" class="button2" style="color: Black;">Upload 
@@ -47,9 +24,9 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td  align="right">
                 <br />
-                Select Setllement Date
+                Select Date 
             </td>
             <td>
                 <br />

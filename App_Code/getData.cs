@@ -19,6 +19,33 @@ public class getData
         //
     }
 
+    public DataSet getDataSet(string spQuery, SqlParameter[] sqlParameters)
+    {
+        DataSet dt = new DataSet();
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(con))
+            {
+                using (SqlCommand cmd = new SqlCommand(spQuery, conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    foreach (SqlParameter prm in sqlParameters)
+                    {
+                        cmd.Parameters.Add(prm);
+                    }
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+    }
+
     public DataTable getDataTable(string spQuery, SqlParameter[] sqlParameters)
     {
         DataTable dt = new DataTable();

@@ -12,6 +12,10 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
+        table tr{
+           font-size:12px;
+           font-family: Arial, Helvetica, sans-serif;
+        }
         .btn-primary {
             background-color: #008fcc;
         }
@@ -64,7 +68,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
                                 <a class="dropdown-item" href="TubwellList.aspx">Tube Well List</a>                               
                                 <a class="dropdown-item" href="TubwellInpectionList.aspx">Tube Well Inspection</a>                               
-                                <a class="dropdown-item" href="TubewellIrrigation.aspx">Tube Well Irrigation</a>                               
+                                <%--<a class="dropdown-item" href="TubewellIrrigation.aspx">Tube Well Irrigation</a>  --%>                             
                             </div>
                         </li>                        
                         <li class="nav-item active">

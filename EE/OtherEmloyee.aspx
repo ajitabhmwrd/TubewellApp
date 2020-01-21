@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/JE/JEMaster.master" AutoEventWireup="true" CodeFile="TubwellInpectionList.aspx.cs" Inherits="JE_TubwellInpectionList" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="OtherEmloyee.aspx.cs" Inherits="EE_OtherEmloyee" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -7,83 +7,82 @@
         <ContentTemplate>
             <br />
             <div class="container">
-                <span class="font-weight-bold small">Tube Well Inspection</span>
+                <span class="font-weight-bold small">Mukhiya/ Panchayat Sachiv List</span>
                 <hr />
             </div>
-
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 p-1">
-                        <a class="btn btn-primary btn-sm" href="AddInspection.aspx">Add new Inpection</a>
+                        <a class="btn btn-primary btn-sm" href="AddOtherEmployee.aspx">Add new</a>
                     </div>
                     <div class="col-md-6 p-1"></div>
                     <div class="col-md-3 p-1">
                         <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search.." OnTextChanged="txtSearch_TextChanged" AutoPostBack="true"></asp:TextBox>
                     </div>
                     <div class="col-md-12 p-2 table-responsive">
-                        <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
+                        <asp:GridView ID="gvBlockEmployee" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
                             HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"
-                            OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="5" AllowPaging="false">
-                            <Columns>                                
+                            OnPageIndexChanging="gvEmployee_PageIndexChanging" PageSize="5" AllowPaging="false">
+                            
+                            <Columns>
                                 <asp:TemplateField HeaderText="SNo">
                                     <ItemTemplate>
                                         <%#Container.DataItemIndex+1 %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+
                                 <asp:TemplateField HeaderText="ID">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
+                                        <asp:Label ID="lblID" runat="server" Text='<%# Bind("EmpID") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                
+
                                 <asp:TemplateField HeaderText="Name">
                                     <ItemTemplate>
                                         <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Block">
+
+                                <asp:TemplateField HeaderText="Designation">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblBlockName" runat="server" Text='<%# Bind("BlockName") %>'></asp:Label>
+                                        <asp:Label ID="lblDesignation" runat="server" Text='<%# Bind("Designation") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>                                
+                                
+                                <asp:TemplateField HeaderText="District">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblDist" runat="server" Text='<%# Bind("Dist") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                 <asp:TemplateField HeaderText="Block">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblBlock" runat="server" Text='<%# Bind("Block") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Panchayat">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblPanchayatName" runat="server" Text='<%# Bind("PanchayatName") %>'></asp:Label>
+                                        <asp:Label ID="lblPanchayat" runat="server" Text='<%# Bind("Panchayat") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Village">
+
+                                <asp:TemplateField HeaderText="Mobile">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblVILLNAME" runat="server" Text='<%# Bind("VILLNAME") %>'></asp:Label>
+                                        <asp:Label ID="lblMobile" runat="server" Text='<%# Bind("Mobile") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Type" ItemStyle-Wrap="false">
+                                <asp:TemplateField HeaderText="AltMob">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblType" runat="server" Text='<%# Bind("Type") %>'></asp:Label>
+                                        <asp:Label ID="lblAltMob" runat="server" Text='<%# Bind("AltMob") %>'></asp:Label>
                                     </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Status">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblStatus" runat="server" Text='<%# Bind("Status") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Total Inspection" ItemStyle-Wrap="false">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblInspectionCount" runat="server" Text='<%# Bind("InspectionCount") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Last Inspection Date">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblInspectionDate" runat="server" Text='<%# Eval("LastInspectionDate", "{0:dd/MM/yyyy}") %>' ></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                </asp:TemplateField>                                
                                 <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                             <ContentTemplate>                                                
-                                        <asp:Button ID="btnDetail" runat="server" Text="Detail" class="btn-primary" OnClick="btnDetail_Click" />
+                                        <asp:Button ID="btnEdit" runat="server" Text="Edit" class="btn btn-primary btn-sm" OnClick="btnEdit_Click" />
                                             </ContentTemplate>
                                             <Triggers>
-                                                <asp:PostBackTrigger ControlID="btnDetail" />
+                                                <asp:PostBackTrigger ControlID="btnEdit" />
                                             </Triggers>
                                         </asp:UpdatePanel>
                                     </ItemTemplate>
@@ -98,7 +97,8 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="txtSearch" EventName="TextChanged" />
         </Triggers>
-    </asp:UpdatePanel>   
+    </asp:UpdatePanel>
 </asp:Content>
+
 
 

@@ -72,19 +72,12 @@ public partial class Admin_gwlEntry : System.Web.UI.Page
                 //fill the Excel data to data set  
                 da.Fill(ds);
                 int totalRecords = ds.Tables[0].Rows.Count;
-                if(totalRecords!=470)
-                {
-                    lblextMsg.Text = "Records must be 470!!!";
-                    return;
-                }
                 try
                 {
                     int count = 0;
                     foreach (DataRow dr in ds.Tables[0].Rows)
                     {
                         SqlParameter[] prm = new SqlParameter[]{
-                            new SqlParameter("@SNo",dr["sno"].ToString()),
-                            new SqlParameter("@BlockName",dr["Block"].ToString()),
                             new SqlParameter("@Longitude",dr["Longitude"].ToString()),
                             new SqlParameter("@Latitude",dr["Latitude"].ToString()),
                             new SqlParameter("@GWLInMeter",dr["GWL"].ToString()),
