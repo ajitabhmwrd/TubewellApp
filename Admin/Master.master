@@ -8,19 +8,21 @@
     <link href="../bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../myContent/Style/myStyle.css" rel="stylesheet" />
     <script src="../Scripts/jquery-3.4.1.min.js"></script>
-        <script src="../bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script src="../bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <style>
-        table tr{
-           font-size:12px;
-           font-family: Arial, Helvetica, sans-serif;
+        table tr {
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
         }
+
         .btn-primary {
             background-color: #008fcc;
         }
-        .customBgColor{
+
+        .customBgColor {
             background-color: #008fcc;
-            color:white;  
-            font-size:12px;
+            color: white;
+            font-size: 12px;
         }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -38,9 +40,9 @@
                     <div style="font-weight: bold; font-size: 14px">Minor Water Resources Department</div>
                     <div class="small">Govt. of Bihar</div>
                 </div>
-                <div class="font-weight-bold small text-lg-left"  style="color: black;margin-left:70px">
+                <div class="font-weight-bold small text-lg-left" style="color: black; margin-left: 70px">
                     <asp:Label ID="lblDesignation" runat="server" Text=""></asp:Label>
-                     
+
                 </div>
             </nav>
 
@@ -52,19 +54,17 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="height: 30px">
                     <ul class="navbar-nav mr-auto">
-                        
+
                         <li class="nav-item active dropdown">
-                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Employee
+                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Report
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="TubewellDetail.aspx">Add</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="rptTubewellHandover.aspx">Tubewell Functional Report</a>
                             </div>
                         </li>
-                        <li class="nav-item active">
+                        <%--<li class="nav-item active">
                             <a class="nav-link" href="#">Link</a>
-                        </li>
+                        </li>--%>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
@@ -75,8 +75,8 @@
             </nav>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-        </div>       
+        </div>
     </form>
-    
+
 </body>
 </html>

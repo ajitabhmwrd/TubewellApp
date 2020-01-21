@@ -6,7 +6,7 @@
         <ContentTemplate>
             <br />
             <div class="container">
-                <span class="font-weight-bold small">Tube Well List</span>
+                <span class="font-weight-bold small">Tube Well Irrigation List</span>
                 <hr />
             </div>
 

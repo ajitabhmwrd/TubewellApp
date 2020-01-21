@@ -118,7 +118,7 @@ public partial class EE_UpdateEmployee : System.Web.UI.Page
             SqlParameter[] prm = new SqlParameter[]{
                     new SqlParameter("@EmpID",lblEmployeeID.Text.Trim()),
                     new SqlParameter("@Name",txtName.Text.Trim()),
-                    new SqlParameter("@FatherName",txtName.Text.Trim()),
+                    new SqlParameter("@FatherName",txtFatherName.Text.Trim()),
                     new SqlParameter("@Gender",ddlGender.SelectedValue),
                     new SqlParameter("@EmployeeType",ddlEmpType.SelectedValue),
                     new SqlParameter("@Mobile",txtMobile.Text.Trim()),

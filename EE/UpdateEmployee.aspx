@@ -7,7 +7,7 @@
         <ContentTemplate>
             <br />
             <div class="container">
-                <span class="font-weight-bold small">Add new AE/JE</span>
+                <span class="font-weight-bold small">Update AE/JE</span>
                 <hr />
             </div>
 

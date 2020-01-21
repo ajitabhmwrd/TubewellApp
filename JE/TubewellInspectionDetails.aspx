@@ -6,7 +6,7 @@
     <br />
     
     <div class="container">
-        <span class="font-weight-bold small">Update Tube  ell</span>
+        <span class="font-weight-bold small">Tube well Inpection Detail</span>
         <hr />
     </div>
 

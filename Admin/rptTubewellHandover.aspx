@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <br />
     <div class="container">
-        <span class="font-weight-bold small">Tubewells Detail Report</span>
+        <span class="font-weight-bold small">Tubewell Functional Report</span>
         <hr />
     </div>
 
