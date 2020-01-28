@@ -88,7 +88,7 @@ public partial class JE_TubewellInspectionDetails : System.Web.UI.Page
         img1.ID= "ImgInspection" + index;
         img1.Attributes.Add("style", "padding:5px");
         //img1.Width = new Unit("100%");
-        img1.Height = new Unit("200px");        
+        img1.Height = new Unit("200px");
         string insImg = Convert.ToBase64String(Image);
         img1.ImageUrl = String.Format("data:image/jpg;base64,{0}", insImg);
         img1.Attributes.Add("OnClientClick", "return LoadDiv(this.src);");

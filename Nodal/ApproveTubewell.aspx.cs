@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-public partial class JE_TubewellIrrigation : System.Web.UI.Page
+
+public partial class Nodal_ApproveTubewell : System.Web.UI.Page
 {
     getData gd = new getData();
     bindControls bc = new bindControls();
@@ -23,21 +23,12 @@ public partial class JE_TubewellIrrigation : System.Web.UI.Page
         try
         {
             if (txtSearch.Text.Trim() != "")
-            { 
-                TubewellIrrigationSearch();
+            {
+                TubewellSearch();
             }
             else
             {
-                SqlParameter[] prm = new SqlParameter[]
-                        {
-                        new SqlParameter("@DistCode",Session["DistCode"].ToString())
-                        };
-                DataTable dt = gd.getDataTable("getTubewellIrrigationByDist", prm);
-                dt.Columns.Add("Duration");
-                foreach (DataRow dr in dt.Rows)
-                {
-                    dr["Duration"] = dr["DurationHour"].ToString() + "h " + dr["DurationMinute"].ToString() + "min";
-                }
+                DataTable dt = gd.getDataTable("getTubewellApproved");
                 bc.bindGV(gvTubewell, dt);
             }
         }
@@ -55,23 +46,18 @@ public partial class JE_TubewellIrrigation : System.Web.UI.Page
 
     protected void txtSearch_TextChanged(object sender, EventArgs e)
     {
-        TubewellIrrigationSearch();
+        TubewellSearch();
     }
-    public void TubewellIrrigationSearch()
+    public void TubewellSearch()
     {
         try
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
-                        new SqlParameter("@DistCode",Session["DistCode"].ToString()),
-                        new SqlParameter("@SearchKey",txtSearch.Text.Trim())
+                    new SqlParameter("@DistCode",Session["DistCode"].ToString()),
+                    new SqlParameter("@SearchKey",txtSearch.Text.Trim())
                     };
-            DataTable dt = gd.getDataTable("getTubewellIrrigationByDistSearch", prm);
-            dt.Columns.Add("Duration");
-            foreach (DataRow dr in dt.Rows)
-            {
-                dr["Duration"] = dr["DurationHour"].ToString() + "h " + dr["DurationMinute"].ToString() + "min";
-            }
+            DataTable dt = gd.getDataTable("getTubewellByDistCodeSearchKey", prm);
             bc.bindGV(gvTubewell, dt);
         }
         catch (Exception ex)
@@ -79,11 +65,12 @@ public partial class JE_TubewellIrrigation : System.Web.UI.Page
         }
     }
 
-    protected void btnEdit_Click(object sender, EventArgs e)
+    protected void btnView_Click(object sender, EventArgs e)
     {
         Button btnEdit = (Button)sender;
         GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
         Context.Items.Add("ID", ((Label)gvr.FindControl("lblID")).Text.ToString());
-        Server.Transfer("UpdateTubewellIrrigation.aspx");
+        Server.Transfer("ViewTubewell.aspx");
     }
+    
 }

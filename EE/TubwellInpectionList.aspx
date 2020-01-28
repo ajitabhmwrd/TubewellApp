@@ -1,21 +1,20 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="TubewellDetail.aspx.cs" Inherits="EE_TubewellDetail" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="TubwellInpectionList.aspx.cs" Inherits="JE_TubwellInpectionList" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:UpdatePanel ID="Update" runat="server">
         <ContentTemplate>
             <br />
             <div class="container">
-                <span class="font-weight-bold small">Tube Well List</span>
+                <span class="font-weight-bold small">Tube Well Inspection</span>
                 <hr />
             </div>
 
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 p-1">
-                        <a class="btn btn-primary btn-sm" href="AddTubewell.aspx">Add new Tube Well</a>
+                        <a class="btn btn-primary btn-sm" href="AddInspection.aspx">Add new Inpection</a>
                     </div>
                     <div class="col-md-6 p-1"></div>
                     <div class="col-md-3 p-1">
@@ -24,8 +23,8 @@
                     <div class="col-md-12 p-2 table-responsive">
                         <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
                             HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"
-                            OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="50" AllowPaging="true" OnRowDataBound="gvTubewell_RowDataBound">
-                            <Columns>
+                            OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="5" AllowPaging="false">
+                            <Columns>                                
                                 <asp:TemplateField HeaderText="SNo">
                                     <ItemTemplate>
                                         <%#Container.DataItemIndex+1 %>
@@ -36,11 +35,7 @@
                                         <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="CA Number">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblConsumerID" runat="server" Text='<%# Bind("ConsumerID") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
+                                
                                 <asp:TemplateField HeaderText="Name">
                                     <ItemTemplate>
                                         <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
@@ -61,26 +56,34 @@
                                         <asp:Label ID="lblVILLNAME" runat="server" Text='<%# Bind("VILLNAME") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Type"  ItemStyle-Wrap="false">
+                                <asp:TemplateField HeaderText="Type" ItemStyle-Wrap="false">
                                     <ItemTemplate>
                                         <asp:Label ID="lblType" runat="server" Text='<%# Bind("Type") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Status"  ItemStyle-Wrap="false">
+                                <asp:TemplateField HeaderText="Status">
                                     <ItemTemplate>
                                         <asp:Label ID="lblStatus" runat="server" Text='<%# Bind("Status") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="" ItemStyle-Wrap="false">
+                                <asp:TemplateField HeaderText="Total Inspection" ItemStyle-Wrap="false">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblInspectionCount" runat="server" Text='<%# Bind("InspectionCount") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Last Inspection Date">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblInspectionDate" runat="server" Text='<%# Eval("LastInspectionDate", "{0:dd/MM/yyyy}") %>' ></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="">
                                     <ItemTemplate>
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                             <ContentTemplate>                                                
-                                                <asp:Button ID="btnEdit" runat="server" Text="Edit" class="btn-primary" OnClick="btnEdit_Click"/>
-                                                <asp:Button ID="btnView" runat="server" Text="View / Lock" class="btn-primary" OnClick="btnView_Click"/>
+                                        <asp:Button ID="btnDetail" runat="server" Text="Detail" class="btn-primary" OnClick="btnDetail_Click" />
                                             </ContentTemplate>
                                             <Triggers>
-                                                <asp:PostBackTrigger ControlID="btnEdit" />
-                                                <asp:PostBackTrigger ControlID="btnView" />
+                                                <asp:PostBackTrigger ControlID="btnDetail" />
                                             </Triggers>
                                         </asp:UpdatePanel>
                                     </ItemTemplate>
@@ -97,4 +100,5 @@
         </Triggers>
     </asp:UpdatePanel>   
 </asp:Content>
+
 

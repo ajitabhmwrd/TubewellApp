@@ -14,7 +14,7 @@ public partial class Login : System.Web.UI.Page
     getData gd = new getData();
     protected void Page_Load(object sender, EventArgs e)
     {
-        //imgCaptcha.ImageUrl = "~/CreateCaptcha.aspx?New="+DateTime.Now.ToString();
+        imgCaptcha.ImageUrl = "~/CreateCaptcha.aspx?New="+DateTime.Now.ToString();
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)
@@ -33,6 +33,7 @@ public partial class Login : System.Web.UI.Page
         //if (!(Session["CaptchaCode"] != null && txtCaptcha.Text == Session["CaptchaCode"].ToString()))
         //{
         //    ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('Captcha not matched, Please try again!!!');", true);
+        //    txtCaptcha.Text = "";
         //    return;
         //}
         VerifyLogin(txtUserName.Text, txtPassword.Text);
@@ -81,6 +82,10 @@ public partial class Login : System.Web.UI.Page
                 {
                     Session["DistCode"] = dt.Rows[0]["DistCode"].ToString();
                     returnUrl = "~/EE/default.aspx";
+                }
+                else if (userrole == "Nodal")
+                {
+                    returnUrl = "~/Nodal/default.aspx";
                 }
                 else if (userrole == "Contractor")
                 {
@@ -152,8 +157,9 @@ public partial class Login : System.Web.UI.Page
         }
     }
 
-    //protected void imgBtnCapchaRefresh_Click(object sender, ImageClickEventArgs e)
-    //{
-    //    txtCaptcha.Text = "";
-    //}
+
+    protected void imgBtnCapchaRefresh_Click(object sender, ImageClickEventArgs e)
+    {
+        txtCaptcha.Text = "";
+    }
 }

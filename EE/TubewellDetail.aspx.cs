@@ -76,4 +76,41 @@ public partial class EE_TubewellDetail : System.Web.UI.Page
         Context.Items.Add("ID", ((Label)gvr.FindControl("lblID")).Text.ToString());
         Server.Transfer("UpdateTubewell.aspx");
     }
+
+    protected void btnView_Click(object sender, EventArgs e)
+    {
+        Button btnEdit = (Button)sender;
+        GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+        Context.Items.Add("ID", ((Label)gvr.FindControl("lblID")).Text.ToString());
+        Server.Transfer("ViewTubewell.aspx");
+    }
+
+    protected void gvTubewell_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DataRowView dr = (DataRowView)e.Row.DataItem;
+                Button btnEdit = (Button)e.Row.FindControl("btnEdit");
+                Button btnView = (Button)e.Row.FindControl("btnView");
+                if (dr["IsLock"].ToString()=="Y")
+                {
+                    btnEdit.Enabled = false;
+                    btnEdit.Text = "Locked";
+                    btnView.Text = "View";
+                }
+                else
+                {
+                    btnEdit.Enabled = true;
+                    btnEdit.Text = "Edit";
+                    btnView.Text = "View / Lock";
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Response.Write(ex.ToString());
+        }
+    }
 }

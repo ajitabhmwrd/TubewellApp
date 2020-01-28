@@ -20,11 +20,17 @@
                                 <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" class="form-control" placeholder="Password" required></asp:TextBox>
                                 <label for='<%= txtPassword.ClientID %>'>Password</label>
                             </div>
-
-                            <div class="custom-control custom-checkbox mb-3">
+                            <div class="my-4">
+                                <div style="display: flex; justify-content: center;">
+                                    <asp:Image ID="imgCaptcha" runat="server" ImageUrl="~/CreateCaptcha.aspx?New=1" Width="40%" Height="30px" class="rounded" />
+                                    <asp:ImageButton ID="imgBtnCapchaRefresh" AlternateText="Refresh" runat="server" OnClick="imgBtnCapchaRefresh_Click" ImageUrl="~/Images/refresh.png" Width="10%" Height="30px" />
+                                    <asp:TextBox ID="txtCaptcha" runat="server" placeholder="Captcha" Width="40%"  autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                            <%--<div class="custom-control custom-checkbox mb-3">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                                 <label class="custom-control-label" for="customCheck1">Remember password</label>
-                            </div>
+                            </div>--%>
                             <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Sign in" class="btn btn-lg btn-primary btn-block text-uppercase btn-menuColor" Style="background-color: #008fcc;" />
 
                             <%--<hr class="my-4">
@@ -36,6 +42,6 @@
             </div>
         </div>
     </div>
-   
+
 </asp:Content>
 

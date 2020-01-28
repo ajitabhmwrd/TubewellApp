@@ -21,21 +21,21 @@ public partial class EE_UpdateTubewell : System.Web.UI.Page
                 lblTubewellID.Text = ID.ToUpper();
                 SqlParameter[] prm = new SqlParameter[]
                     {
-                    new SqlParameter("@ID",ID)
+                        new SqlParameter("@ID",ID)
                     };
                 DataTable dt = gd.getDataTable("getTubewellByID", prm);
                 if (dt.Rows.Count == 1)
                 {
                     txtTubewellName.Text = dt.Rows[0]["Name"].ToString();
                     bindDDLBlock();
-                    bindDDLStatus();
+                    //bindDDLStatus();
                     bindDDLType();
                     ddlBlock.SelectedValue= dt.Rows[0]["BlockID"].ToString();
                     bindDDLPanchyat();
                     ddlPanchayat.SelectedValue= dt.Rows[0]["PanchyatID"].ToString();
                     bindDDLVill();
                     ddlVillage.SelectedValue = dt.Rows[0]["VillageID"].ToString();
-                    ddlStatus.Items.FindByText(dt.Rows[0]["Status"].ToString()).Selected=true;
+                    //ddlStatus.Items.FindByText(dt.Rows[0]["Status"].ToString()).Selected=true;
                     ddlType.Items.FindByText(dt.Rows[0]["Type"].ToString()).Selected = true;
                     bindDDLScada();
                     ddlIsHandedOver.SelectedValue= dt.Rows[0]["IsHandedOver"].ToString();
@@ -56,7 +56,7 @@ public partial class EE_UpdateTubewell : System.Web.UI.Page
                     txtFarmer1Mobile.Text= dt.Rows[0]["ConsernFarmer1Mobile"].ToString();                    
                     txtFarmer2Name.Text = dt.Rows[0]["ConsernFarmer2"].ToString();
                     txtFarmer2Mobile.Text = dt.Rows[0]["ConsernFarmer2Mobile"].ToString();
-
+                    HandoverEnableDisable();
                 }
                 else
                     Response.Redirect("TubewellDetail.aspx");
@@ -141,17 +141,17 @@ public partial class EE_UpdateTubewell : System.Web.UI.Page
         }
     }
 
-    public void bindDDLStatus()
-    {
-        try
-        {
-            DataTable dt = gd.getDataTable("getTubewellStatus");
-            bc.bindDDL(ddlStatus, dt, "Status", "ID");
-        }
-        catch (Exception ex)
-        {
-        }
-    }
+    //public void bindDDLStatus()
+    //{
+    //    try
+    //    {
+    //        DataTable dt = gd.getDataTable("getTubewellStatus");
+    //        bc.bindDDL(ddlStatus, dt, "Status", "ID");
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //    }
+    //}
 
     protected void ddlBlock_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -203,7 +203,7 @@ public partial class EE_UpdateTubewell : System.Web.UI.Page
                     new SqlParameter("@BlockID",ddlBlock.SelectedValue),
                     new SqlParameter("@PanchyatID",ddlPanchayat.SelectedValue),
                     new SqlParameter("@VillageID",ddlVillage.SelectedValue),
-                    new SqlParameter("@Status",ddlStatus.SelectedItem.Text),
+                    //new SqlParameter("@Status",ddlStatus.SelectedItem.Text),
                     new SqlParameter("@Type",ddlType.SelectedItem.Text),
                     new SqlParameter("@updByID",Session["LoginId"].ToString()),
                     new SqlParameter("@updByIP",customVariables.GetIPAddress()),
@@ -233,24 +233,34 @@ public partial class EE_UpdateTubewell : System.Web.UI.Page
 
     protected void ddlIsHandedOver_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (ddlIsHandedOver.SelectedValue == "N")
+        HandoverEnableDisable();
+    }
+    public void HandoverEnableDisable()
+    {
+        try
         {
-            ddlHandOverPanchayat.Enabled = false;
-            ddlHandOverBlock.Enabled = false;
-            txtHandedOverDate.Enabled = false;
-            rfvHandedOverDate.Enabled = false;
-            rfvHandOverPanchayat.Enabled = false;
-            rfvHandOverBlock.Enabled = false;
-        }
-        else
-        {
-            ddlHandOverPanchayat.Enabled = true;
-            ddlHandOverBlock.Enabled = true;
-            txtHandedOverDate.Enabled = true;
-            rfvHandedOverDate.Enabled = true;
-            rfvHandOverPanchayat.Enabled = true;
-            rfvHandOverBlock.Enabled = true;
+            if (ddlIsHandedOver.SelectedValue == "N")
+            {
+                ddlHandOverPanchayat.Enabled = false;
+                ddlHandOverBlock.Enabled = false;
+                txtHandedOverDate.Enabled = false;
+                rfvHandedOverDate.Enabled = false;
+                rfvHandOverPanchayat.Enabled = false;
+                rfvHandOverBlock.Enabled = false;
+            }
+            else
+            {
+                ddlHandOverPanchayat.Enabled = true;
+                ddlHandOverBlock.Enabled = true;
+                txtHandedOverDate.Enabled = true;
+                rfvHandedOverDate.Enabled = true;
+                rfvHandOverPanchayat.Enabled = true;
+                rfvHandOverBlock.Enabled = true;
 
+            }
+        }
+        catch (Exception ex)
+        {
         }
     }
 }
