@@ -25,7 +25,7 @@ public partial class EE_eeMaster : System.Web.UI.MasterPage
         }
         catch (Exception ex)
         {
-
+            Logout();
         }
     }
 

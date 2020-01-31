@@ -12,26 +12,26 @@ public partial class EE_eeMaster : System.Web.UI.MasterPage
     getData gd = new getData();
     protected void Page_Load(object sender, EventArgs e)
     {
-        try
-        {
-            if (Session["RoleName"].ToString() == "EE")
-            {
-                SqlParameter[] prm = new SqlParameter[]
-                {
-                    new SqlParameter("@DistCode",Session["DistCode"].ToString())
-                };
-                DataTable dt = gd.getDataTable("getDistrictByDIstCode", prm);
-                lblDesignation.Text = "Welcome " + Session["Designation"].ToString() + ", " + dt.Rows[0]["DistName"].ToString();
-            }
-            else
-            {
-                Logout();
-            }
-        }
-        catch (Exception ex)
-        {
-            Logout();
-        }
+        //try
+        //{
+        //    if (Session["RoleName"].ToString() == "EE")
+        //    {
+        //        SqlParameter[] prm = new SqlParameter[]
+        //        {
+        //            new SqlParameter("@DistCode",Session["DistCode"].ToString())
+        //        };
+        //        DataTable dt = gd.getDataTable("getDistrictByDIstCode", prm);
+        //        lblDesignation.Text = "Welcome " + Session["Designation"].ToString() + ", " + dt.Rows[0]["DistName"].ToString();
+        //    }
+        //    else
+        //    {
+        //        Logout();
+        //    }
+        //}
+        //catch (Exception ex)
+        //{
+        //    Logout();
+        //}
     }
 
     protected void lnkLogout_Click(object sender, EventArgs e)
