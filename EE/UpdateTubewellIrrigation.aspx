@@ -31,7 +31,7 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtIrrigationDate" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic" Font-Size="Small"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtIrrigationDate" ValidationGroup="TubewellEntry" Display="Dynamic"
                             ValidationExpression="(((0|1)[0-9]|2[0-9]|3[0-1])\-(0[1-9]|1[0-2])\-((19|20)\d\d))$" ErrorMessage="(Invalid)" Font-Size="Small" />
-                        <asp:TextBox ID="txtIrrigationDate" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                        <asp:TextBox ID="txtIrrigationDate" runat="server" CssClass="form-control form-control-sm" autocomplete="off"></asp:TextBox>
                         <cc1:CalendarExtender ID="Calendar1" PopupButtonID="txtInspectionDate" runat="server" TargetControlID="txtIrrigationDate" Format="dd-MM-yyyy"></cc1:CalendarExtender>
                     </div>
                     
@@ -42,12 +42,12 @@
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator6" InitialValue="Select" runat="server" Display="Dynamic" ControlToValidate="ddlMinutes" Text="(Select)" ErrorMessage="Select Village" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Font-Size="Small"></asp:RequiredFieldValidator>
                         </div>
                         <div style="float: left; width: 50%;">
-                            <asp:DropDownList ID="ddlHour" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlHour" runat="server" CssClass="form-control form-control-sm">
                                 <asp:ListItem Value="Select">Select Hour</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         <div style="float: left; width: 50%;">
-                            <asp:DropDownList ID="ddlMinutes" runat="server" CssClass="form-control">
+                            <asp:DropDownList ID="ddlMinutes" runat="server" CssClass="form-control form-control-sm">
                                 <asp:ListItem Value="Select">Select Minutes</asp:ListItem>
                             </asp:DropDownList>
                         </div>
@@ -57,33 +57,33 @@
                         <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtIrrigationAreaInDecimal" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
                         <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtIrrigationAreaInDecimal" ValidationGroup="TubewellEntry" Display="Dynamic"
                             ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
-                        <asp:TextBox ID="txtIrrigationAreaInDecimal" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtIrrigationAreaInDecimal" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
                     </div>
                     <div class="col-md-3 p-1 ">
                         Revenue Demand(In Rs.)*
                     <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtRevenueDemand" ValidationGroup="TubewellEntry" Display="Dynamic"
                         ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
                         <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtRevenueDemand" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
-                        <asp:TextBox ID="txtRevenueDemand" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtRevenueDemand" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
                     </div>
                     <div class="col-md-3 p-1 ">
                         Revenue Collection (In Rs.)*
                     <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtRevenueCollection" ValidationGroup="TubewellEntry" Display="Dynamic"
                         ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
                         <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtRevenueCollection" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
-                        <asp:TextBox ID="txtRevenueCollection" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtRevenueCollection" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
                     </div>
                     <div class="col-md-3 p-1 ">
                         Deposited into Bank (In Rs.)*
                         <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtBankDeposited" ValidationGroup="TubewellEntry" Display="Dynamic"
                             ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
                         <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtBankDeposited" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
-                        <asp:TextBox ID="txtBankDeposited" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtBankDeposited" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
                     </div>
                     <div class="col-md-6 p-1 "></div>
                     <div class="col-md-3 p-1 ">
                         Comment                        
-                        <asp:TextBox ID="txtComment" TextMode="MultiLine" Rows="3" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtComment" TextMode="MultiLine" Rows="3" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">

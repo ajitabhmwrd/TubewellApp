@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-6 p-1"></div>
                     <div class="col-md-3 p-1">
-                        <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="Search.." OnTextChanged="txtSearch_TextChanged" AutoPostBack="true"></asp:TextBox>
+                        <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control form-control-sm" placeholder="Search.." OnTextChanged="txtSearch_TextChanged" AutoPostBack="true"></asp:TextBox>
                     </div>
                     <div class="col-md-12 p-2 table-responsive">
                         <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"

@@ -12,12 +12,12 @@
                         <h5 class="card-title text-center">Sign In</h5>
                         <div class="form-signin">
                             <div class="form-label-group">
-                                <asp:TextBox ID="txtUserName" runat="server" class="form-control" placeholder="Username" required></asp:TextBox>
+                                <asp:TextBox ID="txtUserName" runat="server" class="form-control form-control-sm" placeholder="Username" required></asp:TextBox>
                                 <label for='<%= txtUserName.ClientID %>'>Username</label>
                             </div>
 
                             <div class="form-label-group">
-                                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" class="form-control" placeholder="Password" required></asp:TextBox>
+                                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" class="form-control form-control-sm" placeholder="Password" required></asp:TextBox>
                                 <label for='<%= txtPassword.ClientID %>'>Password</label>
                             </div>
                             <div class="my-4">

@@ -94,7 +94,7 @@ public partial class EE_AddOtherEmployee : System.Web.UI.Page
                     new SqlParameter("@PostingDistrictID",DBNull.Value),
                     new SqlParameter("@PostingBlockID",DBNull.Value)
                             };
-            lblMessage.Text = gd.insExecuteSP("insCreateEmployee", prm);
+            lblMessage.Text = gd.insExecuteSP("insCreateOtherEmployee", prm);
             clear();
         }
         catch (Exception ex)

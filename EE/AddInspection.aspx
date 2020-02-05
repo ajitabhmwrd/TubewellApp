@@ -28,20 +28,20 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtInspectionDate" Text="(Required)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtInspectionDate" ValidationGroup="TubewellEntry" Display="Dynamic"
                             ValidationExpression="(((0|1)[0-9]|2[0-9]|3[0-1])\-(0[1-9]|1[0-2])\-((19|20)\d\d))$" ErrorMessage="(Invalid date)" />
-                        <asp:TextBox ID="txtInspectionDate" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                        <asp:TextBox ID="txtInspectionDate" runat="server" CssClass="form-control form-control-sm" autocomplete="off"></asp:TextBox>
                         <cc1:CalendarExtender ID="Calendar1" PopupButtonID="txtInspectionDate" runat="server" TargetControlID="txtInspectionDate" Format="dd/MM/yyyy"></cc1:CalendarExtender>
                     </div>
                     <div class="col-md-3 p-1">
                         Block*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" InitialValue="0" runat="server" ControlToValidate="ddlBlock" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                        <asp:DropDownList ID="ddlBlock" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlBlock_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlBlock" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlBlock_SelectedIndexChanged">
                             <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-md-3 p-1">
                         Panchyat*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" InitialValue="0" runat="server" ControlToValidate="ddlPanchayat" Text="(Select)" ErrorMessage="Select Panchayat" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                        <asp:DropDownList ID="ddlPanchayat" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlPanchayat_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlPanchayat" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlPanchayat_SelectedIndexChanged">
                             <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>
@@ -49,14 +49,14 @@
                     <div class="col-md-3 p-1">
                         Tubewell*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" InitialValue="0" runat="server" ControlToValidate="ddlTubewell" Text="(Select)" ErrorMessage="Select Village" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                        <asp:DropDownList ID="ddlTubewell" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="ddlTubewell" runat="server" CssClass="form-control form-control-sm">
                             <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-md-3 p-1">
                         Tubewell Status*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" InitialValue="0" runat="server" ControlToValidate="ddlStatus" Text="(Select)" ErrorMessage="Select Tube Well Status" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-control form-control-sm">
                             <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>
@@ -96,47 +96,47 @@
                     <div class="col-md-3 p-1 ">
                         Image 1 Comment Type*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator5" InitialValue="0" runat="server" ControlToValidate="ddlCommentType1" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                        <asp:DropDownList ID="ddlCommentType1" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="ddlCommentType1" runat="server" CssClass="form-control form-control-sm">
                             <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-md-3 p-1 ">
                         Image 2 Comment Type
-                        <asp:DropDownList ID="ddlCommentType2" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="ddlCommentType2" runat="server" CssClass="form-control form-control-sm">
                             <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-md-3 p-1 ">
                         Image 3 Comment Type
-                        <asp:DropDownList ID="ddlCommentType3" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="ddlCommentType3" runat="server" CssClass="form-control form-control-sm">
                             <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-md-3 p-1 ">
                         Image 4 Comment Type
-                        <asp:DropDownList ID="ddlCommentType4" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="ddlCommentType4" runat="server" CssClass="form-control form-control-sm">
                             <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-md-3 p-1 ">
                         Image 1 Comment*
                         <asp:RequiredFieldValidator ErrorMessage="(Required)" ControlToValidate="txtComment1" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" />
-                        <asp:TextBox ID="txtComment1" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtComment1" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control form-control-sm"></asp:TextBox>
                     </div>
                     <div class="col-md-3 p-1 ">
                         Image 2 Comment
                         <%--<asp:RequiredFieldValidator ErrorMessage="(Required)" ControlToValidate="txtComment2" runat="server" Display="Dynamic"   ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" />--%>
-                        <asp:TextBox ID="txtComment2" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtComment2" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control form-control-sm"></asp:TextBox>
                     </div>
                     <div class="col-md-3 p-1 ">
                         Image 3 Comment
                         <%--<asp:RequiredFieldValidator ErrorMessage="(Required)" ControlToValidate="txtComment3" runat="server" Display="Dynamic"   ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" />--%>
-                        <asp:TextBox ID="txtComment3" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtComment3" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control form-control-sm"></asp:TextBox>
                     </div>
                     <div class="col-md-3 p-1 ">
                         Image 4 Comment
                         <%--<asp:RequiredFieldValidator ErrorMessage="(Required)" ControlToValidate="txtComment4" runat="server" Display="Dynamic"   ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" />--%>
-                        <asp:TextBox ID="txtComment4" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtComment4" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control form-control-sm"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">
