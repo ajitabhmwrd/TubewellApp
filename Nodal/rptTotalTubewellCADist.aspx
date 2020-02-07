@@ -4,7 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container">
-        <span class="font-weight-bold small">Total Tube Well List</span>
+        <br />
+        <span class="font-weight-bold small">Tube Well Having CA Number</span>
         <hr />
     </div>
 
