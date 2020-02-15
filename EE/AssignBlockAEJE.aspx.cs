@@ -48,6 +48,7 @@ public partial class EE_AssignBlockAEJE : System.Web.UI.Page
             DropDownList ddlAE = gvBlock.Rows[e.RowIndex].FindControl("ddlAE") as DropDownList;
             DropDownList ddlJE = gvBlock.Rows[e.RowIndex].FindControl("ddlJE") as DropDownList;
             SqlParameter[] prm = new SqlParameter[]{
+                    new SqlParameter("@DistCode",Session["DistCode"].ToString()),
                     new SqlParameter("@BlockCode",lblBlockCode.Text),
                     new SqlParameter("@JEEmpID",ddlJE.SelectedValue),
                     new SqlParameter("@AEEmpID",ddlAE.SelectedValue),
