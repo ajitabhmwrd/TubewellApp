@@ -70,8 +70,8 @@
                                 <a class="dropdown-item" href="TubewellDetail.aspx">Manage Tube Well</a>                               
                                 <a class="dropdown-item" href="TubewellIrrigation.aspx">Tube Well Irrigation</a>                               
                                 <a class="dropdown-item" href="TubwellInpectionList.aspx">Tube Well Inspection</a>                               
-                                <a class="dropdown-item" href="TubewellDemadList.aspx">Tube Well Demand</a>                               
-                                <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment</a>                               
+                                <%--<a class="dropdown-item" href="TubewellDemadList.aspx">Tube Well Demand</a>                               
+                                <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment</a>--%>                               
                             </div>
                         </li>
                         

@@ -16,19 +16,29 @@ public partial class JE_TubewellInspectionDetails : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            try
+            {
+                string ID = Context.Items["ID"].ToString();
+                lblTubewellID.Text = ID.ToUpper();
+
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("TubwellInpectionList.aspx");
+            }
             loadData();
         }
+
     }
 
     public void loadData()
     {
         try
         {
-            string ID = Context.Items["ID"].ToString();
-            lblTubewellID.Text = ID.ToUpper();
+            
             SqlParameter[] prm = new SqlParameter[]
                 {
-                    new SqlParameter("@ID",ID)
+                    new SqlParameter("@ID",lblTubewellID.Text)
                 };
             DataSet ds = gd.getDataSet("getTubewellInspectionByID", prm);
             DataTable dt0 = ds.Tables[0];
@@ -49,8 +59,7 @@ public partial class JE_TubewellInspectionDetails : System.Web.UI.Page
                     string ins = "Inspection By : " + dr["EntryByDesignation"].ToString() + ", Date : " + DateTime.Parse(dr["InspectionDate"].ToString()).ToString("dd-MMM-yyyy");
                     AddLabel(count,ins);  
                     foreach (DataRow dri in dt1.Rows)
-                    {
-                        
+                    {                        
                         if (dr["InpectionID"].ToString() == dri["InpectionID"].ToString())
                         {
                             System.Drawing.Image image = clsImage.byteArrayToImage((byte[])(dri["Image"]));
@@ -84,14 +93,21 @@ public partial class JE_TubewellInspectionDetails : System.Web.UI.Page
     }
     public void AddImage(byte[] Image,int index )
     {
-        Image img1 = new Image();
+        ImageButton img1 = new ImageButton();
         img1.ID= "ImgInspection" + index;
+
         img1.Attributes.Add("style", "padding:5px");
         //img1.Width = new Unit("100%");
         img1.Height = new Unit("200px");
         string insImg = Convert.ToBase64String(Image);
         img1.ImageUrl = String.Format("data:image/jpg;base64,{0}", insImg);
-        img1.Attributes.Add("OnClientClick", "return LoadDiv(this.src);");
+        //img1.Attributes.Add("OnClientClick", "return LoadDiv(this.src);");
+        img1.Click += new ImageClickEventHandler(img1_Click);
         pnlDetail.Controls.Add(img1);
+    }
+
+    private void img1_Click(object sender, ImageClickEventArgs e)
+    {
+        lblMessage.Text = "Button Clicked";
     }
 }

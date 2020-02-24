@@ -68,7 +68,8 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
                                 <a class="dropdown-item" href="ApproveTubewell.aspx">New Tube well Request</a>                               
-                                <%--<a class="dropdown-item" href="TubwellInpectionList.aspx">Tube Well Inspection</a>  --%>                             
+                                <a class="dropdown-item" href="AddAllotmentPlan.aspx">Tube Well Allotment (Plan)</a>                               
+                                <a class="dropdown-item" href="CreateAllotment.aspx">Tube Well Allotment (Non Plan)</a>                               
                                 <%--<a class="dropdown-item" href="TubewellIrrigation.aspx">Tube Well Irrigation</a>  --%>                             
                             </div>
                         </li>       
@@ -77,7 +78,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
                                 <a class="dropdown-item" href="rptTubewellHandover.aspx">Tube Well Detail Report</a>                               
-                                <%--<a class="dropdown-item" href="TubwellInpectionList.aspx">Tube Well Inspection</a>  --%>                             
+                                <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment</a>                             
                                 <%--<a class="dropdown-item" href="TubewellIrrigation.aspx">Tube Well Irrigation</a>  --%>                             
                             </div>
                         </li>          
