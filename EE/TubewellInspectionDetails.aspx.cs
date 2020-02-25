@@ -20,29 +20,27 @@ public partial class JE_TubewellInspectionDetails : System.Web.UI.Page
             {
                 string ID = Context.Items["ID"].ToString();
                 lblTubewellID.Text = ID.ToUpper();
+                bindGVInspection();
 
             }
             catch (Exception ex)
             {
                 Response.Redirect("TubwellInpectionList.aspx");
             }
-            loadData();
         }
 
     }
-
-    public void loadData()
+        
+    public void bindGVInspection()
     {
         try
         {
-            
+
             SqlParameter[] prm = new SqlParameter[]
                 {
                     new SqlParameter("@ID",lblTubewellID.Text)
                 };
-            DataSet ds = gd.getDataSet("getTubewellInspectionByID", prm);
-            DataTable dt0 = ds.Tables[0];
-            DataTable dt1 = ds.Tables[1];
+            DataTable dt0 = gd.getDataTable("getTubewellInspectionByID", prm);
             if (dt0.Rows.Count > 0)
             {
                 lblCANumber.Text = dt0.Rows[0]["ConsumerID"].ToString();
@@ -52,62 +50,57 @@ public partial class JE_TubewellInspectionDetails : System.Web.UI.Page
                 lblBlock.Text = dt0.Rows[0]["BlockName"].ToString();
                 lblPanchayat.Text = dt0.Rows[0]["PanchayatName"].ToString();
                 lblVillage.Text = dt0.Rows[0]["VILLNAME"].ToString();
-                int count = 0;
-                foreach (DataRow dr in dt0.Rows)
-                {
-                    count++;
-                    string ins = "Inspection By : " + dr["EntryByDesignation"].ToString() + ", Date : " + DateTime.Parse(dr["InspectionDate"].ToString()).ToString("dd-MMM-yyyy");
-                    AddLabel(count,ins);  
-                    foreach (DataRow dri in dt1.Rows)
-                    {                        
-                        if (dr["InpectionID"].ToString() == dri["InpectionID"].ToString())
-                        {
-                            System.Drawing.Image image = clsImage.byteArrayToImage((byte[])(dri["Image"]));
-                            byte[] bin = clsImage.scaleImage(image, 400, 400, false);
-                            //byte[] image = (byte[])(dri["Image"]);
-                            AddImage(bin, count);
-                        }
-                    }
-
-                }
+                gvInspection.DataSource = dt0;
+                gvInspection.DataBind();
             }
-            else
-                Response.Redirect("TubwellInpectionList.aspx");
         }
         catch (Exception ex)
         {
             Response.Redirect("TubwellInpectionList.aspx");
         }
     }
-    private void AddLabel(int index,string insDate)
-    {
-        Label lbl = new Label();
-        lbl.ID = "lblInsDate" + index;
-        lbl.Text = insDate;
-        lbl.Font.Bold = true;
-        lbl.ForeColor = System.Drawing.Color.DarkBlue;
-        pnlDetail.Controls.Add(new Literal() { Text = "<Br/>" });
-        pnlDetail.Controls.Add(new Literal() { Text = "<Br/>" });
-        pnlDetail.Controls.Add(lbl);
-        pnlDetail.Controls.Add(new Literal() {Text = "<hr/>" });
-    }
-    public void AddImage(byte[] Image,int index )
-    {
-        ImageButton img1 = new ImageButton();
-        img1.ID= "ImgInspection" + index;
 
-        img1.Attributes.Add("style", "padding:5px");
-        //img1.Width = new Unit("100%");
-        img1.Height = new Unit("200px");
-        string insImg = Convert.ToBase64String(Image);
-        img1.ImageUrl = String.Format("data:image/jpg;base64,{0}", insImg);
-        //img1.Attributes.Add("OnClientClick", "return LoadDiv(this.src);");
-        img1.Click += new ImageClickEventHandler(img1_Click);
-        pnlDetail.Controls.Add(img1);
+    protected void gvInspection_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            string InpectionID = gvInspection.DataKeys[e.Row.RowIndex].Value.ToString();
+            //GridView gvInspectionImage = e.Row.FindControl("gvInspectionImage") as GridView;
+            Repeater rtImage = e.Row.FindControl("rtImage") as Repeater;
+            SqlParameter[] prm = new SqlParameter[]
+                {
+                    new SqlParameter("@InpectionID",InpectionID)
+                };
+            DataTable dt = gd.getDataTable("getTubewellInspectionImage", prm);
+            //bc.bindGV(gvInspectionImage,dt);
+            foreach (DataRow dr in dt.Rows)
+            {
+                System.Drawing.Image image = clsImage.byteArrayToImage((byte[])(dr["Image"]));
+                byte[] bin = clsImage.scaleImage(image, 200, 200, false);
+                dr["Image"] = bin;
+            }
+            rtImage.DataSource = dt;            
+            rtImage.DataBind();            
+        }
+    }
+    
+    public string GetImage(object img)
+    {
+        return "data:image/jpg;base64," + Convert.ToBase64String((byte[])img);
     }
 
-    private void img1_Click(object sender, ImageClickEventArgs e)
+
+    protected void ibImage_Click(object sender, ImageClickEventArgs e)
     {
-        lblMessage.Text = "Button Clicked";
+        RepeaterItem item = (sender as ImageButton).NamingContainer as RepeaterItem;
+        string ImageID = (item.FindControl("lblImageID") as Label).Text;
+        SqlParameter[] prm = new SqlParameter[]
+                {
+                    new SqlParameter("@ImageID",ImageID)
+                };
+        DataTable dt = gd.getDataTable("getTubewellInspectionImageByID", prm);
+        string imageUrl = "data:image/jpg;base64," + Convert.ToBase64String((byte[])dt.Rows[0]["Image"]);
+        imgMP.ImageUrl = imageUrl;
+        mp1.Show();
     }
 }

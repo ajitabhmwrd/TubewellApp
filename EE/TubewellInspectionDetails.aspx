@@ -1,10 +1,36 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="TubewellInspectionDetails.aspx.cs" Inherits="JE_TubewellInspectionDetails" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        .modalBackground {
+            background-color: Black;
+            filter: alpha(opacity=90);
+            opacity: 0.8;
+        }
+
+        .modalPopup {
+            background-color: #FFFFFF;
+            border-width: 3px;
+            border-style: solid;
+            border-color: black;
+            padding-top: 10px;
+            padding-left: 10px;
+            width: auto;
+            height: auto;
+        }
+
+        .img-FullScr {
+            height: 95vh;
+            width: auto;
+            object-fit: cover;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <br />
-    
+
     <div class="container">
         <span class="font-weight-bold small">Tube well Inpection Detail</span>
         <hr />
@@ -51,10 +77,44 @@
                         <asp:Label ID="lblStatus" runat="server" Font-Bold="True" ForeColor="Blue"></asp:Label>
             </div>
         </div>
-        <div class="col-md-12 p-2 table-responsive">
-            <asp:Panel ID="pnlDetail" runat="server" CssClass="=row">
-            </asp:Panel>
+
+        <div class="col-md-12 p-2">
+            <asp:GridView ID="gvInspection" runat="server" AutoGenerateColumns="False" CssClass="table table-sm" GridLines="None"
+                HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found" DataKeyNames="InpectionID" ShowHeader="false" OnRowDataBound="gvInspection_RowDataBound">
+                <Columns>
+                    <asp:TemplateField HeaderText="">
+                        <ItemTemplate>
+                            <span style="font-size: 15px; font-weight: bold; color: blue; padding-bottom: 8px"><%#Container.DataItemIndex+1 %>.
+                               Inspection By : 
+                                <asp:Label ID="lblEntryByDesignation" runat="server" Text='<%# Bind("EntryByDesignation") %>'></asp:Label>,
+                                 Date :
+                                <asp:Label ID="lblInspectionDate" runat="server" Text='<%# Eval("InspectionDate", "{0:dd/MM/yyyy}") %>'></asp:Label>
+                            </span>
+                            <div class="row">
+                                <asp:Repeater ID="rtImage" runat="server">
+                                    <ItemTemplate>
+                                        <div class="col-md-3">
+                                            <asp:Label ID="lblImageID" runat="server" Text='<%# Bind("ImageID") %>' Visible="false"></asp:Label>,
+                                            <asp:ImageButton ID="ibImage" runat="server" AlternateText="No Image" ImageUrl='<%# GetImage(Eval("Image")) %>' Height="200px" OnClick="ibImage_Click" CssClass="rounded" />
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </div>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
         </div>
     </div>
+    <asp:LinkButton Text="" ID="lnkFake" runat="server" />
+    <!-- ModalPopupExtender -->
+    <cc1:ModalPopupExtender ID="mp1" runat="server" PopupControlID="Panel1" TargetControlID="lnkFake"
+        CancelControlID="btnClose" BackgroundCssClass="modalBackground">
+    </cc1:ModalPopupExtender>
+    <asp:Panel ID="Panel1" runat="server" CssClass="modalPopup" align="center" Style="display: none">
+        <asp:Image ID="imgMP" runat="server" CssClass="img-FullScr" /><br />
+        <asp:Button ID="btnClose" runat="server" Text="Close" CssClass="btn btn-primary btn-sm" />
+    </asp:Panel>
+    <!-- ModalPopupExtender -->
 </asp:Content>
 
