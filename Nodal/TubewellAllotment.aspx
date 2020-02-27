@@ -9,8 +9,7 @@
         <hr />
     </div>
     <div class="container">
-        <div class="row">
-            
+        <div class="row">            
             <div class="col-md-2 p-1">
                 Financial Year
                 <asp:DropDownList ID="ddlFinYear" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlFinYear_SelectedIndexChanged">
@@ -31,7 +30,7 @@
                 </asp:DropDownList>
             </div>
             <div class="col-md-2 p-1">
-                Block              
+                Block
                 <asp:DropDownList ID="ddlBlock" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlBlock_SelectedIndexChanged">
                     <asp:ListItem Value="0">Select</asp:ListItem>
                 </asp:DropDownList>

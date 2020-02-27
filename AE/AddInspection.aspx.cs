@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class JE_AddInspection : System.Web.UI.Page
+public partial class AE_AddInspection : System.Web.UI.Page
 {
     getData gd = new getData();
     bindControls bc = new bindControls();
@@ -30,9 +30,10 @@ public partial class JE_AddInspection : System.Web.UI.Page
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
-                    new SqlParameter("@DistCode",Session["DistCode"].ToString())
+                    new SqlParameter("@DistCode",Session["DistCode"].ToString()),
+                    new SqlParameter("@AEEmpID",Session["LoginId"].ToString())
                     };
-            DataTable dt = gd.getDataTable("getAllBlocksByDistCode", prm);
+            DataTable dt = gd.getDataTable("getAllBlocksByAEEmpID", prm);
             bc.bindDDL(ddlBlock, dt, "BlockName", "BlockCode");
         }
         catch (Exception ex)

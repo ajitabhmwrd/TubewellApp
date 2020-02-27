@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="TubewellInspectionDetails.aspx.cs" Inherits="JE_TubewellInspectionDetails" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AE/AEMaster.master" AutoEventWireup="true" CodeFile="TubewellInspectionDetails.aspx.cs" Inherits="AE_TubewellInspectionDetails" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 

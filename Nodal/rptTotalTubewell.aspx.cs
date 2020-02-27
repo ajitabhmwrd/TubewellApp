@@ -29,7 +29,7 @@ public partial class Nodal_rptTotalTubewell : System.Web.UI.Page
             SqlParameter[] prm = new SqlParameter[]{
                     new SqlParameter("@DistCode",DistCode)
                     };
-            DataTable dt = gd.getDataTable("getTubewellByDistCode", prm);
+            DataTable dt = gd.getDataTable("getTubewellByDistCodeRPt", prm);
             bc.bindGV(gvTubewell, dt);
         }
         catch (Exception ex)

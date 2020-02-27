@@ -1,42 +1,24 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="TubwellInpectionList.aspx.cs" Inherits="JE_TubwellInpectionList" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AE/AEMaster.master" AutoEventWireup="true" CodeFile="TubwellList.aspx.cs" Inherits="AE_TubwellList" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:UpdatePanel ID="Update" runat="server">
+        <ContentTemplate>
             <br />
             <div class="container">
-                <span class="font-weight-bold small">Tube Well Inspection</span>
+                <span class="font-weight-bold small">Tube Well List</span>
                 <hr />
             </div>
 
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 p-1">
-                        <a class="btn btn-primary btn-sm" href="AddInspection.aspx">Add new Inpection</a>
+                        <%--<a class="btn btn-primary btn-sm" href="AddTubewell.aspx">Add new Tube Well</a>--%>
                     </div>
-                    <div class="col-md-9 p-1"></div>
-                    <div class="col-md-2 p-1">
-                        Block              
-                    <asp:DropDownList ID="ddlBlock" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlBlock_SelectedIndexChanged">
-                        <asp:ListItem Value="0">Select</asp:ListItem>
-                    </asp:DropDownList>
-                    </div>
-                    <div class="col-md-2 p-1">
-                        Panchyat
-                    <asp:DropDownList ID="ddlPanchayat" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlPanchayat_SelectedIndexChanged">
-                        <asp:ListItem Value="0">Select</asp:ListItem>
-                    </asp:DropDownList>
-                    </div>
-                    <div class="col-md-2 p-1">
-                        Tubewell
-                    <asp:DropDownList ID="ddlTubewell" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlTubewell_SelectedIndexChanged">
-                        <asp:ListItem Value="0">Select</asp:ListItem>
-                    </asp:DropDownList>
-                    </div>
-
-                    <div class="col-md-2 p-1">
-                        <br />
-                        <asp:Button ID="btnClear" runat="server" Text="Reset" CssClass="btn btn-primary btn-sm" OnClick="btnClear_Click" />
+                    <div class="col-md-6 p-1"></div>
+                    <div class="col-md-3 p-1">
+                        <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control form-control-sm" placeholder="Search.." OnTextChanged="txtSearch_TextChanged" AutoPostBack="true"></asp:TextBox>
                     </div>
                     <div class="col-md-12 p-2 table-responsive">
                         <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
@@ -53,7 +35,6 @@
                                         <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-
                                 <asp:TemplateField HeaderText="Name">
                                     <ItemTemplate>
                                         <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
@@ -74,7 +55,7 @@
                                         <asp:Label ID="lblVILLNAME" runat="server" Text='<%# Bind("VILLNAME") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Type" ItemStyle-Wrap="false">
+                                <asp:TemplateField HeaderText="Type">
                                     <ItemTemplate>
                                         <asp:Label ID="lblType" runat="server" Text='<%# Bind("Type") %>'></asp:Label>
                                     </ItemTemplate>
@@ -84,24 +65,14 @@
                                         <asp:Label ID="lblStatus" runat="server" Text='<%# Bind("Status") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Total Inspection" ItemStyle-Wrap="false">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblInspectionCount" runat="server" Text='<%# Bind("InspectionCount") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Last Inspection Date">
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblInspectionDate" runat="server" Text='<%# Eval("LastInspectionDate", "{0:dd/MM/yyyy}") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="">
+                                <asp:TemplateField HeaderText="" Visible="false">
                                     <ItemTemplate>
                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                            <ContentTemplate>
-                                                <asp:Button ID="btnDetail" runat="server" Text="Detail" class="btn-primary" OnClick="btnDetail_Click" />
+                                            <ContentTemplate>       
+                                                <asp:Button ID="btnInspection" runat="server" Text="Inspection Detail" class="btn btn-primary btn-sm" OnClick="btnInspection_Click" />
                                             </ContentTemplate>
                                             <Triggers>
-                                                <asp:PostBackTrigger ControlID="btnDetail" />
+                                                <asp:PostBackTrigger ControlID="btnInspection" />
                                             </Triggers>
                                         </asp:UpdatePanel>
                                     </ItemTemplate>
@@ -113,6 +84,8 @@
                 </div>
             </div>
         </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="txtSearch" EventName="TextChanged" />
+        </Triggers>
+    </asp:UpdatePanel>
 </asp:Content>
-
-

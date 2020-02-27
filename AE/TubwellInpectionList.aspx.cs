@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class JE_TubwellInpectionList : System.Web.UI.Page
+public partial class AE_TubwellInpectionList : System.Web.UI.Page
 {
     getData gd = new getData();
     bindControls bc = new bindControls();
@@ -15,28 +15,26 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            bindDDLBlock();
             bindgvTubewell();
+            bindDDLBlock();
         }
     }
-
     public void bindDDLBlock()
     {
         try
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
-                        new SqlParameter("@DistCode",Session["DistCode"].ToString())
+                    new SqlParameter("@DistCode",Session["DistCode"].ToString()),
+                    new SqlParameter("@AEEmpID",Session["LoginId"].ToString())
                     };
-            DataTable dt = gd.getDataTable("getAllBlocksByDistCode", prm);
+            DataTable dt = gd.getDataTable("getAllBlocksByAEEmpID", prm);
             bc.bindDDL(ddlBlock, dt, "BlockName", "BlockCode");
-
         }
         catch (Exception ex)
         {
         }
     }
-
     public void bindDDLPanchyat()
     {
         try
@@ -77,7 +75,6 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
         bindDDLPanchyat();
         bindgvTubewell();
     }
-
     protected void ddlPanchayat_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindDDLTubewell();
@@ -87,13 +84,13 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
     {
         bindgvTubewell();
     }
-
     protected void btnClear_Click(object sender, EventArgs e)
     {
         ddlBlock.ClearSelection();
         bindDDLPanchyat();
         bindgvTubewell();
     }
+
     public void bindgvTubewell()
     {
         try
@@ -101,11 +98,12 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
             SqlParameter[] prm = new SqlParameter[]
                     {
                         new SqlParameter("@DistCode",Session["DistCode"].ToString()),
+                        new SqlParameter("@AEEmpID",Session["LoginId"].ToString()),
                         new SqlParameter("@BlockID",ddlBlock.SelectedValue=="0"?(object)DBNull.Value:ddlBlock.SelectedValue),
                         new SqlParameter("@PanchyatID",ddlPanchayat.SelectedValue=="0"?(object)DBNull.Value:ddlPanchayat.SelectedValue),
                         new SqlParameter("@ID",ddlTubewell.SelectedValue=="0"?(object)DBNull.Value:ddlTubewell.SelectedValue)
                     };
-            DataTable dt = gd.getDataTable("getTubewellInspectByDist", prm);
+            DataTable dt = gd.getDataTable("getTubewellInspectByAE", prm);
             bc.bindGV(gvTubewell, dt);
         }
         catch (Exception ex)
@@ -120,23 +118,7 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
         gvTubewell.DataBind();
     }
 
-    protected void txtSearch_TextChanged(object sender, EventArgs e)
-    {
-        //try
-        //{
-        //    SqlParameter[] prm = new SqlParameter[]
-        //            {
-        //            new SqlParameter("@DistCode",Session["DistCode"].ToString()),
-        //            new SqlParameter("@JEEmpID",Session["LoginId"].ToString())
-        //            };
-        //    DataTable dt = gd.getDataTable("getTubewellInspectByJE", prm);
-        //    bc.bindGV(gvTubewell, dt);
-        //}
-        //catch (Exception ex)
-        //{
-        //}
-    }
-
+    
     protected void btnEdit_Click(object sender, EventArgs e)
     {
         Button btnEdit = (Button)sender;

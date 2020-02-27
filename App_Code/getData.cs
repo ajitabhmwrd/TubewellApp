@@ -55,7 +55,7 @@ public class getData
             {
                 using (SqlCommand cmd = new SqlCommand(spQuery,conn))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandType =CommandType.StoredProcedure;
                     foreach(SqlParameter prm in sqlParameters)
                     {
                         cmd.Parameters.Add(prm);

@@ -41,6 +41,7 @@ public partial class Nodal_CreateAllotment : System.Web.UI.Page
 
             DataTable dt = gd.getDataTable("getAllDistrict");
             bc.bindDDL(ddlDist, dt, "DistName", "DistCode");
+            bindDDLBlock();
         }
         catch (Exception ex)
         {
@@ -57,6 +58,7 @@ public partial class Nodal_CreateAllotment : System.Web.UI.Page
                     };
             DataTable dt = gd.getDataTable("getAllBlocksByDistCode", prm);
             bc.bindDDL(ddlBlock, dt, "BlockName", "BlockCode");
+            bindDDLPanchyat();
         }
         catch (Exception ex)
         {
@@ -73,6 +75,7 @@ public partial class Nodal_CreateAllotment : System.Web.UI.Page
                     };
             DataTable dt = gd.getDataTable("getAllPanchaytByBlockCode", prm);
             bc.bindDDL(ddlPanchayat, dt, "PanchayatName", "PanchayatCode");
+            bindDDLTubewell();
         }
         catch (Exception ex)
         {
@@ -185,9 +188,10 @@ public partial class Nodal_CreateAllotment : System.Web.UI.Page
     {
         ddlFinYear.ClearSelection();
         ddlDist.ClearSelection();
-        ddlBlock.ClearSelection();
-        ddlPanchayat.ClearSelection();
-        ddlTubewell.ClearSelection();
+        bindDDLBlock();
+        //ddlBlock.ClearSelection();
+        //ddlPanchayat.ClearSelection();
+        //ddlTubewell.ClearSelection();
         txtAllotment.Text = "";
         bindgvTubewell();
         lblMessage.Text = "";

@@ -27,7 +27,7 @@
                     <div class="col-md-3 p-1">
                         Designation*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" InitialValue="0" runat="server" ControlToValidate="ddlDesignation" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                        <asp:DropDownList ID="ddlDesignation" runat="server" CssClass="form-control form-control-sm">
+                        <asp:DropDownList ID="ddlDesignation" runat="server" CssClass="form-control form-control-sm" Enabled="false">
                             <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>

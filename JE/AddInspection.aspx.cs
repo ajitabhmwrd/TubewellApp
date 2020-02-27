@@ -22,7 +22,7 @@ public partial class JE_AddInspection : System.Web.UI.Page
             bindDDLStatus();
         }
         txtInspectionDate.Text = DateTime.Parse(DateTime.Now.ToString()).ToString("dd/MM/yyyy");
-        txtInspectionDate.Enabled = false;
+        //txtInspectionDate.Enabled = false;
     }
     public void bindDDLBlock()
     {

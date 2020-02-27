@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class JE_TubewellInspectionDetails : System.Web.UI.Page
+public partial class AE_TubewellInspectionDetails : System.Web.UI.Page
 {
     getData gd = new getData();
     bindControls bc = new bindControls();
