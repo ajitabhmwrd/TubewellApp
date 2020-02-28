@@ -171,12 +171,17 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
         {
             Button btnEdit = (Button)sender;
             GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
-            lblTWAllotmentID.Text=((Label)gvr.FindControl("lblID")).Text;
+            lblAdmAprID.Text=((Label)gvr.FindControl("lblID")).Text;
             lblTWID.Text=((Label)gvr.FindControl("lblTubewellID")).Text;
             lblTWName.Text=((Label)gvr.FindControl("lblName")).Text;
             bindDDLFinYr();
             txtAllotment.Text = "";
             lblMessageMP.Text = "";
+            txtLtNO.Text = "";
+            txtLtDate.Text = "";
+            btnUpdateAllotment.Visible = false;
+            btnCancel.Visible = false;
+            btnInsertAllotment.Visible = true;
             bindgvAllotment();
             mp1.Show();
         }
@@ -185,8 +190,6 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
             ex.ToString();   
         }
     }
-
-
     public void bindDDLFinYr()
     {
         try
@@ -221,14 +224,17 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
 
             SqlParameter[] prm = new SqlParameter[]{
                     new SqlParameter("@TubewellID",lblTWID.Text),
-                    new SqlParameter("@AdmAprID",lblTWAllotmentID.Text),
+                    new SqlParameter("@AdmAprID",lblAdmAprID.Text),
                     new SqlParameter("@FinancialYear",ddlFinYear.SelectedValue),
+                    new SqlParameter("@LetterNo",txtLtNO.Text.Trim()),
+                    new SqlParameter("@LetterDate",DateTime.Parse(txtLtDate.Text).ToString("yyyy-MM-dd")),
                     new SqlParameter("@HeadType","1"),
                     new SqlParameter("@AllotmentAmount",txtAllotment.Text.Trim()),
                     new SqlParameter("@EntryByID",Session["LoginId"].ToString()),
                     new SqlParameter("@EntryByIP",customVariables.GetIPAddress())
                             };
             lblMessageMP.Text = gd.insExecuteSP("insCreateTubewellAllotment", prm);
+            txtAllotment.Text = "";
             bindgvAllotment();
         }
         catch (Exception ex)
@@ -243,7 +249,7 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
             SqlParameter[] prm = new SqlParameter[]
                     {
                         new SqlParameter("@TubewellID",lblTWID.Text),
-                        new SqlParameter("@AdmAprID",lblTWAllotmentID.Text)
+                        new SqlParameter("@AdmAprID",lblAdmAprID.Text)
 
                     };
             DataTable dt = gd.getDataTable("getAllotmentbyTubewell", prm);
@@ -258,5 +264,62 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
     protected void btnClose_Click(object sender, EventArgs e)
     {
         mp1.Hide();
+    }    
+
+    protected void btnAllotmentEdit_Click(object sender, EventArgs e)
+    {
+        Button btnEdit = (Button)sender;
+        GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+        lblAllotmentID.Text = ((Label)gvr.FindControl("lblAllotmentID")).Text;
+        ddlFinYear.SelectedValue= ((Label)gvr.FindControl("lblFinancialYear")).Text;
+        txtAllotment.Text= ((Label)gvr.FindControl("lblAllotmentAmount")).Text;
+        txtLtNO.Text= ((Label)gvr.FindControl("lblLetterNo")).Text;
+        txtLtDate.Text= ((Label)gvr.FindControl("lblLetterDate")).Text;
+        btnInsertAllotment.Visible = false;
+        btnCancel.Visible = true;
+        btnUpdateAllotment.Visible = true;
+    }
+
+    protected void btnUpdateAllotment_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (Page.IsValid == false)
+            {
+                return;
+            }
+            lblMessageMP.Text = "";
+
+            SqlParameter[] prm = new SqlParameter[]{
+                    new SqlParameter("@AllotmentID",lblAllotmentID.Text),
+                    new SqlParameter("@FinancialYear",ddlFinYear.SelectedValue),
+                    new SqlParameter("@LetterNo",txtLtNO.Text.Trim()),
+                    new SqlParameter("@LetterDate",DateTime.Parse(txtLtDate.Text).ToString("yyyy-MM-dd")),
+                    new SqlParameter("@AllotmentAmount",txtAllotment.Text.Trim()),
+                    new SqlParameter("@EntryByID",Session["LoginId"].ToString()),
+                    new SqlParameter("@EntryByIP",customVariables.GetIPAddress())
+                            };
+            lblMessageMP.Text = gd.insExecuteSP("updTubewellAllotment", prm);
+            ddlFinYear.SelectedValue = "0";
+            txtAllotment.Text = "";
+            txtLtDate.Text = "";
+            txtLtNO.Text = "";
+            btnUpdateAllotment.Visible = false;
+            btnAllotmentEdit.Visible = false;
+            btnCancel.Visible = false;
+            btnInsertAllotment.Visible = true;
+            bindgvAllotment();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        btnInsertAllotment.Visible = true;
+        btnCancel.Visible = false;
+        btnUpdateAllotment.Visible = false;
     }
 }

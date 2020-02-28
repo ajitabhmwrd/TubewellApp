@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="rptTubewellHandOverByDist.aspx.cs" Inherits="Admin_rptTubewellHandOverByDist" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="TubewellHandOverByDist.aspx.cs" Inherits="EE_TubewellHandOverByDist" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -13,13 +13,6 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-12 p-1">
-                <a class="btn btn-primary btn-sm" href="rptTubewellHandover.aspx">Back</a>
-            </div>
-            <div class="col-md-12 p-1">
-                <asp:Label ID="lblDistCode" runat="server" Text="" Visible="false"></asp:Label>
-                District : <asp:Label ID="lblDist" runat="server" ForeColor="Blue" Font-Bold="True"></asp:Label>
-            </div>
             <div class="col-md-12 p-1">
                 <asp:Label ID="lblMessage" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
             </div>
@@ -51,7 +44,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Tubewell Having CA No">
                             <ItemTemplate>
-                                <asp:LinkButton ID="lblTotalCA" runat="server" Text='<%# Bind("TotalCA") %>' OnClick="lbTotalCA_Click"></asp:LinkButton>
+                                <asp:LinkButton ID="lblTotalCA" runat="server" Text='<%# Bind("TotalCA") %>'  OnClick="lbTotalCA_Click"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Total Tubewell Panchayat">
@@ -61,7 +54,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Functional">
                             <ItemTemplate>
-                                <asp:LinkButton ID="lblTotalTubewellFunctional" runat="server" Text='<%# Bind("TotalTubewellFunctional") %>' OnClick="lbTotalTubewellFunctional_Click"></asp:LinkButton>
+                                <asp:LinkButton ID="lblTotalTubewellFunctional" runat="server" Text='<%# Bind("TotalTubewellFunctional") %>' OnClick="lbTotalTubewellFunctional_Click" ></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Non-Functional">

@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Admin_rptTubewellHandOverByDist : System.Web.UI.Page
+public partial class EE_TubewellHandOverByDist : System.Web.UI.Page
 {
     getData gd = new getData();
     bindControls bc = new bindControls();
@@ -23,12 +23,8 @@ public partial class Admin_rptTubewellHandOverByDist : System.Web.UI.Page
     {
         try
         {
-            string DistCode = Context.Items["DistCode"].ToString();
-            string DistName = Context.Items["DistName"].ToString();
-            lblDist.Text = DistName;
-            lblDistCode.Text = DistCode;
             SqlParameter[] prm = new SqlParameter[]{
-                    new SqlParameter("@DistCode",DistCode)
+                    new SqlParameter("@DistCode",Session["DistCode"].ToString())
                     };
             DataTable dt = gd.getDataTable("getTubewellHandOverByDist", prm);
             bc.bindGV(gvTubewell, dt);
@@ -48,7 +44,7 @@ public partial class Admin_rptTubewellHandOverByDist : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Response.Redirect("rptTubewellHandover.aspx");
+            //Response.Redirect("rptTubewellHandover.aspx");
         }
     }
 
@@ -58,23 +54,21 @@ public partial class Admin_rptTubewellHandOverByDist : System.Web.UI.Page
     {
         LinkButton btnEdit = (LinkButton)sender;
         GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
-        Context.Items.Add("DistCode", lblDistCode.Text);
-        Context.Items.Add("DistName", lblDist.Text);
+        Context.Items.Add("DistCode", Session["DistCode"].ToString());
         Context.Items.Add("BlockCode", ((Label)gvr.FindControl("lblBlockCode")).Text.ToString());
         Context.Items.Add("BlockName", ((LinkButton)gvr.FindControl("lbBlockName")).Text.ToString());
-        Server.Transfer("rptTubewellHandOverByBlock.aspx");
+        Server.Transfer("TubewellHandoverByBlock.aspx");
     }
 
     protected void lbTotalTubewell_Click(object sender, EventArgs e)
     {
-            LinkButton btnEdit = (LinkButton)sender;
-            GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
-            Context.Items.Add("DistCode", lblDistCode.Text);
-            Context.Items.Add("DistName", lblDist.Text);
-            Context.Items.Add("BlockCode", ((Label)gvr.FindControl("lblBlockCode")).Text.ToString());
-            Context.Items.Add("BlockName", ((LinkButton)gvr.FindControl("lbBlockName")).Text.ToString());
-            Server.Transfer("rptTotalTubewellBlock.aspx");
-           
+        LinkButton btnEdit = (LinkButton)sender;
+        GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+        Context.Items.Add("DistCode", Session["DistCode"].ToString());
+        Context.Items.Add("BlockCode", ((Label)gvr.FindControl("lblBlockCode")).Text.ToString());
+        Context.Items.Add("BlockName", ((LinkButton)gvr.FindControl("lbBlockName")).Text.ToString());
+        Server.Transfer("TotalTubewellBlock.aspx");
+
     }
 
     protected void lbTotalCA_Click(object sender, EventArgs e)
@@ -83,11 +77,10 @@ public partial class Admin_rptTubewellHandOverByDist : System.Web.UI.Page
         {
             LinkButton btnEdit = (LinkButton)sender;
             GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
-            Context.Items.Add("DistCode", lblDistCode.Text);
-            Context.Items.Add("DistName", lblDist.Text);
+            Context.Items.Add("DistCode", Session["DistCode"].ToString());
             Context.Items.Add("BlockName", ((LinkButton)gvr.FindControl("lbBlockName")).Text.ToString());
             Context.Items.Add("BlockCode", ((Label)gvr.FindControl("lblBlockCode")).Text.ToString());
-            Server.Transfer("rptTotalTubewellCABlock.aspx");
+            Server.Transfer("TotalTubewellCABlock.aspx");
         }
         catch (Exception ex)
         {
@@ -101,11 +94,10 @@ public partial class Admin_rptTubewellHandOverByDist : System.Web.UI.Page
         {
             LinkButton btnEdit = (LinkButton)sender;
             GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
-            Context.Items.Add("DistCode", lblDistCode.Text);
-            Context.Items.Add("DistName", lblDist.Text);
+            Context.Items.Add("DistCode", Session["DistCode"].ToString());
             Context.Items.Add("BlockCode", ((Label)gvr.FindControl("lblBlockCode")).Text.ToString());
             Context.Items.Add("BlockName", ((LinkButton)gvr.FindControl("lbBlockName")).Text.ToString());
-            Server.Transfer("rptTubewellPanchayatBlock.aspx");
+            Server.Transfer("TubewellPanchayatBlock.aspx");
         }
         catch (Exception ex)
         {
@@ -118,11 +110,10 @@ public partial class Admin_rptTubewellHandOverByDist : System.Web.UI.Page
         {
             LinkButton btnEdit = (LinkButton)sender;
             GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
-            Context.Items.Add("DistCode", lblDistCode.Text);
-            Context.Items.Add("DistName", lblDist.Text);
+            Context.Items.Add("DistCode", Session["DistCode"].ToString());
             Context.Items.Add("BlockCode", ((Label)gvr.FindControl("lblBlockCode")).Text.ToString());
             Context.Items.Add("BlockName", ((LinkButton)gvr.FindControl("lbBlockName")).Text.ToString());
-            Server.Transfer("rptTubewellFunctionalBlock.aspx");
+            Server.Transfer("TubewellFunctionalBlock.aspx");
         }
         catch (Exception ex)
         {
@@ -135,11 +126,10 @@ public partial class Admin_rptTubewellHandOverByDist : System.Web.UI.Page
         {
             LinkButton btnEdit = (LinkButton)sender;
             GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
-            Context.Items.Add("DistCode", lblDistCode.Text);
-            Context.Items.Add("DistName", lblDist.Text);
+            Context.Items.Add("DistCode", Session["DistCode"].ToString());
             Context.Items.Add("BlockCode", ((Label)gvr.FindControl("lblBlockCode")).Text.ToString());
             Context.Items.Add("BlockName", ((LinkButton)gvr.FindControl("lbBlockName")).Text.ToString());
-            Server.Transfer("rptTubewellNonFunctionalBlock.aspx");
+            Server.Transfer("TubewellNonFunctionalBlock.aspx");
         }
         catch (Exception ex)
         {
