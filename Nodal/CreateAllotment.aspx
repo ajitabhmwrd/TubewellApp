@@ -11,7 +11,7 @@
         <hr />
     </div>
     <div class="container">
-        <div class="row">            
+        <div class="row">
             <div class="col-md-12 p-1">
                 <asp:Label ID="lblMessage" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
             </div>
@@ -22,7 +22,7 @@
                     <asp:ListItem Value="0">Select</asp:ListItem>
                 </asp:DropDownList>
             </div>
-            
+
             <div class="col-md-2 p-1">
                 District*
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator8" InitialValue="0" runat="server" ControlToValidate="ddlDist" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Font-Size="Small"></asp:RequiredFieldValidator>
@@ -59,6 +59,20 @@
                 <asp:TextBox ID="txtAllotment" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
             </div>
             <div class="col-md-2 p-1 ">
+                Letter No*
+                        <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtLtNO" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
+                <asp:TextBox ID="txtLtNO" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
+            </div>
+            <div class="col-md-3 p-1">
+                Letter Date(DD-MM-YYYY)*
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtLtDate" Text="(Required)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntryMP" Font-Bold="True" Display="Dynamic"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtLtDate" ValidationGroup="TubewellEntry" Display="Dynamic"
+                    ValidationExpression="(((0|1)[0-9]|2[0-9]|3[0-1])\-(0[1-9]|1[0-2])\-((19|20)\d\d))$" ErrorMessage="(Invalid date)" />
+                <asp:TextBox ID="txtLtDate" runat="server" CssClass="form-control form-control-sm" autocomplete="off"></asp:TextBox>
+                <cc1:CalendarExtender ID="Calendar1" PopupButtonID="txtLtDate" runat="server" TargetControlID="txtLtDate" Format="dd-MM-yyyy"></cc1:CalendarExtender>
+            </div>
+            <div class="col-md-2 p-1 ">
+                <br />
                 <asp:Button ID="btnAdd" runat="server" Text="Add" CssClass="btn btn-primary btn-sm" OnClick="btnAdd_Click" ValidationGroup="TubewellEntry" />
                 <asp:Button ID="btnClear" runat="server" Text="Reset" CssClass="btn btn-primary btn-sm" OnClick="btnClear_Click" />
             </div>
@@ -116,7 +130,7 @@
                     </Columns>
                 </asp:GridView>
             </div>
-        </div>        
+        </div>
     </div>
 </asp:Content>
 

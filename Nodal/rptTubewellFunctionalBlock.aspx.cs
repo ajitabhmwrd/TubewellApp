@@ -30,7 +30,8 @@ public partial class Nodal_rptTubewellFunctionalBlock : System.Web.UI.Page
 
             SqlParameter[] prm = new SqlParameter[]{
                     new SqlParameter("@DistCode",distCode),
-                    new SqlParameter("@BlockCode",blockCode)
+                    new SqlParameter("@BlockCode",blockCode),
+                     new SqlParameter("@PanchayatCode",DBNull.Value)
                     };
             DataTable dt = gd.getDataTable("getTubewellFunctionalByBlock", prm);
             bc.bindGV(gvTubewell, dt);

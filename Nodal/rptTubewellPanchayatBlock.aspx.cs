@@ -35,7 +35,8 @@ public partial class Nodal_rptTubewellPanchayatBlock : System.Web.UI.Page
 
             SqlParameter[] prm = new SqlParameter[]{
                     new SqlParameter("@DistCode",distCode),
-                    new SqlParameter("@BlockCode",blockCode)
+                    new SqlParameter("@BlockCode",blockCode),
+                    new SqlParameter("@PanchayatCode",DBNull.Value)
                     };
             DataTable dt = gd.getDataTable("getTubewellPanchaytByBlock", prm);
             bc.bindGV(gvTubewell, dt);

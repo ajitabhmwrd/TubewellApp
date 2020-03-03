@@ -39,7 +39,8 @@ public partial class Nodal_rptTubewellNonFunctionalBlock : System.Web.UI.Page
 
             SqlParameter[] prm = new SqlParameter[]{
                     new SqlParameter("@DistCode",distCode),
-                    new SqlParameter("@BlockCode",blockCode)
+                    new SqlParameter("@BlockCode",blockCode),
+                     new SqlParameter("@PanchayatCode",DBNull.Value)
                     };
             DataTable dt = gd.getDataTable("getTubewellNonFunctionalByBlock", prm);
             bc.bindGV(gvTubewell, dt);

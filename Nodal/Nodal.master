@@ -79,7 +79,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
                                 <a class="dropdown-item" href="rptTubewellHandover.aspx">Tube Well Detail Report</a>                               
                                 <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment</a>                             
-                                <%--<a class="dropdown-item" href="TubewellIrrigation.aspx">Tube Well Irrigation</a>  --%>                             
+                                <a class="dropdown-item" href="TubewellwiseRpt.aspx">Tube Well Wise Allotment Report</a>                            
                             </div>
                         </li>          
                         <%--<li class="nav-item active">

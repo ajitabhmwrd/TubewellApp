@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="AddAllotmentPlan.aspx.cs" Inherits="Nodal_AddAllotmentPlan" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="AddAllotmentPlan.aspx.cs" Inherits="Nodal_AddAllotmentPlan" MaintainScrollPositionOnPostback="true" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
@@ -26,7 +26,7 @@
     </div>
     <div class="container">
         <div class="row">
-            
+
             <div class="col-md-12 p-1">
                 <asp:Label ID="lblMessage" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
             </div>
@@ -69,11 +69,12 @@
                 <asp:Button ID="btnAdd" runat="server" Text="Add" CssClass="btn btn-primary btn-sm" OnClick="btnAdd_Click" ValidationGroup="TubewellEntry" />
                 <asp:Button ID="btnClear" runat="server" Text="Reset" CssClass="btn btn-primary btn-sm" OnClick="btnClear_Click" />
             </div>
-            
+
             <div class="col-md-12 p-2 table-responsive">
                 <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
                     HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"
-                    OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="100" AllowPaging="false">
+                    OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="100" AllowPaging="false" OnRowEditing="gvTubewell_RowEditing" OnRowCancelingEdit="gvTubewell_RowCancelingEdit"
+                    OnRowUpdating="gvTubewell_RowUpdating">
                     <Columns>
                         <asp:TemplateField HeaderText="SNo">
                             <ItemTemplate>
@@ -112,18 +113,23 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblEstimatedCost" runat="server" Text='<%# Bind("EstimatedCost") %>'></asp:Label>
                             </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtEstimatedCost" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
+                <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtEstimatedCost" ValidationGroup="TubewellEntry" Display="Dynamic"
+                    ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
+                                <asp:TextBox ID="txtEstimatedCost" runat="server" ValidationGroup="gvValidation" Text='<%# Bind("EstimatedCost") %>'></asp:TextBox>
+                            </EditItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="">
                             <ItemTemplate>
-                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                    <ContentTemplate>
-                                        <asp:Button ID="btnAddAllotment" runat="server" Text="Add Allotment" class="btn-primary" OnClick="btnAddAllotment_Click" />
-                                    </ContentTemplate>
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="btnAddAllotment" EventName="Click" />
-                                    </Triggers>
-                                </asp:UpdatePanel>
+                                <asp:Button ID="btnAddAllotment" runat="server" Text="Add Allotment" class="btn-primary" OnClick="btnAddAllotment_Click" />
+                                <asp:Button ID="BtnECEdit" runat="server" Text="Edit" class="btn-primary" CommandName="Edit" />
                             </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:Button ID="btnECUpdate" runat="server" CommandName="Update" Text="Update" class="btn-primary" ValidationGroup="gvValidation" />
+                                <asp:Button ID="btnECCancel" runat="server" CommandName="Cancel" Text="Cancel" class="btn-primary" />
+
+                            </EditItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
@@ -144,9 +150,6 @@
                         Add Tube Well Allotment (Plan)
                 <hr />
                     </div>
-                    <div class="col-md-12 p-1">
-                        <asp:Label ID="lblMessageMP" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
-                    </div>
                     <div class="col-md-3 p-1">
                         Tubewell ID =
                         <asp:Label ID="lblAllotmentID" runat="server" Text="" Visible="false"></asp:Label>
@@ -162,10 +165,10 @@
                         Financial Year*
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" InitialValue="0" runat="server" ControlToValidate="ddlFinYear" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntryMP" Font-Bold="True"></asp:RequiredFieldValidator>
                         <asp:DropDownList ID="ddlFinYear" runat="server" CssClass="form-control form-control-sm">
-                        <asp:ListItem Value="0">Select</asp:ListItem>
+                            <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>
-                    
+
                     <div class="col-md-2 p-1 ">
                         Allotment(In Rs)*
                         <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtAllotment" runat="server" Display="Dynamic" ValidationGroup="TubewellEntryMP" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
@@ -173,19 +176,19 @@
                             ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
                         <asp:TextBox ID="txtAllotment" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
                     </div>
-                    
+
                     <div class="col-md-2 p-1 ">
                         Letter No*
                         <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtLtNO" runat="server" Display="Dynamic" ValidationGroup="TubewellEntryMP" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
                         <asp:TextBox ID="txtLtNO" runat="server" CssClass="form-control form-control-sm"></asp:TextBox>
                     </div>
                     <div class="col-md-3 p-1">
-                        Letter Date(DD-MM-YYYY)*
+                        Letter Date(YYYY-MM-DD)*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtLtDate" Text="(Required)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntryMP" Font-Bold="True" Display="Dynamic"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtLtDate" ValidationGroup="TubewellEntryMP" Display="Dynamic"
-                            ValidationExpression="(((0|1)[0-9]|2[0-9]|3[0-1])\-(0[1-9]|1[0-2])\-((19|20)\d\d))$" ErrorMessage="(Invalid date)" />
+                            ValidationExpression="(19|20|21)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])" ErrorMessage="(Invalid date)" />
                         <asp:TextBox ID="txtLtDate" runat="server" CssClass="form-control form-control-sm" autocomplete="off"></asp:TextBox>
-                        <cc1:CalendarExtender ID="Calendar1" PopupButtonID="txtLtDate" runat="server" TargetControlID="txtLtDate" Format="dd-MM-yyyy"></cc1:CalendarExtender>
+                        <cc1:CalendarExtender ID="Calendar1" PopupButtonID="txtLtDate" runat="server" TargetControlID="txtLtDate" Format="yyyy-MM-dd"></cc1:CalendarExtender>
                     </div>
                     <div class="col-md-3 p-1 ">
                         <br />
@@ -194,32 +197,34 @@
                         <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-primary btn-sm" OnClick="btnCancel_Click" />
                         <asp:Button ID="btnClose" runat="server" Text="Close" CssClass="btn btn-primary btn-sm" OnClick="btnClose_Click" />
                     </div>
-                    
+                    <div class="col-md-12 p-1">
+                        <asp:Label ID="lblMessageMP" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
+                    </div>
                 </div>
                 <div class="col-md-12 p-2 table-responsive">
                     <asp:GridView ID="gvAllotment" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
-                        HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found" >
+                        HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found">
                         <Columns>
                             <asp:TemplateField HeaderText="SNo">
                                 <ItemTemplate>
                                     <%#Container.DataItemIndex+1 %>
                                 </ItemTemplate>
-                            </asp:TemplateField> 
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Allotment ID">
                                 <ItemTemplate>
                                     <asp:Label ID="lblAllotmentID" runat="server" Text='<%# Bind("AllotmentID") %>'></asp:Label>
-                                </ItemTemplate>                                
+                                </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Financial Year">
                                 <ItemTemplate>
                                     <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
-                                </ItemTemplate>                                
+                                </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Estimated Cost (In Rs)">
                                 <ItemTemplate>
                                     <asp:Label ID="lblAllotmentAmount" runat="server" Text='<%# Bind("AllotmentAmount") %>'></asp:Label>
                                 </ItemTemplate>
-                            </asp:TemplateField> 
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Letter No">
                                 <ItemTemplate>
                                     <asp:Label ID="lblLetterNo" runat="server" Text='<%# Bind("LetterNo") %>'></asp:Label>
@@ -231,17 +236,17 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="">
-                            <ItemTemplate>
-                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                    <ContentTemplate>
-                                        <asp:Button ID="btnAllotmentEdit" runat="server" Text="Edit" class="btn-primary" OnClick="btnAllotmentEdit_Click" />
-                                    </ContentTemplate>
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="btnAllotmentEdit" EventName="Click" />
-                                    </Triggers>
-                                </asp:UpdatePanel>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                        <ContentTemplate>
+                                            <asp:Button ID="btnAllotmentEdit" runat="server" Text="Edit" class="btn-primary" OnClick="btnAllotmentEdit_Click" />
+                                        </ContentTemplate>
+                                        <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="btnAllotmentEdit" EventName="Click" />
+                                        </Triggers>
+                                    </asp:UpdatePanel>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </div>

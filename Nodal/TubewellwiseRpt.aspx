@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="TubewellAllotment.aspx.cs" Inherits="Nodal_TubewellAllotment" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="TubewellwiseRpt.aspx.cs" Inherits="Nodal_TubewellwiseRpt" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container">
@@ -16,13 +16,7 @@
                     <asp:ListItem Value="0">Select</asp:ListItem>
                 </asp:DropDownList>
             </div>
-            <div class="col-md-2 p-1">
-                Head Type  
-                <asp:DropDownList ID="ddlHead" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlHead_SelectedIndexChanged">
-                    <asp:ListItem Value="0">Select</asp:ListItem>
-                </asp:DropDownList>
-            </div>
-
+            
             <div class="col-md-2 p-1">
                 District               
                 <asp:DropDownList ID="ddlDist" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlDist_SelectedIndexChanged">
@@ -86,19 +80,35 @@
                                 <asp:Label ID="lblPanchayatName" runat="server" Text='<%# Bind("PanchayatName") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Head">
-                            <ItemTemplate>
-                                <asp:Label ID="lblHeadType" runat="server" Text='<%# Bind("HeadType") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                        
                         <asp:TemplateField HeaderText="Financial Year">
                             <ItemTemplate>
                                 <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Allotment (In Rs)">
+                        <asp:TemplateField HeaderText="Estimated Cost (In Rs)">
                             <ItemTemplate>
-                                <asp:Label ID="lblAllotmentAmount" runat="server" Text='<%# Bind("AllotmentAmount") %>'></asp:Label>
+                                <asp:Label ID="lblEstimatedCost" runat="server" Text='<%# Bind("EstimatedCost") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Allotment Plan(In Rs)">
+                            <ItemTemplate>
+                                <asp:Label ID="lblAllotmentPlan" runat="server" Text='<%# Bind("AllotmentPlan") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Count (Plan)">
+                            <ItemTemplate>
+                                <asp:Label ID="lblAllotmentPlanCount" runat="server" Text='<%# Bind("AllotmentPlanCount") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Allotment Non-Plan(In Rs)">
+                            <ItemTemplate>
+                                <asp:Label ID="lblAllotmentNonPlan" runat="server" Text='<%# Bind("AllotmentNonPlan") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Count (Non-Plan)">
+                            <ItemTemplate>
+                                <asp:Label ID="lblAllotmentNonPlanCount" runat="server" Text='<%# Bind("AllotmentNonPlanCount") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -107,3 +117,4 @@
         </div>
     </div>
 </asp:Content>
+

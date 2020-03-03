@@ -108,8 +108,8 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
                         new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
                     };
             DataTable dt = gd.getDataTable("getTubewellByPanchayat", prm);
-            bc.bindDDL(ddlTubewell, dt, "Name", "ID");
-            
+            bc.bindDDL(ddlTubewell, dt, "Name", "ID");            
+
         }
         catch (Exception ex)
         {
@@ -157,6 +157,10 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
                     };
             DataTable dt = gd.getDataTable("getAllotmentBySearch", prm);
             bc.bindGV(gvTubewell, dt);
+            decimal TAllotmentAmount = dt.AsEnumerable().Sum(row => row.Field<decimal>("AllotmentAmount"));
+            gvTubewell.FooterRow.Cells[7].Text = "Total";
+            gvTubewell.FooterRow.Cells[7].HorizontalAlign = HorizontalAlign.Right;
+            gvTubewell.FooterRow.Cells[8].Text = TAllotmentAmount.ToString();
         }
         catch (Exception ex)
         {

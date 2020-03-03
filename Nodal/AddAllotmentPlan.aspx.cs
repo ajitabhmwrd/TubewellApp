@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -39,7 +40,7 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
             ex.ToString();
         }
     }
-    
+
     public void bindDDLDistrict()
     {
         try
@@ -139,6 +140,7 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
                             };
             lblMessage.Text = gd.insExecuteSP("insCreateTubewellAdmAprv", prm);
             bindgvTubewell();
+            txtEstimated.Text = "";
         }
         catch (Exception ex)
         {
@@ -171,9 +173,9 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
         {
             Button btnEdit = (Button)sender;
             GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
-            lblAdmAprID.Text=((Label)gvr.FindControl("lblID")).Text;
-            lblTWID.Text=((Label)gvr.FindControl("lblTubewellID")).Text;
-            lblTWName.Text=((Label)gvr.FindControl("lblName")).Text;
+            lblAdmAprID.Text = ((Label)gvr.FindControl("lblID")).Text;
+            lblTWID.Text = ((Label)gvr.FindControl("lblTubewellID")).Text;
+            lblTWName.Text = ((Label)gvr.FindControl("lblName")).Text;
             bindDDLFinYr();
             txtAllotment.Text = "";
             lblMessageMP.Text = "";
@@ -187,7 +189,7 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            ex.ToString();   
+            ex.ToString();
         }
     }
     public void bindDDLFinYr()
@@ -227,7 +229,7 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
                     new SqlParameter("@AdmAprID",lblAdmAprID.Text),
                     new SqlParameter("@FinancialYear",ddlFinYear.SelectedValue),
                     new SqlParameter("@LetterNo",txtLtNO.Text.Trim()),
-                    new SqlParameter("@LetterDate",DateTime.Parse(txtLtDate.Text).ToString("yyyy-MM-dd")),
+                    new SqlParameter("@LetterDate",DateTime.ParseExact(txtLtDate.Text,"yyyy-MM-dd",CultureInfo.InvariantCulture)),
                     new SqlParameter("@HeadType","1"),
                     new SqlParameter("@AllotmentAmount",txtAllotment.Text.Trim()),
                     new SqlParameter("@EntryByID",Session["LoginId"].ToString()),
@@ -239,6 +241,7 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
         }
         catch (Exception ex)
         {
+            //lblMessageMP.Text = ex.ToString(); ;
         }
     }
 
@@ -264,17 +267,17 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
     protected void btnClose_Click(object sender, EventArgs e)
     {
         mp1.Hide();
-    }    
+    }
 
     protected void btnAllotmentEdit_Click(object sender, EventArgs e)
     {
         Button btnEdit = (Button)sender;
         GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
         lblAllotmentID.Text = ((Label)gvr.FindControl("lblAllotmentID")).Text;
-        ddlFinYear.SelectedValue= ((Label)gvr.FindControl("lblFinancialYear")).Text;
-        txtAllotment.Text= ((Label)gvr.FindControl("lblAllotmentAmount")).Text;
-        txtLtNO.Text= ((Label)gvr.FindControl("lblLetterNo")).Text;
-        txtLtDate.Text= ((Label)gvr.FindControl("lblLetterDate")).Text;
+        ddlFinYear.SelectedValue = ((Label)gvr.FindControl("lblFinancialYear")).Text;
+        txtAllotment.Text = ((Label)gvr.FindControl("lblAllotmentAmount")).Text;
+        txtLtNO.Text = ((Label)gvr.FindControl("lblLetterNo")).Text;
+        txtLtDate.Text = ((Label)gvr.FindControl("lblLetterDate")).Text;
         btnInsertAllotment.Visible = false;
         btnCancel.Visible = true;
         btnUpdateAllotment.Visible = true;
@@ -321,5 +324,46 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
         btnInsertAllotment.Visible = true;
         btnCancel.Visible = false;
         btnUpdateAllotment.Visible = false;
+        ddlFinYear.ClearSelection();
+        txtAllotment.Text = "";
+        txtLtNO.Text = "";
+        txtLtDate.Text = "";
+    }
+
+    protected void gvTubewell_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        gvTubewell.EditIndex = e.NewEditIndex;
+        bindgvTubewell();
+    }
+
+    protected void gvTubewell_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        gvTubewell.EditIndex = -1;
+        bindgvTubewell();
+    }
+
+    protected void gvTubewell_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        try
+        {
+            if (Page.IsValid == false)
+            {
+                return;
+            }
+            GridViewRow gvr = gvTubewell.Rows[e.RowIndex];
+            SqlParameter[] prm = new SqlParameter[]{
+                    new SqlParameter("@ID",((Label)gvr.FindControl("lblID")).Text),
+                    new SqlParameter("@EstimatedCost",decimal.Parse( ((TextBox)gvr.FindControl("txtEstimatedCost")).Text)),
+                    new SqlParameter("@EntryByID",Session["LoginId"].ToString()),
+                    new SqlParameter("@EntryByIP",customVariables.GetIPAddress())
+                            };
+            gd.insExecuteSP("updTubewellAdmAprv", prm);
+            
+        }
+        catch (Exception ex)
+        {
+        }
+        gvTubewell.EditIndex = -1;
+        bindgvTubewell();
     }
 }
