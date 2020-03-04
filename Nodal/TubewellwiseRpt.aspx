@@ -86,7 +86,7 @@
                                 <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Estimated Cost (In Rs)">
+                        <asp:TemplateField HeaderText="Estimated Cost Plan(In Rs)">
                             <ItemTemplate>
                                 <asp:Label ID="lblEstimatedCost" runat="server" Text='<%# Bind("EstimatedCost") %>'></asp:Label>
                             </ItemTemplate>

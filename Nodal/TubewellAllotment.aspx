@@ -85,15 +85,30 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblPanchayatName" runat="server" Text='<%# Bind("PanchayatName") %>'></asp:Label>
                             </ItemTemplate>
+                        </asp:TemplateField>                        
+                        <asp:TemplateField HeaderText="Financial Year">
+                            <ItemTemplate>
+                                <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
+                            </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Head">
+                        <asp:TemplateField HeaderText="Letter No">
+                            <ItemTemplate>
+                                <asp:Label ID="lblLetterNo" runat="server" Text='<%# Bind("LetterNo") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Letter Date" ItemStyle-Wrap="false" >
+                            <ItemTemplate>
+                                <asp:Label ID="lblLetterDate" runat="server" Text='<%# Bind("LetterDate","{0:dd-MM-yyyy}") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Head" ItemStyle-Wrap="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblHeadType" runat="server" Text='<%# Bind("HeadType") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Financial Year">
+                        <asp:TemplateField HeaderText="Estimated Cost (In Rs)">
                             <ItemTemplate>
-                                <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
+                                <asp:Label ID="lblEstimatedCost" runat="server" Text='<%# Bind("EstimatedCost") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Allotment (In Rs)">

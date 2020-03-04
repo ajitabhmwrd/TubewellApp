@@ -24,12 +24,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 p-1">
-                        Inpection Date(dd/MM/yyyy)*
+                        Inpection Date(YYYY-MM-DD)*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtInspectionDate" Text="(Required)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtInspectionDate" ValidationGroup="TubewellEntry" Display="Dynamic"
-                            ValidationExpression="(((0|1)[0-9]|2[0-9]|3[0-1])\-(0[1-9]|1[0-2])\-((19|20)\d\d))$" ErrorMessage="(Invalid date)" />
+                            ValidationExpression="(19|20|21)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])" ErrorMessage="(Invalid date)" />
                         <asp:TextBox ID="txtInspectionDate" runat="server" CssClass="form-control form-control-sm" autocomplete="off"></asp:TextBox>
-                        <cc1:CalendarExtender ID="Calendar1" PopupButtonID="txtInspectionDate" runat="server" TargetControlID="txtInspectionDate" Format="dd/MM/yyyy"></cc1:CalendarExtender>
+                        <cc1:CalendarExtender ID="Calendar1" PopupButtonID="txtInspectionDate" runat="server" TargetControlID="txtInspectionDate" Format="yyyy-MM-dd"></cc1:CalendarExtender>
                     </div>
                     <div class="col-md-3 p-1">
                         Block*
