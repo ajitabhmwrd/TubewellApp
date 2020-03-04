@@ -42,7 +42,7 @@
                 <asp:TextBox ID="txtLetterNo" runat="server" CssClass="form-control form-control-sm" MaxLength="50"></asp:TextBox>
             </div>
             <div class="col-md-3 p-1">
-                Lt. Dt(YYYY-MM-DD)*
+                Lt. Dt(yyyy-MM-dd)*
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtLetterDate" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic" Font-Size="Small"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtLetterDate" ValidationGroup="TubewellEntry" Display="Dynamic"
                     ValidationExpression="(19|20|21)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])" ErrorMessage="(Invalid)" Font-Size="Small" />

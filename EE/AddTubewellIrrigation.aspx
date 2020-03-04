@@ -24,7 +24,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 p-1">
-                        Irrigation Date(YYYY-MM-DD)*
+                        Irrigation Date(yyyy-MM-dd)*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="txtIrrigationDate" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic" Font-Size="Small"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator runat="server" ForeColor="Red" ControlToValidate="txtIrrigationDate" ValidationGroup="TubewellEntry" Display="Dynamic"
                             ValidationExpression="(19|20|21)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])" ErrorMessage="(Invalid)" Font-Size="Small" />

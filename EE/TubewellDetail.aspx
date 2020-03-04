@@ -104,7 +104,7 @@
                             <ItemTemplate>
                                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                     <ContentTemplate>
-                                        <asp:Button ID="btnEdit" runat="server" Text="Edit" class="btn-primary" OnClick="btnEdit_Click" />
+                                        <asp:Button ID="btnEdit" runat="server" Text="Edit" class="btn-primary" OnClick="btnEdit_Click" />                                        
                                         <asp:Button ID="btnView" runat="server" Text="View / Lock" class="btn-primary" OnClick="btnView_Click" />
                                     </ContentTemplate>
                                     <Triggers>

@@ -158,9 +158,11 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
             DataTable dt = gd.getDataTable("getAllotmentBySearch", prm);
             bc.bindGV(gvTubewell, dt);
             decimal TAllotmentAmount = dt.AsEnumerable().Sum(row => row.Field<decimal>("AllotmentAmount"));
-            gvTubewell.FooterRow.Cells[7].Text = "Total";
-            gvTubewell.FooterRow.Cells[7].HorizontalAlign = HorizontalAlign.Right;
-            gvTubewell.FooterRow.Cells[8].Text = TAllotmentAmount.ToString();
+            decimal TEstimatedCost = dt.AsEnumerable().Sum(row => row.Field<decimal>("EstimatedCost"));
+            gvTubewell.FooterRow.Cells[9].Text = "Total";
+            gvTubewell.FooterRow.Cells[9].HorizontalAlign = HorizontalAlign.Right;
+            gvTubewell.FooterRow.Cells[11].Text = TAllotmentAmount.ToString();
+            gvTubewell.FooterRow.Cells[10].Text = TEstimatedCost.ToString();
         }
         catch (Exception ex)
         {

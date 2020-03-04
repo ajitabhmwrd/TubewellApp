@@ -21,7 +21,7 @@ public partial class AE_AddInspection : System.Web.UI.Page
             bindDDLCommentType();
             bindDDLStatus();
         }
-        txtInspectionDate.Text = DateTime.Parse(DateTime.Now.ToString()).ToString("dd/MM/yyyy");
+        txtInspectionDate.Text = DateTime.Parse(DateTime.Now.ToString()).ToString("yyyy-MM-dd");
         //txtInspectionDate.Enabled = false;
     }
     public void bindDDLBlock()
