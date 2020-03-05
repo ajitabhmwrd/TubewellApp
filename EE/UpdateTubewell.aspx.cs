@@ -140,19 +140,7 @@ public partial class EE_UpdateTubewell : System.Web.UI.Page
         {
         }
     }
-
-    //public void bindDDLStatus()
-    //{
-    //    try
-    //    {
-    //        DataTable dt = gd.getDataTable("getTubewellStatus");
-    //        bc.bindDDL(ddlStatus, dt, "Status", "ID");
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //    }
-    //}
-
+    
     protected void ddlBlock_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindDDLPanchyat();
