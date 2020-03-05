@@ -277,7 +277,7 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
         ddlFinYear.SelectedValue = ((Label)gvr.FindControl("lblFinancialYear")).Text;
         txtAllotment.Text = ((Label)gvr.FindControl("lblAllotmentAmount")).Text;
         txtLtNO.Text = ((Label)gvr.FindControl("lblLetterNo")).Text;
-        txtLtDate.Text = ((Label)gvr.FindControl("lblLetterDate")).Text;
+        txtLtDate.Text = DateTime.Parse(((Label)gvr.FindControl("lblLetterDate")).Text).ToString("yyyy-MM-dd");
         btnInsertAllotment.Visible = false;
         btnCancel.Visible = true;
         btnUpdateAllotment.Visible = true;

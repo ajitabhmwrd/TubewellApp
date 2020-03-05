@@ -49,7 +49,7 @@ public partial class EE_UpdateTubewell : System.Web.UI.Page
                     if (string.IsNullOrWhiteSpace(HandedOverDate) == false)
                     {
                         DateTime date1= DateTime.Parse(HandedOverDate);
-                        txtHandedOverDate.Text = date1.ToString("dd-MM-yyyy"); 
+                        txtHandedOverDate.Text = date1.ToString("yyyy-MM-dd"); 
                     }
                     txtCANo.Text = dt.Rows[0]["ConsumerID"].ToString();
                     txtFarmer1Name.Text = dt.Rows[0]["ConsernFarmer1"].ToString();
