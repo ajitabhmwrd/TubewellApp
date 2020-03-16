@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="TubewellwiseRpt.aspx.cs" Inherits="Nodal_TubewellwiseRpt" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="TubewellwiseAllotmentRpt.aspx.cs" Inherits="Nodal_TubewellwiseRpt" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>

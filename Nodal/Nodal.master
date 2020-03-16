@@ -81,9 +81,10 @@
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
                                 <a class="dropdown-item" href="rptTubewellHandover.aspx">Tube Well Functional Count Report</a>                               
                                 <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment Report</a>                             
-                                <a class="dropdown-item" href="TubewellwiseRpt.aspx">Tube Well Wise Allotment Report</a>                            
+                                <a class="dropdown-item" href="TubewellwiseAllotmentRpt.aspx">Tube Well Wise Allotment Report</a>                            
                                 <a class="dropdown-item" href="TubewellInpectionCountDistRpt.aspx">Inspection District-wise Report</a>                            
                                 <a class="dropdown-item" href="TubwellInpectionList.aspx">Tube well-wise Inspection Report</a>                            
+                                <a class="dropdown-item" href="RptTubewellIrrigationTubewellwise.aspx">Tube well-wise Irrigation Report</a>                            
                                 <a class="dropdown-item" href="TubewellCompleteDetailRpt.aspx">Tube well Complete Detail Report</a>                            
                             </div>
                         </li>          

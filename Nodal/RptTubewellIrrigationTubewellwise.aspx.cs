@@ -7,16 +7,30 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class JE_TubwellInpectionList : System.Web.UI.Page
+public partial class Nodal_RptTubewellIrrigationTubewellwise : System.Web.UI.Page
 {
     getData gd = new getData();
     bindControls bc = new bindControls();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if(!IsPostBack)
         {
+            bindDDLFinYr();
             bindDDLDistrict();
-            bindgvTubewell();
+            bindgvIrrigation();
+            
+        }
+    }
+    public void bindDDLFinYr()
+    {
+        try
+        {
+
+            DataTable dt = gd.getDataTable("getFinYear");
+            bc.bindDDL(ddlFinYear, dt, "FinYear", "FinYear");
+        }
+        catch (Exception ex)
+        {
         }
     }
     public void bindDDLDistrict()
@@ -87,81 +101,66 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
     protected void ddlBlock_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindDDLPanchyat();
-        bindgvTubewell();
+        bindgvIrrigation();
     }
     protected void ddlPanchayat_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindDDLTubewell();
-        bindgvTubewell();
+        bindgvIrrigation();
     }
     protected void ddlTubewell_SelectedIndexChanged(object sender, EventArgs e)
     {
-        bindgvTubewell();
+        bindgvIrrigation();
     }
     protected void btnClear_Click(object sender, EventArgs e)
     {
         ddlBlock.ClearSelection();
         bindDDLPanchyat();
-        bindgvTubewell();
+        ddlFinYear.ClearSelection();
+        bindgvIrrigation();
     }
-    public void bindgvTubewell()
+    public void bindgvIrrigation()
     {
         try
         {
             SqlParameter[] prm = new SqlParameter[]
                     {
                         new SqlParameter("@DistCode",ddlDist.SelectedValue=="0"?(object)DBNull.Value:ddlDist.SelectedValue),
-                        new SqlParameter("@BlockID",ddlBlock.SelectedValue=="0"?(object)DBNull.Value:ddlBlock.SelectedValue),
                         new SqlParameter("@PanchyatID",ddlPanchayat.SelectedValue=="0"?(object)DBNull.Value:ddlPanchayat.SelectedValue),
-                        new SqlParameter("@ID",ddlTubewell.SelectedValue=="0"?(object)DBNull.Value:ddlTubewell.SelectedValue)
+                        new SqlParameter("@BlockID",ddlBlock.SelectedValue=="0"?(object)DBNull.Value:ddlBlock.SelectedValue),
+                        new SqlParameter("@ID",ddlTubewell.SelectedValue=="0"?(object)DBNull.Value:ddlTubewell.SelectedValue),
+                        new SqlParameter("@FinancialYear",ddlFinYear.SelectedValue=="0"?(object)DBNull.Value:ddlFinYear.SelectedValue)
                     };
-            DataTable dt = gd.getDataTable("getTubewellInspectByDist", prm);
-            bc.bindGV(gvTubewell, dt);
+            DataTable dt = gd.getDataTable("getTubewellIrrigationByTubwellWise", prm);
+            bc.bindGV(gvIrrigation, dt);
+            decimal TAreaDecimal = dt.AsEnumerable().Sum(row => row.Field<decimal>("AreaDecimal"));
+            decimal TRevenueDemandRs = dt.AsEnumerable().Sum(row => row.Field<decimal>("RevenueDemandRs"));
+            decimal TRevenueCollectionRs = dt.AsEnumerable().Sum(row => row.Field<decimal>("RevenueCollectionRs"));
+            decimal TDepositedAmountInBank = dt.AsEnumerable().Sum(row => row.Field<decimal>("DepositedAmountInBank"));
+            gvIrrigation.FooterRow.Cells[5].Text = "Total";
+            gvIrrigation.FooterRow.Cells[5].HorizontalAlign = HorizontalAlign.Right;
+            gvIrrigation.FooterRow.Cells[7].Text = TAreaDecimal.ToString();
+            gvIrrigation.FooterRow.Cells[8].Text = TRevenueDemandRs.ToString();
+            gvIrrigation.FooterRow.Cells[9].Text = TRevenueCollectionRs.ToString();
+            gvIrrigation.FooterRow.Cells[10].Text = TDepositedAmountInBank.ToString();
         }
         catch (Exception ex)
         {
         }
     }
-    protected void gvTubewell_PageIndexChanging(object sender, GridViewPageEventArgs e)
-    {
-        bindgvTubewell();
-        gvTubewell.PageIndex = e.NewPageIndex;
-        gvTubewell.DataBind();
-    }
-    protected void txtSearch_TextChanged(object sender, EventArgs e)
-    {
-        //try
-        //{
-        //    SqlParameter[] prm = new SqlParameter[]
-        //            {
-        //            new SqlParameter("@DistCode",Session["DistCode"].ToString()),
-        //            new SqlParameter("@JEEmpID",Session["LoginId"].ToString())
-        //            };
-        //    DataTable dt = gd.getDataTable("getTubewellInspectByJE", prm);
-        //    bc.bindGV(gvTubewell, dt);
-        //}
-        //catch (Exception ex)
-        //{
-        //}
-    }
-    protected void btnEdit_Click(object sender, EventArgs e)
-    {
-        Button btnEdit = (Button)sender;
-        GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
-        Context.Items.Add("ID", ((Label)gvr.FindControl("lblID")).Text.ToString());
-        Server.Transfer("UpdateTubewell.aspx");
-    }
-    protected void btnDetail_Click(object sender, EventArgs e)
-    {
-        Button btnDetail = (Button)sender;
-        GridViewRow gvr = (GridViewRow)btnDetail.NamingContainer;
-        Context.Items.Add("ID", ((Label)gvr.FindControl("lblID")).Text.ToString());
-        Server.Transfer("TubewellInspectionDetails.aspx");
-    }
-
     protected void ddlDist_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindDDLBlock();
-        bindgvTubewell();
+        bindgvIrrigation();
+    }
+    protected void ddlFinYear_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        bindgvIrrigation();
+    }
+       
+    protected void gvIrrigation_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvIrrigation.PageIndex = e.NewPageIndex;
+        bindgvIrrigation();
     }
 }
