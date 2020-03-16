@@ -45,10 +45,11 @@ public partial class Login : System.Web.UI.Page
         try
         {
             Encryptor enc = new Encryptor(Encryptor.PrivateKey);
+            string pass = enc.Encrypt(txtPassword.Text);
             SqlParameter[] prm = new SqlParameter[]
             {
                 new SqlParameter("@LoginId",txtUserName.Text),
-                new SqlParameter("@Pass",enc.Encrypt(txtPassword.Text))
+                new SqlParameter("@Pass",pass)
             };
             DataTable dt = gd.getDataTable("getLoginDetails", prm);
             if (dt.Rows.Count == 0)

@@ -8,7 +8,6 @@
         <span class="font-weight-bold small">Tube Well List</span>
         <hr />
     </div>
-
     <div class="container">
         <div class="row">
             <div class="col-md-3 p-1">
