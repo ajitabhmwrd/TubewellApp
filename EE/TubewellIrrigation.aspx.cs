@@ -151,7 +151,7 @@ public partial class JE_TubewellIrrigation : System.Web.UI.Page
             if (dt.Rows.Count == 1)
             {
                 lblTubewellID.Text = dt.Rows[0]["TubewellID"].ToString();
-                txtIrrigationDate.Text = DateTime.Parse(dt.Rows[0]["IrrigationDate"].ToString()).ToString("dd-MM-yyyy");
+                txtIrrigationDate.Text = DateTime.Parse(dt.Rows[0]["IrrigationDate"].ToString()).ToString("yyyy-MM-dd");
                 ddlHour.SelectedValue = dt.Rows[0]["DurationHour"].ToString();
                 ddlMinutes.SelectedValue = dt.Rows[0]["DurationMinute"].ToString();
                 txtIrrigationAreaInDecimal.Text = dt.Rows[0]["AreaDecimal"].ToString();

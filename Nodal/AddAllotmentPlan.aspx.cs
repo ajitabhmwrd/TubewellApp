@@ -271,16 +271,24 @@ public partial class Nodal_AddAllotmentPlan : System.Web.UI.Page
 
     protected void btnAllotmentEdit_Click(object sender, EventArgs e)
     {
-        Button btnEdit = (Button)sender;
-        GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
-        lblAllotmentID.Text = ((Label)gvr.FindControl("lblAllotmentID")).Text;
-        ddlFinYear.SelectedValue = ((Label)gvr.FindControl("lblFinancialYear")).Text;
-        txtAllotment.Text = ((Label)gvr.FindControl("lblAllotmentAmount")).Text;
-        txtLtNO.Text = ((Label)gvr.FindControl("lblLetterNo")).Text;
-        txtLtDate.Text = ((Label)gvr.FindControl("lblLetterDate")).Text;
-        btnInsertAllotment.Visible = false;
-        btnCancel.Visible = true;
-        btnUpdateAllotment.Visible = true;
+        try
+        {
+            Button btnEdit = (Button)sender;
+            GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+            lblAllotmentID.Text = ((Label)gvr.FindControl("lblAllotmentID")).Text;
+            ddlFinYear.SelectedValue = ((Label)gvr.FindControl("lblFinancialYear")).Text;
+            txtAllotment.Text = ((Label)gvr.FindControl("lblAllotmentAmount")).Text;
+            txtLtNO.Text = ((Label)gvr.FindControl("lblLetterNo")).Text;
+            txtLtDate.Text = DateTime.Parse(((Label)gvr.FindControl("lblLetterDate")).Text).ToString("yyyy-MM-dd");
+            btnInsertAllotment.Visible = false;
+            btnCancel.Visible = true;
+            btnUpdateAllotment.Visible = true;
+        }
+        catch (Exception ex)
+        {
+            lblMessageMP.Text = ex.ToString();
+        }
+        
     }
 
     protected void btnUpdateAllotment_Click(object sender, EventArgs e)

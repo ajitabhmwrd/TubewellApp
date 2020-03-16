@@ -1,11 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="TubewellwiseRpt.aspx.cs" Inherits="Nodal_TubewellwiseRpt" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="TubewellwiseAllotmentRpt.aspx.cs" Inherits="Nodal_TubewellwiseRpt" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="container">
         <br />
-        <span class="font-weight-bold small">Tube Well Allotment</span>
+        <span class="font-weight-bold small">Tube Well Wise Allotment</span>
         <hr />
     </div>
     <div class="container">
@@ -17,12 +17,7 @@
                 </asp:DropDownList>
             </div>
             
-            <div class="col-md-2 p-1">
-                District               
-                <asp:DropDownList ID="ddlDist" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlDist_SelectedIndexChanged">
-                    <asp:ListItem Value="0">Select</asp:ListItem>
-                </asp:DropDownList>
-            </div>
+            
             <div class="col-md-2 p-1">
                 Block
                 <asp:DropDownList ID="ddlBlock" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlBlock_SelectedIndexChanged">
@@ -47,7 +42,7 @@
             <div class="col-md-12 p-2 table-responsive">
                 <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
                     HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"
-                    OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="100" AllowPaging="false" ShowFooter="true" FooterStyle-Font-Bold="true">
+                    OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="100" AllowPaging="true" ShowFooter="true" FooterStyle-Font-Bold="true">
                     <Columns>
                         <asp:TemplateField HeaderText="SNo">
                             <ItemTemplate>

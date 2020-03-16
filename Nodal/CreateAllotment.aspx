@@ -13,6 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 p-1">
+                <asp:Label ID="lblAllotmentID" runat="server" Font-Bold="True" Visible="false" Text=""></asp:Label>
                 <asp:Label ID="lblMessage" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
             </div>
             <div class="col-md-2 p-1">
@@ -73,6 +74,8 @@
             </div>
             <div class="col-md-2 p-1 ">
                 <br />
+                <asp:Button ID="btnUpdateAllotment" runat="server" Text="Update" CssClass="btn btn-primary btn-sm" OnClick="btnUpdateAllotment_Click" Visible="false" ValidationGroup="TubewellEntry" />
+                <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-primary btn-sm" OnClick="btnCancel_Click" Visible="false" />
                 <asp:Button ID="btnAdd" runat="server" Text="Add" CssClass="btn btn-primary btn-sm" OnClick="btnAdd_Click" ValidationGroup="TubewellEntry" />
                 <asp:Button ID="btnClear" runat="server" Text="Reset" CssClass="btn btn-primary btn-sm" OnClick="btnClear_Click" />
             </div>
@@ -86,8 +89,9 @@
                                 <%#Container.DataItemIndex+1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="ID">
+                        <asp:TemplateField HeaderText="Tube well ID">
                             <ItemTemplate>
+                                <asp:Label ID="lblAllotmentID" runat="server" Text='<%# Bind("AllotmentID") %>' Visible="false"></asp:Label>
                                 <asp:Label ID="lblTubewellID" runat="server" Text='<%# Bind("TubewellID") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -99,16 +103,19 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="District">
                             <ItemTemplate>
+                                <asp:Label ID="lblDistrictID" runat="server" Text='<%# Bind("DistrictID") %>' Visible="false"></asp:Label>
                                 <asp:Label ID="lblDistName" runat="server" Text='<%# Bind("DistName") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Block">
                             <ItemTemplate>
+                                <asp:Label ID="lblBlockID" runat="server" Text='<%# Bind("BlockID") %>' Visible="false"></asp:Label>
                                 <asp:Label ID="lblBlockName" runat="server" Text='<%# Bind("BlockName") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Panchayat">
                             <ItemTemplate>
+                                <asp:Label ID="lblPanchyatID" runat="server" Text='<%# Bind("PanchyatID") %>' Visible="false"></asp:Label>
                                 <asp:Label ID="lblPanchayatName" runat="server" Text='<%# Bind("PanchayatName") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -122,9 +129,24 @@
                                 <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Letter No">
+                            <ItemTemplate>
+                                <asp:Label ID="lblLetterNo" runat="server" Text='<%# Bind("LetterNo") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Letter Date">
+                            <ItemTemplate>
+                                <asp:Label ID="lblLetterDate" runat="server" Text='<%# Eval("LetterDate","{0:yyyy-MM-dd}") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Allotment (In Rs)">
                             <ItemTemplate>
                                 <asp:Label ID="lblAllotmentAmount" runat="server" Text='<%# Bind("AllotmentAmount") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="">
+                            <ItemTemplate>
+                                <asp:Button ID="btnAllotmentEdit" runat="server" Text="Edit" class="btn-primary" OnClick="btnAllotmentEdit_Click" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

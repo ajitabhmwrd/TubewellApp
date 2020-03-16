@@ -125,7 +125,8 @@ public partial class Nodal_TubewellwiseRpt : System.Web.UI.Page
 
     protected void gvTubewell_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
-
+        gvTubewell.PageIndex = e.NewPageIndex;
+        bindgvTubewell();
     }
     public void bindgvTubewell()
     {

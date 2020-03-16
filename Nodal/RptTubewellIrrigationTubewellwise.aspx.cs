@@ -7,34 +7,20 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Nodal_TubewellAllotment : System.Web.UI.Page
+public partial class Nodal_RptTubewellIrrigationTubewellwise : System.Web.UI.Page
 {
     getData gd = new getData();
     bindControls bc = new bindControls();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if(!IsPostBack)
         {
-            bindDDLDistrict();
             bindDDLFinYr();
-            bindDDLAllotmentHead();
-            bindgvTubewell();
+            bindDDLDistrict();
+            bindgvIrrigation();
+            
         }
     }
-
-    public void bindDDLAllotmentHead()
-    {
-        try
-        {
-
-            DataTable dt = gd.getDataTable("getAllotmentHead");
-            bc.bindDDL(ddlHead, dt, "HeadType", "HeadID");
-        }
-        catch (Exception ex)
-        {
-        }
-    }
-
     public void bindDDLFinYr()
     {
         try
@@ -60,7 +46,6 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
         {
         }
     }
-
     public void bindDDLBlock()
     {
         try
@@ -72,13 +57,11 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
             DataTable dt = gd.getDataTable("getAllBlocksByDistCode", prm);
             bc.bindDDL(ddlBlock, dt, "BlockName", "BlockCode");
             bindDDLPanchyat();
-            
         }
         catch (Exception ex)
         {
         }
     }
-
     public void bindDDLPanchyat()
     {
         try
@@ -90,13 +73,12 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
             DataTable dt = gd.getDataTable("getAllPanchaytByBlockCode", prm);
             bc.bindDDL(ddlPanchayat, dt, "PanchayatName", "PanchayatCode");
             bindDDLTubewell();
-            
+
         }
         catch (Exception ex)
         {
         }
     }
-
     public void bindDDLTubewell()
     {
         try
@@ -104,46 +86,40 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
             SqlParameter[] prm = new SqlParameter[]
                     {
                         new SqlParameter("@DistCode",ddlDist.SelectedValue),
+                        //new SqlParameter("@VILLCODE",ddlVillage.SelectedValue),
                         new SqlParameter("@PanchayatCode",ddlPanchayat.SelectedValue),
                         new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
                     };
             DataTable dt = gd.getDataTable("getTubewellByPanchayat", prm);
-            bc.bindDDL(ddlTubewell, dt, "Name", "ID");            
+            bc.bindDDL(ddlTubewell, dt, "Name", "ID");
 
         }
         catch (Exception ex)
         {
         }
     }
-
     protected void ddlBlock_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindDDLPanchyat();
-        bindgvTubewell();
+        bindgvIrrigation();
     }
-
     protected void ddlPanchayat_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindDDLTubewell();
-        bindgvTubewell();
+        bindgvIrrigation();
     }
-    protected void ddlDist_SelectedIndexChanged(object sender, EventArgs e)
+    protected void ddlTubewell_SelectedIndexChanged(object sender, EventArgs e)
     {
-        bindDDLBlock();
-        bindgvTubewell();
+        bindgvIrrigation();
     }
-
-    protected void btnEdit_Click(object sender, EventArgs e)
+    protected void btnClear_Click(object sender, EventArgs e)
     {
-
+        ddlBlock.ClearSelection();
+        bindDDLPanchyat();
+        ddlFinYear.ClearSelection();
+        bindgvIrrigation();
     }
-
-    protected void gvTubewell_PageIndexChanging(object sender, GridViewPageEventArgs e)
-    {
-        gvTubewell.PageIndex = e.NewPageIndex;
-        bindgvTubewell();
-    }
-    public void bindgvTubewell()
+    public void bindgvIrrigation()
     {
         try
         {
@@ -152,49 +128,39 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
                         new SqlParameter("@DistCode",ddlDist.SelectedValue=="0"?(object)DBNull.Value:ddlDist.SelectedValue),
                         new SqlParameter("@PanchyatID",ddlPanchayat.SelectedValue=="0"?(object)DBNull.Value:ddlPanchayat.SelectedValue),
                         new SqlParameter("@BlockID",ddlBlock.SelectedValue=="0"?(object)DBNull.Value:ddlBlock.SelectedValue),
-                        new SqlParameter("@TubewellID",ddlTubewell.SelectedValue=="0"?(object)DBNull.Value:ddlTubewell.SelectedValue),
-                        new SqlParameter("@FinancialYear",ddlFinYear.SelectedValue=="0"?(object)DBNull.Value:ddlFinYear.SelectedValue),
-                        new SqlParameter("@HeadID",ddlHead.SelectedValue=="0"?(object)DBNull.Value:ddlHead.SelectedValue)
+                        new SqlParameter("@ID",ddlTubewell.SelectedValue=="0"?(object)DBNull.Value:ddlTubewell.SelectedValue),
+                        new SqlParameter("@FinancialYear",ddlFinYear.SelectedValue=="0"?(object)DBNull.Value:ddlFinYear.SelectedValue)
                     };
-            DataTable dt = gd.getDataTable("getAllotmentBySearch", prm);
-            bc.bindGV(gvTubewell, dt);
-            decimal TAllotmentAmount = dt.AsEnumerable().Sum(row => row.Field<decimal>("AllotmentAmount"));
-            decimal TEstimatedCost = dt.AsEnumerable().Sum(row => row.Field<decimal>("EstimatedCost"));
-            gvTubewell.FooterRow.Cells[9].Text = "Total";
-            gvTubewell.FooterRow.Cells[9].HorizontalAlign = HorizontalAlign.Right;
-            gvTubewell.FooterRow.Cells[11].Text = TAllotmentAmount.ToString();
-            gvTubewell.FooterRow.Cells[10].Text = TEstimatedCost.ToString();
+            DataTable dt = gd.getDataTable("getTubewellIrrigationByTubwellWise", prm);
+            bc.bindGV(gvIrrigation, dt);
+            decimal TAreaDecimal = dt.AsEnumerable().Sum(row => row.Field<decimal>("AreaDecimal"));
+            decimal TRevenueDemandRs = dt.AsEnumerable().Sum(row => row.Field<decimal>("RevenueDemandRs"));
+            decimal TRevenueCollectionRs = dt.AsEnumerable().Sum(row => row.Field<decimal>("RevenueCollectionRs"));
+            decimal TDepositedAmountInBank = dt.AsEnumerable().Sum(row => row.Field<decimal>("DepositedAmountInBank"));
+            gvIrrigation.FooterRow.Cells[5].Text = "Total";
+            gvIrrigation.FooterRow.Cells[5].HorizontalAlign = HorizontalAlign.Right;
+            gvIrrigation.FooterRow.Cells[7].Text = TAreaDecimal.ToString();
+            gvIrrigation.FooterRow.Cells[8].Text = TRevenueDemandRs.ToString();
+            gvIrrigation.FooterRow.Cells[9].Text = TRevenueCollectionRs.ToString();
+            gvIrrigation.FooterRow.Cells[10].Text = TDepositedAmountInBank.ToString();
         }
         catch (Exception ex)
         {
-            ex.ToString();
         }
     }
-
+    protected void ddlDist_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        bindDDLBlock();
+        bindgvIrrigation();
+    }
     protected void ddlFinYear_SelectedIndexChanged(object sender, EventArgs e)
     {
-        bindgvTubewell();
+        bindgvIrrigation();
     }
-
-    protected void ddlHead_SelectedIndexChanged(object sender, EventArgs e)
+       
+    protected void gvIrrigation_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
-        bindgvTubewell();
-    }
-
-    protected void ddlTubewell_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        bindgvTubewell();
-    }
-
-    protected void btnClear_Click(object sender, EventArgs e)
-    {
-        ddlDist.ClearSelection();
-        bindDDLBlock();
-        //ddlBlock.ClearSelection();
-        //ddlPanchayat.ClearSelection();
-        //ddlTubewell.ClearSelection();
-        ddlFinYear.ClearSelection();
-        ddlHead.ClearSelection();
-        bindgvTubewell();
+        gvIrrigation.PageIndex = e.NewPageIndex;
+        bindgvIrrigation();
     }
 }

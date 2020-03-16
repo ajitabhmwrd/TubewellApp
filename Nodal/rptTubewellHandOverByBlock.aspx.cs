@@ -53,6 +53,7 @@ public partial class Admin_rptTubewellHandOverByBlock : System.Web.UI.Page
         catch (Exception ex)
         {
             Response.Redirect("rptTubewellHandover.aspx");
+
         }
     }
 
@@ -62,4 +63,80 @@ public partial class Admin_rptTubewellHandOverByBlock : System.Web.UI.Page
             Context.Items.Add("DistName", lblDist.Text);
             Server.Transfer("rptTubewellHandOverByDist.aspx");        
     }
+
+    protected void lbTotalTubewellPanchayat_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            LinkButton btnEdit = (LinkButton)sender;
+            GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+            Context.Items.Add("DistCode", lblDistCode.Text);
+            Context.Items.Add("BlockCode", lblBlockCode.Text);
+            Context.Items.Add("BlockName", lblBlock.Text);
+            Context.Items.Add("PanchayatCode", ((Label)gvr.FindControl("lblPanchayatCode")).Text.ToString());
+            Context.Items.Add("PanchayatName", ((Label)gvr.FindControl("lblPanchayatName")).Text.ToString());
+
+            Server.Transfer("RptTotalTubewellPanchayat.aspx");
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
+    protected void lbTotalCA_Click(object sender, EventArgs e)
+    {
+        try
+        {
+
+            LinkButton btnEdit = (LinkButton)sender;
+            GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+            Context.Items.Add("DistCode", lblDistCode.Text);
+            Context.Items.Add("BlockCode", lblBlockCode.Text);
+            Context.Items.Add("BlockName", lblBlock.Text);
+            Context.Items.Add("PanchayatCode", ((Label)gvr.FindControl("lblPanchayatCode")).Text.ToString());
+            Context.Items.Add("PanchayatName", ((Label)gvr.FindControl("lblPanchayatName")).Text.ToString());
+            Server.Transfer("RptTotalTubewellCAPanchayat.aspx");
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    protected void lbTotalTubewellFunctional_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            LinkButton btnEdit = (LinkButton)sender;
+            GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+            Context.Items.Add("DistCode", lblDistCode.Text);
+            Context.Items.Add("BlockCode", lblBlockCode.Text);
+            Context.Items.Add("BlockName", lblBlock.Text);
+            Context.Items.Add("PanchayatCode", ((Label)gvr.FindControl("lblPanchayatCode")).Text.ToString());
+            Context.Items.Add("PanchayatName", ((Label)gvr.FindControl("lblPanchayatName")).Text.ToString());
+            Server.Transfer("RptTubewellFunctionalPanchayat.aspx");
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
+    protected void lTubewellNonFunctional_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            LinkButton btnEdit = (LinkButton)sender;
+            GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+            Context.Items.Add("DistCode", lblDistCode.Text);
+            Context.Items.Add("BlockCode", lblBlockCode.Text);
+            Context.Items.Add("BlockName", lblBlock.Text);
+            Context.Items.Add("PanchayatCode", ((Label)gvr.FindControl("lblPanchayatCode")).Text.ToString());
+            Context.Items.Add("PanchayatName", ((Label)gvr.FindControl("lblPanchayatName")).Text.ToString());
+            Server.Transfer("RptTubewellNonFunctionalPanchayat.aspx");
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
 }

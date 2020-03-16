@@ -51,13 +51,6 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtTubewellName" Text="(Enter)" ErrorMessage="Enter Tube Well Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtTubewellName" runat="server" CssClass="form-control form-control-sm" MaxLength="50"></asp:TextBox>
                     </div>
-                    <%--<div class="col-md-3 p-1">
-                        Tubewell Status*
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" InitialValue="0" runat="server" ControlToValidate="ddlStatus" Text="(Select)" ErrorMessage="Select Tube Well Status" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-control form-control-sm">
-                            <asp:ListItem Value="0">Select</asp:ListItem>
-                        </asp:DropDownList>
-                    </div>--%>
                     <div class="col-md-3 p-1">
                         Tubewell Type*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator6" InitialValue="0" runat="server" ControlToValidate="ddlType" Text="(Select)" ErrorMessage="Select Tube Well Type" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>

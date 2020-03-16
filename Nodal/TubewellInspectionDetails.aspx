@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/EE/eeMaster.master" AutoEventWireup="true" CodeFile="TubewellInspectionDetails.aspx.cs" MaintainScrollPositionOnPostback="true" Inherits="JE_TubewellInspectionDetails" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="TubewellInspectionDetails.aspx.cs" MaintainScrollPositionOnPostback="true" Inherits="JE_TubewellInspectionDetails" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
