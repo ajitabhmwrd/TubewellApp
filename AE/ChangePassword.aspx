@@ -22,6 +22,7 @@
             <div class="col-md-3 p-1">
                 New Password*<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtNewPassword" Text="(Enter)" ErrorMessage="Enter Name" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True" Display="Dynamic"></asp:RequiredFieldValidator>
                 <asp:TextBox ID="txtNewPassword" runat="server" CssClass="form-control form-control-sm" TextMode="Password"></asp:TextBox>
+                <asp:RegularExpressionValidator Display = "Dynamic" ControlToValidate = "txtNewPassword" ID="RegularExpressionValidator2" ForeColor="Red" ValidationExpression = "^[\s\S]{8,}$" runat="server" ValidationGroup="TubewellEntry" ErrorMessage="Minimum 8 characters required."></asp:RegularExpressionValidator>
             </div>
             <div class="col-md-9 p-1"></div>
             <div class="col-md-3 p-1">
