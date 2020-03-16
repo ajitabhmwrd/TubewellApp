@@ -78,7 +78,12 @@
                             <a class="nav-link dropdown-toggle " href="#" id="navbarTubwell" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tube Well Report
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
-                                <a class="dropdown-item" href="TubewellHandOverByDist.aspx">Tube Well Detail Report</a>                           
+                                <a class="dropdown-item" href="TubewellHandOverByDist.aspx">Tube Well Detail Report</a>   
+                                <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment Report</a>   
+                                <a class="dropdown-item" href="TubewellwiseAllotmentRpt.aspx">Tube Well Wise Allotment Report</a>                                      
+                                <a class="dropdown-item" href="TubwellInpectionList.aspx">Tube well-wise Inspection Report</a>                            
+                                <a class="dropdown-item" href="RptTubewellIrrigationTubewellwise.aspx">Tube well-wise Irrigation Report</a>                            
+                                <a class="dropdown-item" href="TubewellCompleteDetailRpt.aspx">Tube well Complete Detail Report</a>    
                             </div>
                         </li> 
                         
