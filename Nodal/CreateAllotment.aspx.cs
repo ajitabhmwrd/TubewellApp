@@ -187,21 +187,105 @@ public partial class Nodal_CreateAllotment : System.Web.UI.Page
 
     protected void btnClear_Click(object sender, EventArgs e)
     {
-        ddlFinYear.ClearSelection();
-        ddlDist.ClearSelection();
-        bindDDLBlock();
-        //ddlBlock.ClearSelection();
-        //ddlPanchayat.ClearSelection();
-        //ddlTubewell.ClearSelection();
-        txtAllotment.Text = "";        
-        lblMessage.Text = "";
-        txtLtNO.Text = "";
-        txtLtDate.Text = "";
-        bindgvTubewell();
+        reset();
     }
 
     protected void ddlFinYear_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindgvTubewell();
+    }
+
+    protected void btnAllotmentEdit_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Button btnEdit = (Button)sender;
+            GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+            lblAllotmentID.Text = ((Label)gvr.FindControl("lblAllotmentID")).Text;
+            ddlFinYear.SelectedValue = ((Label)gvr.FindControl("lblFinancialYear")).Text;
+            ddlDist.SelectedValue = ((Label)gvr.FindControl("lblDistrictID")).Text;
+            bindDDLBlock();
+            ddlBlock.SelectedValue = ((Label)gvr.FindControl("lblBlockID")).Text;
+            bindDDLPanchyat();
+            ddlPanchayat.SelectedValue = ((Label)gvr.FindControl("lblPanchyatID")).Text;
+            bindDDLTubewell();
+            ddlTubewell.SelectedValue = ((Label)gvr.FindControl("lblTubewellID")).Text;
+            txtAllotment.Text = ((Label)gvr.FindControl("lblAllotmentAmount")).Text;
+            txtLtNO.Text = ((Label)gvr.FindControl("lblLetterNo")).Text;
+            txtLtDate.Text = DateTime.Parse(((Label)gvr.FindControl("lblLetterDate")).Text).ToString("yyyy-MM-dd");
+            updateView();
+        }
+        catch (Exception ex)
+        {
+            lblMessage.Text= ex.ToString();
+        }
+    }
+
+    protected void btnUpdateAllotment_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (Page.IsValid == false)
+            {
+                return;
+            }
+            lblMessage.Text = "";
+
+            SqlParameter[] prm = new SqlParameter[]{
+                    new SqlParameter("@AllotmentID",lblAllotmentID.Text),
+                    new SqlParameter("@FinancialYear",ddlFinYear.SelectedValue),
+                    new SqlParameter("@LetterNo",txtLtNO.Text.Trim()),
+                    new SqlParameter("@LetterDate",DateTime.Parse(txtLtDate.Text.Trim()).ToString("yyyy-MM-dd")),
+                    new SqlParameter("@AllotmentAmount",txtAllotment.Text.Trim()),
+                    new SqlParameter("@EntryByID",Session["LoginId"].ToString()),
+                    new SqlParameter("@EntryByIP",customVariables.GetIPAddress())
+                            };
+            gd.insExecuteSP("updTubewellAllotment", prm);
+            reset();
+            lblMessage.Text = "updated Successfully";
+        }
+        catch (Exception ex)
+        {
+            lblMessage.Text = ex.ToString();
+        }
+        
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        reset();
+    }
+    public void reset()
+    {
+        btnAdd.Visible = true;
+        btnUpdateAllotment.Visible = false;
+        btnCancel.Visible = false;
+        btnClear.Visible = true;
+        ddlFinYear.ClearSelection();
+        ddlDist.ClearSelection();
+        bindDDLBlock();
+        ddlBlock.ClearSelection();
+        ddlPanchayat.ClearSelection();
+        ddlTubewell.ClearSelection();
+        txtAllotment.Text = "";
+        lblMessage.Text = "";
+        txtLtNO.Text = "";
+        txtLtDate.Text = "";  
+        ddlDist.Enabled = true;
+        ddlBlock.Enabled = true;
+        ddlPanchayat.Enabled = true;
+        ddlTubewell.Enabled = true;
+        bindgvTubewell();
+    }
+    public void updateView()
+    {
+        btnAdd.Visible = false;
+        btnClear.Visible = false;
+        btnUpdateAllotment.Visible = true;
+        btnCancel.Visible = true;
+        ddlDist.Enabled = false;
+        ddlBlock.Enabled = false;
+        ddlPanchayat.Enabled = false;
+        ddlTubewell.Enabled = false;
     }
 }

@@ -232,7 +232,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Letter Date">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblLetterDate" runat="server" Text='<%# Eval("LetterDate","{0:dd-MM-yyyy}") %>'></asp:Label>
+                                    <asp:Label ID="lblLetterDate" runat="server" Text='<%# Eval("LetterDate","{0:yyyy-MM-dd}") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="">

@@ -7,12 +7,13 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 
-public partial class Nodal_rptTubewellPanchayatBlock : System.Web.UI.Page
+public partial class Nodal_RptTotalTubewellPanchayat : System.Web.UI.Page
 {
     getData gd = new getData();
     bindControls bc = new bindControls();
     protected void Page_Load(object sender, EventArgs e)
     {
+
         if (!IsPostBack)
         {
             bindgvTubewell();
@@ -24,26 +25,28 @@ public partial class Nodal_rptTubewellPanchayatBlock : System.Web.UI.Page
         try
         {
             string distCode = Context.Items["DistCode"].ToString();
-            string distName = Context.Items["DistName"].ToString();
             string blockCode = Context.Items["BlockCode"].ToString();
+            string panchayatName = Context.Items["PanchayatName"].ToString();
             string blockName = Context.Items["BlockName"].ToString();
 
             lblDistCode.Text = distCode;
-            lblDist.Text = distName;
             lblBlockCode.Text = blockCode;
             lblBlock.Text = blockName;
+            lbPanchayatName.Text = panchayatName;
+
+
 
             SqlParameter[] prm = new SqlParameter[]{
                     new SqlParameter("@DistCode",distCode),
                     new SqlParameter("@BlockCode",blockCode),
-                     new SqlParameter("@PanchayatCode",DBNull.Value)
+                    new SqlParameter("@PanchayatCode", Context.Items["PanchayatCode"].ToString())
                     };
-            DataTable dt = gd.getDataTable("getTubewellPanchaytByBlock", prm);
+            DataTable dt = gd.getDataTable("getTotalTubewellByPanchayat", prm);
             bc.bindGV(gvTubewell, dt);
         }
         catch (Exception ex)
         {
-            Response.Redirect("rptTubewellHandover.aspx");
+            //Response.Redirect("rTubewellHandover.aspx");
         }
     }
 }

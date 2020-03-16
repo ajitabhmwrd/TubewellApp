@@ -19,7 +19,6 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
             bindgvTubewell();
         }
     }
-
     public void bindDDLBlock()
     {
         try
@@ -36,7 +35,6 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
         {
         }
     }
-
     public void bindDDLPanchyat()
     {
         try
@@ -77,7 +75,6 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
         bindDDLPanchyat();
         bindgvTubewell();
     }
-
     protected void ddlPanchayat_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindDDLTubewell();
@@ -87,7 +84,6 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
     {
         bindgvTubewell();
     }
-
     protected void btnClear_Click(object sender, EventArgs e)
     {
         ddlBlock.ClearSelection();
@@ -112,14 +108,12 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
         {
         }
     }
-
     protected void gvTubewell_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         bindgvTubewell();
         gvTubewell.PageIndex = e.NewPageIndex;
         gvTubewell.DataBind();
     }
-
     protected void txtSearch_TextChanged(object sender, EventArgs e)
     {
         //try
@@ -136,7 +130,6 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
         //{
         //}
     }
-
     protected void btnEdit_Click(object sender, EventArgs e)
     {
         Button btnEdit = (Button)sender;
@@ -144,8 +137,6 @@ public partial class JE_TubwellInpectionList : System.Web.UI.Page
         Context.Items.Add("ID", ((Label)gvr.FindControl("lblID")).Text.ToString());
         Server.Transfer("UpdateTubewell.aspx");
     }
-
-
     protected void btnDetail_Click(object sender, EventArgs e)
     {
         Button btnDetail = (Button)sender;

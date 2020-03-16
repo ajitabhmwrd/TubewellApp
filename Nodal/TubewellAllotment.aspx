@@ -53,7 +53,7 @@
             <div class="col-md-12 p-2 table-responsive">
                 <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
                     HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"
-                    OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="100" AllowPaging="false" ShowFooter="true" FooterStyle-Font-Bold="true">
+                    OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="100" AllowPaging="true" ShowFooter="true" FooterStyle-Font-Bold="true">
                     <Columns>
                         <asp:TemplateField HeaderText="SNo">
                             <ItemTemplate>

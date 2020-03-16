@@ -226,6 +226,22 @@ public partial class EE_TubewellDetail : System.Web.UI.Page
             DataTable dt = gd.getDataTable("getTubewellByID", prm);
             if (dt.Rows.Count == 1)
             {
+                if (dt.Rows[0]["IsLock"].ToString() == "Y")
+                {
+                    ddlBlockMP.Enabled = false;
+                    ddlPanchayatMP.Enabled = false;
+                    ddlVillage.Enabled = false;
+                    RequiredFieldValidator2.Enabled = false;
+                    txtTubewellName.Enabled = false;                    
+                }
+                else
+                {
+                    ddlBlockMP.Enabled = true; ;
+                    ddlPanchayatMP.Enabled = true;
+                    ddlVillage.Enabled = true;
+                    RequiredFieldValidator2.Enabled = true;
+                    txtTubewellName.Enabled = true;
+                }
                 txtTubewellName.Text = dt.Rows[0]["Name"].ToString();
                 bindDDLBlockMP();
                 bindDDLTypeMP();
@@ -233,7 +249,13 @@ public partial class EE_TubewellDetail : System.Web.UI.Page
                 bindDDLPanchyatMP();
                 ddlPanchayatMP.SelectedValue = dt.Rows[0]["PanchyatID"].ToString();
                 bindDDLVill();
-                ddlVillage.SelectedValue = dt.Rows[0]["VillageID"].ToString();
+                try
+                {
+                    ddlVillage.SelectedValue = dt.Rows[0]["VillageID"].ToString();
+                }
+                catch (Exception)
+                {
+                }                
                 //ddlStatus.Items.FindByText(dt.Rows[0]["Status"].ToString()).Selected=true;
                 ddlTypeMP.Items.FindByText(dt.Rows[0]["Type"].ToString()).Selected = true;
                 bindDDLScada();
@@ -263,20 +285,7 @@ public partial class EE_TubewellDetail : System.Web.UI.Page
                 txtFarmer2Mobile.Text = dt.Rows[0]["ConsernFarmer2Mobile"].ToString();
                 HandoverEnableDisable();
 
-                if(dt.Rows[0]["IsLock"].ToString()=="Y")
-                {
-                    ddlBlockMP.Enabled = false;
-                    ddlPanchayatMP.Enabled = false;
-                    ddlVillage.Enabled = false;
-                    txtTubewellName.Enabled = false;
-                }
-                else
-                {
-                    ddlBlockMP.Enabled = true; ;
-                    ddlPanchayatMP.Enabled = true;
-                    ddlVillage.Enabled = true;
-                    txtTubewellName.Enabled = true;
-                }
+                
             }
             
         }
@@ -394,6 +403,11 @@ public partial class EE_TubewellDetail : System.Web.UI.Page
             SqlParameter HandedOverDate = new SqlParameter("@HandedOverDate", DBNull.Value);
             SqlParameter HandedOverBlockID = new SqlParameter("@HandedOverBlockID", DBNull.Value);
             SqlParameter HandedOverPanchyatID = new SqlParameter("@HandedOverPanchyatID", DBNull.Value);
+            SqlParameter VillageID = new SqlParameter("@VillageID", ddlVillage.SelectedValue);
+            if (ddlVillage.SelectedValue=="0") 
+            {
+                VillageID = new SqlParameter("@VillageID", DBNull.Value);
+            }
             if (ddlIsHandedOver.SelectedValue == "Y")
             {
                 HandedOverDate = new SqlParameter("@HandedOverDate", DateTime.Parse(txtHandedOverDate.Text.Trim()).ToString("yyyy-MM-dd"));
@@ -406,7 +420,7 @@ public partial class EE_TubewellDetail : System.Web.UI.Page
                     new SqlParameter("@DistrictID",Session["DistCode"].ToString()),
                     new SqlParameter("@BlockID",ddlBlockMP.SelectedValue),
                     new SqlParameter("@PanchyatID",ddlPanchayatMP.SelectedValue),
-                    new SqlParameter("@VillageID",ddlVillage.SelectedValue),
+                    VillageID,
                     //new SqlParameter("@Status",ddlStatus.SelectedItem.Text),
                     new SqlParameter("@Type",ddlTypeMP.SelectedItem.Text),
                     new SqlParameter("@updByID",Session["LoginId"].ToString()),
@@ -425,6 +439,7 @@ public partial class EE_TubewellDetail : System.Web.UI.Page
                     new SqlParameter("@ConsernFarmer2Mobile",txtFarmer2Mobile.Text)
                             };
             lblMessage.Text = gd.insExecuteSP("updTubewell", prm);
+            bindgvTubewell();
         }
         catch (Exception ex)
         {

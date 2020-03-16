@@ -47,12 +47,12 @@
 
                         <asp:TemplateField HeaderText="Total Tubewell">
                             <ItemTemplate>
-                                <asp:Label ID="lblTotalTubewell" runat="server" Text='<%# Bind("TotalTubewell") %>'></asp:Label>
+                                <asp:LinkButton ID="lblTotalTubewell" runat="server" Text='<%# Bind("TotalTubewell") %>' OnClick="lbTotalTubewellPanchayat_Click"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Tubewell Having CA No">
                             <ItemTemplate>
-                                <asp:Label ID="lblTotalCA" runat="server" Text='<%# Bind("TotalCA") %>'></asp:Label>
+                                <asp:LinkButton ID="lblTotalCA" runat="server" Text='<%# Bind("TotalCA") %>' OnClick="lbTotalCA_Click"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Total Tubewell Panchayat">
@@ -62,12 +62,12 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Functional">
                             <ItemTemplate>
-                                <asp:Label ID="lblTotalTubewellFunctional" runat="server" Text='<%# Bind("TotalTubewellFunctional") %>'></asp:Label>
+                                <asp:LinkButton ID="lblTotalTubewellFunctional" runat="server" Text='<%# Bind("TotalTubewellFunctional") %>' OnClick="lbTotalTubewellFunctional_Click"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Non-Functional">
                             <ItemTemplate>
-                                <asp:Label ID="lblNonFunctional" runat="server" Text='<%# Bind("TotalTubewellNonFunctional") %>'></asp:Label>
+                                <asp:LinkButton ID="lblNonFunctional" runat="server" Text='<%# Bind("TotalTubewellNonFunctional") %>' OnClick="lTubewellNonFunctional_Click"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
 

@@ -5,6 +5,7 @@
 <html>
 <head runat="server">
     <title></title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../myContent/Style/myStyle.css" rel="stylesheet" />
@@ -25,6 +26,7 @@
             color:white;  
             font-size:12px;
         }
+
     </style>
 </head>
 <body>
@@ -77,9 +79,12 @@
                             <a class="nav-link dropdown-toggle " href="#" id="navbarTubwell" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tube Well Report
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
-                                <a class="dropdown-item" href="rptTubewellHandover.aspx">Tube Well Detail Report</a>                               
-                                <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment</a>                             
+                                <a class="dropdown-item" href="rptTubewellHandover.aspx">Tube Well Functional Count Report</a>                               
+                                <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment Report</a>                             
                                 <a class="dropdown-item" href="TubewellwiseRpt.aspx">Tube Well Wise Allotment Report</a>                            
+                                <a class="dropdown-item" href="TubewellInpectionCountDistRpt.aspx">Inspection District-wise Report</a>                            
+                                <a class="dropdown-item" href="TubwellInpectionList.aspx">Tube well-wise Inspection Report</a>                            
+                                <a class="dropdown-item" href="TubewellCompleteDetailRpt.aspx">Tube well Complete Detail Report</a>                            
                             </div>
                         </li>          
                         <%--<li class="nav-item active">

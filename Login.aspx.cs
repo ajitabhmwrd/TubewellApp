@@ -78,6 +78,13 @@ public partial class Login : System.Web.UI.Page
                 // Add the cookie to the list for outgoing response
                 Response.Cookies.Add(cookie);
 
+                SqlParameter[] prm1 = new SqlParameter[]{
+                    new SqlParameter("@LoginId",dt.Rows[0]["LoginId"].ToString()),
+                    new SqlParameter("@LoginRole", dt.Rows[0]["RoleName"].ToString()),   
+                    new SqlParameter("@LoginIP",customVariables.GetIPAddress())
+                            };
+                gd.insExecuteSP("insLoginLog", prm1);
+
                 if (userrole == "EE")
                 {
                     Session["DistCode"] = dt.Rows[0]["DistCode"].ToString();
