@@ -1,0 +1,28 @@
+﻿<?xml version="1.0"?>
+<configuration>
+  <connectionStrings>
+    <add name="ConnectionStringTubewellApp" connectionString="Server=(local);Database=TubewellNew; user id=sa; password=sa123" providerName="System.Data.SqlClient"/>
+  </connectionStrings>
+  <system.web>
+    <compilation debug="true" targetFramework="4.0">
+      <assemblies>
+        <add assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
+      </assemblies>
+    </compilation>
+    <authentication mode="Forms">
+      <forms name=".ASPXAUTH" loginUrl="Login.aspx" defaultUrl="Login.aspx" protection="All" path="/" timeout="30"/>
+    </authentication>
+    <roleManager enabled="false"/>
+  </system.web>
+  <system.webServer>
+    <security>
+      <requestFiltering>
+        <requestLimits maxAllowedContentLength="104857600"/>
+      </requestFiltering>
+    </security>
+    <validation validateIntegratedModeConfiguration="false"/>
+    <handlers>
+      <add name="CaptchaImage" verb="GET" path="CaptchaImage.axd" type="MSCaptcha.CaptchaImageHandler, MSCaptcha"/>
+    </handlers>
+  </system.webServer>
+</configuration>
