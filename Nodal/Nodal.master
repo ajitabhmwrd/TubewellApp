@@ -14,19 +14,40 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
-        table tr{
-           font-size:12px;
-           font-family: Arial, Helvetica, sans-serif;
+        table tr {
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
         }
+
         .btn-primary {
             background-color: #008fcc;
         }
-        .customBgColor{
+
+        .customBgColor {
             background-color: #008fcc;
-            color:white;  
-            font-size:12px;
+            color: white;
+            font-size: 12px;
         }
 
+        .customBgColor:not(.nohover):hover {
+            background-color: #008fcc;
+            color: white;
+            font-size: 12px;
+        }
+        .dropdown-item
+        {
+            padding-bottom:2px;
+            padding-top:2px;
+            margin-bottom:-3px;
+            margin-top:-3px;
+            color: white;
+            font-size: 12px;
+            font-weight:bold;
+        }
+        .dropdown-menu
+        {
+            background-color: #008fcc;
+        }
     </style>
 </head>
 <body>
@@ -41,21 +62,24 @@
                     <div style="font-weight: bold; font-size: 14px">Minor Water Resources Department</div>
                     <div class="small">Govt. of Bihar</div>
                 </div>
-                <div class="font-weight-bold small text-lg-left"  style="color: black;margin-left:70px">
+                <div class="font-weight-bold small text-lg-left" style="color: black; margin-left: 70px">
                     <asp:Label ID="lblDesignation" runat="server" Text=""></asp:Label>
-                     
+
                 </div>
             </nav>
 
-            <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #008fcc; font-size: 12px; font-weight: bold;">
-                <a class="navbar-brand" href="Default.aspx" style="font-size: 12px">Home</a>
+            <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #008fcc;
+        font-size: 12px;
+        font-weight: bold;
+    ">
+                <a class="navbar-brand" href="Default.aspx" style="                        font-size: 12px">Home</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="height: 30px">
-                    <ul class="navbar-nav mr-auto">    
-                       <%-- <li class="nav-item active dropdown">
+                    <ul class="navbar-nav mr-auto">
+                        <%-- <li class="nav-item active dropdown">
                             <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Adminstration
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -69,32 +93,45 @@
                             <a class="nav-link dropdown-toggle " href="#" id="navbarTubwell" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tube Well
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
-                                <a class="dropdown-item" href="ApproveTubewell.aspx">New Tube well Request</a>                               
-                                <a class="dropdown-item" href="AddAllotmentPlan.aspx">Tube Well Allotment (Plan)</a>                               
-                                <a class="dropdown-item" href="CreateAllotment.aspx">Tube Well Allotment (Non Plan)</a>                               
-                                <%--<a class="dropdown-item" href="TubewellIrrigation.aspx">Tube Well Irrigation</a>  --%>                             
+                                <a class="dropdown-item" href="ApproveTubewell.aspx">New Tube well Request</a>
+                                <%-- <a class="dropdown-item" href="AddAllotmentPlan.aspx">Tube Well Allotment (Plan)</a>                               
+                                <a class="dropdown-item" href="CreateAllotment.aspx">Tube Well Allotment (Non Plan)</a>  --%>
+                                <%--<a class="dropdown-item" href="TubewellIrrigation.aspx">Tube Well Irrigation</a>  --%>
                             </div>
-                        </li>       
+                        </li>
                         <li class="nav-item active dropdown">
                             <a class="nav-link dropdown-toggle " href="#" id="navbarTubwell" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tube Well Report
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
-                                <a class="dropdown-item" href="rptTubewellHandover.aspx">Tube Well Functional Count Report</a>                               
-                                <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment Report</a>                             
-                                <a class="dropdown-item" href="TubewellwiseAllotmentRpt.aspx">Tube Well Wise Allotment Report</a>                            
-                                <a class="dropdown-item" href="TubewellInpectionCountDistRpt.aspx">Inspection District-wise Report</a>                            
-                                <a class="dropdown-item" href="TubwellInpectionList.aspx">Tube well-wise Inspection Report</a>                            
-                                <a class="dropdown-item" href="RptTubewellIrrigationTubewellwise.aspx">Tube well-wise Irrigation Report</a>                            
-                                <a class="dropdown-item" href="TubewellCompleteDetailRpt.aspx">Tube well Complete Detail Report</a>                            
+                                <a class="dropdown-item" href="rptTubewellHandover.aspx">Tube Well Functional Count Report</a>
+                                <a class="dropdown-item" href="rptTwDistwisePlanHead.aspx">Tube Well District-wise Plan Head Report</a>
+                                <a class="dropdown-item" href="rptTwDistwiseNonPlanHead.aspx">Tube Well District-wise Non-Plan Head Report</a>
+                                <a class="dropdown-item" href="TubewellAllotmentRpt.aspx">Tube Well Allotment Report</a>
+                                <a class="dropdown-item" href="TubewellwiseAllotmentRpt.aspx">Tube Well Wise Allotment Report</a>
+                                <a class="dropdown-item" href="TubewellInpectionCountDistRpt.aspx">Inspection District-wise Report</a>
+                                <a class="dropdown-item" href="TubwellInpectionList.aspx">Tube well-wise Inspection Report</a>
+                                <a class="dropdown-item" href="RptTubewellIrrigationTubewellwise.aspx">Tube well-wise Irrigation Report</a>
+                                <a class="dropdown-item" href="TubewellCompleteDetailRpt.aspx">Tube well Complete Detail Report</a>
+                                <a class="dropdown-item" href="RptTwEstimatedCost.aspx">Tube well Estimated Cost</a>
+                                <a class="dropdown-item" href="RptTwPysicalFinProgress.aspx">Tube well Physical and Financial Progress</a>
+                                
                             </div>
-                        </li>          
+                        </li>
+                        <li class="nav-item active dropdown">
+                            <a class="nav-link dropdown-toggle " href="#" id="navbarTubwell" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login Report
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarTubwell">
+                                <a class="dropdown-item" href="LoginLog.aspx">Login Log Report</a>
+                                <a class="dropdown-item" href="LoinDistrictwise.aspx">Login District-wise Report</a>
+                            </div>
+                        </li>
                         <%--<li class="nav-item active">
                             <a class="nav-link" href="#">Link</a>
                         </li>--%>
                     </ul>
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">                            
-                            <a class="nav-link" href="ChangePassword.aspx">Change Password</a>                         
+                        <li class="nav-item active">
+                            <a class="nav-link" href="ChangePassword.aspx">Change Password</a>
                         </li>
                         <li class="nav-item active">
                             <asp:LinkButton ID="lnkLogout" runat="server" OnClick="lnkLogout_Click" CssClass="nav-link">Sign Out</asp:LinkButton>
@@ -104,8 +141,8 @@
             </nav>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-        </div>       
+        </div>
     </form>
-    
+
 </body>
 </html>

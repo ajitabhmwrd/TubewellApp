@@ -15,6 +15,10 @@ public partial class Login : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         imgCaptcha.ImageUrl = "~/CreateCaptcha.aspx?New="+DateTime.Now.ToString();
+        if(!IsPostBack)
+        {
+            txtUserName.Focus();            
+        }
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)
@@ -93,6 +97,10 @@ public partial class Login : System.Web.UI.Page
                 else if (userrole == "Nodal")
                 {
                     returnUrl = "~/Nodal/default.aspx";
+                }
+                else if (userrole == "secretary")
+                {
+                    returnUrl = "~/secretary/default.aspx";
                 }
                 else if (userrole == "Contractor")
                 {

@@ -33,6 +33,7 @@ public partial class Nodal_TubewellwiseRpt : System.Web.UI.Page
         {
         }
     }
+    
 
     public void bindDDLBlock()
     {
@@ -129,14 +130,12 @@ public partial class Nodal_TubewellwiseRpt : System.Web.UI.Page
                     };
             DataTable dt = gd.getDataTable("getAllotmenTubewellWise", prm);
             bc.bindGV(gvTubewell, dt);
-            decimal TEstimatedCost = dt.AsEnumerable().Sum(row => row.Field<decimal>("EstimatedCost"));
             decimal TAllotmentPlan = dt.AsEnumerable().Sum(row => row.Field<decimal>("AllotmentPlan"));
             int TAllotmentPlanCount = dt.AsEnumerable().Sum(row => row.Field<int>("AllotmentPlanCount"));
             decimal TAllotmentNonPlan = dt.AsEnumerable().Sum(row => row.Field<decimal>("AllotmentNonPlan"));
             int TAllotmentNonPlanCount = dt.AsEnumerable().Sum(row => row.Field<int>("AllotmentNonPlanCount"));
-            gvTubewell.FooterRow.Cells[6].Text = "Total";
-            gvTubewell.FooterRow.Cells[6].HorizontalAlign = HorizontalAlign.Right;
-            gvTubewell.FooterRow.Cells[7].Text = TEstimatedCost.ToString();
+            gvTubewell.FooterRow.Cells[7].Text = "Total";
+            gvTubewell.FooterRow.Cells[7].HorizontalAlign = HorizontalAlign.Right;
             gvTubewell.FooterRow.Cells[8].Text = TAllotmentPlan.ToString();
             gvTubewell.FooterRow.Cells[9].Text = TAllotmentPlanCount.ToString();
             gvTubewell.FooterRow.Cells[10].Text = TAllotmentNonPlan.ToString();
@@ -168,4 +167,5 @@ public partial class Nodal_TubewellwiseRpt : System.Web.UI.Page
         ddlFinYear.ClearSelection();
         bindgvTubewell();
     }
+    
 }

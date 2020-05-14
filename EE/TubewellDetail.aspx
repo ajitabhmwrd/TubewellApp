@@ -121,11 +121,14 @@
                                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                     <ContentTemplate>
                                         <asp:Button ID="btnEdit" runat="server" Text="Edit" class="btn-primary" OnClick="btnEdit_Click" />
+                                        <asp:Button ID="btnStEdit" runat="server" Text="Change Status" class="btn-primary" OnClick="btnStEdit_Click" />
                                         <asp:Button ID="btnView" runat="server" Text="View / Lock" class="btn-primary" OnClick="btnView_Click" />
+                                        
                                     </ContentTemplate>
                                     <Triggers>
                                         <asp:PostBackTrigger ControlID="btnEdit" />
                                         <asp:PostBackTrigger ControlID="btnView" />
+                                        <asp:PostBackTrigger ControlID="btnStEdit" />
                                     </Triggers>
                                 </asp:UpdatePanel>
                             </ItemTemplate>
@@ -282,7 +285,7 @@
                         <asp:Button ID="btnClose" runat="server" Text="Close" class="btn btn-primary btn-sm" />
                     </div>
                 </div>
-                
+
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btnUpdate" EventName="Click" />
@@ -291,5 +294,56 @@
         </asp:UpdatePanel>
     </asp:Panel>
     <!-- ModalPopupExtender -->
+
+    <!-- ModalPopupExtender2 -->
+    <cc1:ModalPopupExtender ID="mpSt" runat="server" PopupControlID="Panel2" TargetControlID="lnkFake"
+        CancelControlID="btnStClose" BackgroundCssClass="modalBackground">
+    </cc1:ModalPopupExtender>
+    <asp:Panel ID="Panel2" runat="server" CssClass="modalPopup" Style="display: none" ScrollBars="Auto">
+        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+            <ContentTemplate>
+                <div class="p-4 row">
+                    <div class="col-md-12 font-weight-bold small">
+                        Update Tube Well Status
+                <hr />
+                    </div>
+
+                    <div class="col-md-12 p-1">
+                        <asp:Label ID="lblStMessage" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
+                    </div>
+                    <div class="col-md-12 p-1">
+                       
+                        Tubewell ID =
+                            <asp:Label ID="lblTwStID" runat="server" Text="" ForeColor="Blue" Font-Bold="true"></asp:Label>
+                        <br />
+                        Tubewell Name =
+                            <asp:Label ID="lblTwStName" runat="server" Text="" ForeColor="Blue" Font-Bold="true"></asp:Label>
+                        <br />
+                        Tubewell Current Status =
+                            <asp:Label ID="lblTwStStatus" runat="server" Text="" ForeColor="Blue" Font-Bold="true"></asp:Label>
+                    </div>
+                    <div class="col-md-3 p-1">
+                        Status
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" InitialValue="0" runat="server" ControlToValidate="ddlStStatus" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntrySt" Font-Bold="True"></asp:RequiredFieldValidator>
+                            <asp:DropDownList ID="ddlStStatus" runat="server" CssClass="form-control form-control-sm">
+                                <asp:ListItem Value="0">Select</asp:ListItem>
+                            </asp:DropDownList>
+                    </div>
+                    <div class="col-md-9 p-1">
+                        <br />
+                        <asp:Button ID="btnStUpdate" runat="server" Text="Update" CssClass="btn btn-primary btn-sm" OnClick="btnStUpdate_Click" ValidationGroup="TubewellEntrySt" />
+                        <asp:Button ID="btnStClose" runat="server" Text="Close" class="btn btn-primary btn-sm" />
+                    </div>
+                </div>
+                
+
+            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="btnStUpdate" EventName="Click" />
+                <asp:PostBackTrigger ControlID="btnStClose" />
+            </Triggers>
+        </asp:UpdatePanel>
+    </asp:Panel>
+    <!-- ModalPopupExtender2 -->
 </asp:Content>
 

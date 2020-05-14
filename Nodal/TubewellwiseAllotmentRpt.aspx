@@ -80,17 +80,17 @@
                                 <asp:Label ID="lblPanchayatName" runat="server" Text='<%# Bind("PanchayatName") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        
+                        <asp:TemplateField HeaderText="Status" ItemStyle-Wrap="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblStatus" runat="server" Text='<%# Bind("Status") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Financial Year">
                             <ItemTemplate>
                                 <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Estimated Cost Plan(In Rs)">
-                            <ItemTemplate>
-                                <asp:Label ID="lblEstimatedCost" runat="server" Text='<%# Bind("EstimatedCost") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                        
                         <asp:TemplateField HeaderText="Allotment Plan(In Rs)">
                             <ItemTemplate>
                                 <asp:Label ID="lblAllotmentPlan" runat="server" Text='<%# Bind("AllotmentPlan") %>'></asp:Label>
@@ -111,6 +111,7 @@
                                 <asp:Label ID="lblAllotmentNonPlanCount" runat="server" Text='<%# Bind("AllotmentNonPlanCount") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        
                     </Columns>
                 </asp:GridView>
             </div>

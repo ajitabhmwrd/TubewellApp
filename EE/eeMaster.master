@@ -25,6 +25,25 @@
             color:white;  
             font-size:12px;
         }
+        .customBgColor:not(.nohover):hover {
+            background-color: #008fcc;
+            color: white;
+            font-size: 12px;
+        }
+        .dropdown-item
+        {
+            padding-bottom:2px;
+            padding-top:2px;
+            margin-bottom:-3px;
+            margin-top:-3px;
+            color: white;
+            font-size: 12px;
+            font-weight:bold;
+        }
+        .dropdown-menu
+        {
+            background-color: #008fcc;
+        }
     </style>
 </head>
 <body>
@@ -64,14 +83,16 @@
                             </div>
                         </li>
                         <li class="nav-item active dropdown">
-                            <a class="nav-link dropdown-toggle " href="#" id="navbarTubwell" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tube Well
+                            <a class="nav-link dropdown-toggle " href="#" id="navbarTubwell" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tube Well Entry
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
                                 <a class="dropdown-item" href="TubewellDetail.aspx">Manage Tube Well</a>                               
                                 <a class="dropdown-item" href="TubewellIrrigation.aspx">Tube Well Irrigation</a>                               
-                                <a class="dropdown-item" href="TubwellInpectionList.aspx">Tube Well Inspection</a>                               
-                                <%--<a class="dropdown-item" href="TubewellDemadList.aspx">Tube Well Demand</a>                               
-                                <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment</a>--%>                               
+                                <a class="dropdown-item" href="TubwellInpectionList.aspx">Tube Well Inspection</a>  
+                                <a class="dropdown-item" href="TubewellEstimatedCost.aspx">Tube Well Estimated Cost</a>                                  
+                                <%--<a class="dropdown-item" href="TubewellDemadList.aspx">Tube Well Demand</a>--%>
+                                <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment</a>      
+                                <a class="dropdown-item" href="TwPhysFinProgress.aspx">Tube Well Physical and Finacial Progress</a>                                                                  
                             </div>
                         </li>
                          <li class="nav-item active dropdown">
@@ -79,10 +100,12 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
                                 <a class="dropdown-item" href="TubewellHandOverByDist.aspx">Tube Well Detail Report</a>   
-                                <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment Report</a>   
+                                <a class="dropdown-item" href="TubewellAllotmentRpt.aspx">Tube Well Allotment Report</a>   
                                 <a class="dropdown-item" href="TubewellwiseAllotmentRpt.aspx">Tube Well Wise Allotment Report</a>                                      
                                 <a class="dropdown-item" href="TubwellInpectionList.aspx">Tube well-wise Inspection Report</a>                            
-                                <a class="dropdown-item" href="RptTubewellIrrigationTubewellwise.aspx">Tube well-wise Irrigation Report</a>                            
+                                <a class="dropdown-item" href="RptTubewellIrrigationTubewellwise.aspx">Tube well-wise Irrigation Report</a>  
+                                <a class="dropdown-item" href="RptTwEstimatedCost.aspx">Tube well Estimated Cost</a>                            
+                                <a class="dropdown-item" href="RptTwPysicalFinProgress.aspx">Tube well Physical and Financial Progress</a>                            
                                 <a class="dropdown-item" href="TubewellCompleteDetailRpt.aspx">Tube well Complete Detail Report</a>    
                             </div>
                         </li> 

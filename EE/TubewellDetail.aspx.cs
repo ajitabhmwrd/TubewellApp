@@ -40,6 +40,7 @@ public partial class EE_TubewellDetail : System.Web.UI.Page
         {
             DataTable dt = gd.getDataTable("getTubewellStatus");
             bc.bindDDL(ddlStatus, dt, "Status", "ID");
+            bc.bindDDL(ddlStStatus, dt, "Status", "ID");
         }
         catch (Exception ex)
         {
@@ -481,5 +482,40 @@ public partial class EE_TubewellDetail : System.Web.UI.Page
         catch (Exception ex)
         {
         }
+    }
+
+    protected void btnStUpdate_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (Page.IsValid == false)
+            {
+                return;
+            }
+            SqlParameter[] prm = new SqlParameter[]{
+                    new SqlParameter("@ID",lblTwStID.Text.Trim()),
+                    new SqlParameter("@Status",ddlStStatus.SelectedItem.Text),
+                    new SqlParameter("@EntryByID",Session["LoginId"].ToString()),
+                    new SqlParameter("@EntryByIP",customVariables.GetIPAddress()),
+                    new SqlParameter("@EntryByRole",Session["RoleName"].ToString())
+                            };
+            lblStMessage.Text = gd.insExecuteSP("updTubewellStatus", prm);
+            lblTwStStatus.Text = ddlStStatus.SelectedItem.Text;
+            bindgvTubewell();
+        }
+        catch (Exception ex)
+        {
+        }
+    }
+
+    protected void btnStEdit_Click(object sender, EventArgs e)
+    {
+        Button btnEdit = (Button)sender;
+        GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+        lblTwStID.Text = ((Label)gvr.FindControl("lblID")).Text.ToString();
+        lblTwStName.Text = ((Label)gvr.FindControl("lblName")).Text.ToString();
+        lblTwStStatus.Text = ((Label)gvr.FindControl("lblStatus")).Text.ToString();
+        ddlStStatus.ClearSelection();
+        mpSt.Show();
     }
 }

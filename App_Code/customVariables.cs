@@ -24,4 +24,14 @@ public static class customVariables
         }
         return context.Request.ServerVariables["REMOTE_ADDR"];
     }
+
+    public static object chkTxtBox(object value)
+    {
+        return string.IsNullOrWhiteSpace(value.ToString()) ? (object)DBNull.Value : value;
+    }
+    public static object chkDDL(object value)
+    {
+        return value.ToString()=="0" ? (object)DBNull.Value : value;
+    }
+
 }
