@@ -1,0 +1,3 @@
+select * from (SELECT *
+,ROW_NUMBER() OVER (PARTITION BY TubewellID ORDER BY SUBSTRING(FinaciyalYear,1,4) DESC) AS rn
+   FROM TubwellEstimatedCost) as t where t.rn=1

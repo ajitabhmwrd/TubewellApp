@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Activities.Statements;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -35,7 +36,6 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
         {
         }
     }
-
     public void bindDDLFinYr()
     {
         try
@@ -48,7 +48,6 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
         {
         }
     }
-
     public void bindDDLBlock()
     {
         try
@@ -65,7 +64,6 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
         {
         }
     }
-
     public void bindDDLPanchyat()
     {
         try
@@ -82,7 +80,6 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
         {
         }
     }
-
     public void bindDDLTubewell()
     {
         try
@@ -101,20 +98,17 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
         {
         }
     }
-
     protected void ddlBlock_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindDDLPanchyat();
         bindgvTubewell();
     }
-
     protected void ddlPanchayat_SelectedIndexChanged(object sender, EventArgs e)
     {
         //bindDDLVill();
         bindDDLTubewell();
         bindgvTubewell();
     }
-
     protected void btnAdd_Click(object sender, EventArgs e)
     {
         try
@@ -144,6 +138,7 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
             
             SqlParameter[] prm = new SqlParameter[]{
                     new SqlParameter("@TubewellID",ddlTubewell.SelectedValue),
+                    new SqlParameter("@EstimatedCostID",ddlHead.SelectedValue=="1"?ddlEC.SelectedValue:(object)DBNull.Value),
                     new SqlParameter("@FinancialYear",ddlFinYear.SelectedValue),
                     new SqlParameter("@AdmAprID",DBNull.Value),
                     new SqlParameter("@HeadType",ddlHead.SelectedValue),
@@ -166,7 +161,6 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
     {
 
     }
-
     protected void ddlDist_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindDDLBlock();
@@ -208,31 +202,46 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
             ex.ToString();
         }
     }
-
     protected void gvTubewell_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
 
     }
     protected void ddlHead_SelectedIndexChanged(object sender, EventArgs e)
-    {
+    {        
+        HideShowEC();
+        if (btnUpdateAllotment.Visible == true)
+        {
+            bindddlEC();
+        }        
         bindgvTubewell();
     }
-
+    public void HideShowEC()
+    {
+        lblMessage.Text = "";
+        if (ddlHead.SelectedValue == "1") //For Plan
+        {
+            divEC.Visible = true;
+            rvEC.Enabled = true;
+        }
+        else
+        {
+            divEC.Visible = false;
+            rvEC.Enabled = false;
+        }
+    }
     protected void ddlTubewell_SelectedIndexChanged(object sender, EventArgs e)
     {
+        bindddlEC();        
         bindgvTubewell();
     }
-
     protected void btnClear_Click(object sender, EventArgs e)
     {
         reset();
     }
-
     protected void ddlFinYear_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindgvTubewell();
     }
-
     protected void btnAllotmentEdit_Click(object sender, EventArgs e)
     {
         try
@@ -240,6 +249,7 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
             lblMessage.Text = "";
             Button btnEdit = (Button)sender;
             GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+            ddlHead.SelectedValue = ddlHead.Items.FindByText(((Label)gvr.FindControl("lblHeadType")).Text).Value;
             lblAllotmentID.Text = ((Label)gvr.FindControl("lblAllotmentID")).Text;
             lbDownload.CommandArgument = ((LinkButton)gvr.FindControl("lnkDownload")).CommandArgument;
             ddlFinYear.SelectedValue = ((Label)gvr.FindControl("lblFinancialYear")).Text;
@@ -248,10 +258,22 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
             ddlPanchayat.SelectedValue = ((Label)gvr.FindControl("lblPanchyatID")).Text;
             bindDDLTubewell();
             ddlTubewell.SelectedValue = ((Label)gvr.FindControl("lblTubewellID")).Text;
+            HideShowEC();
+            if (ddlHead.SelectedValue == "1")
+            {                
+                bindddlEC();
+                try
+                {
+                    ddlEC.SelectedValue = ((Label)gvr.FindControl("lblEstimatedCostID")).Text;
+                }
+                catch(Exception)
+                {
+
+                }
+            }
             txtAllotment.Text = ((Label)gvr.FindControl("lblAllotmentAmount")).Text;
             txtLtNO.Text = ((Label)gvr.FindControl("lblLetterNo")).Text;
             txtLtDate.Text = DateTime.Parse(((Label)gvr.FindControl("lblLetterDate")).Text).ToString("yyyy-MM-dd");
-            ddlHead.SelectedValue=ddlHead.Items.FindByText(((Label)gvr.FindControl("lblHeadType")).Text).Value;
             updateView();
             bindgvTubewell();
         }
@@ -260,7 +282,6 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
             //lblMessage.Text = ex.ToString();
         }
     }
-
     protected void btnUpdateAllotment_Click(object sender, EventArgs e)
     {
         try
@@ -299,6 +320,7 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
             
             SqlParameter[] prm = new SqlParameter[]{
                     new SqlParameter("@AllotmentID",lblAllotmentID.Text),
+                    new SqlParameter("@EstimatedCostID",ddlHead.SelectedValue=="1"?ddlEC.SelectedValue:(object)DBNull.Value),
                     new SqlParameter("@FinancialYear",ddlFinYear.SelectedValue),
                     new SqlParameter("@LetterNo",txtLtNO.Text.Trim()),
                     new SqlParameter("@HeadType",ddlHead.SelectedValue),
@@ -308,7 +330,7 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
                     new SqlParameter("@EntryByID",Session["LoginId"].ToString()),
                     new SqlParameter("@EntryByIP",customVariables.GetIPAddress())
                             };
-            gd.insExecuteSP("updTubewellAllotment", prm);
+            string message= gd.insExecuteSP("updTubewellAllotment", prm);
             btnAdd.Visible = true;
             btnUpdateAllotment.Visible = false;
             btnCancel.Visible = false;
@@ -321,8 +343,10 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
             ddlTubewell.Enabled = true;
             lbDownload.Visible = false;
             rfvFU.Enabled = true;
+            ddlEC.Items.Clear();
+            ddlEC.Items.Insert(0, new ListItem("Select", "0"));
             bindgvTubewell();
-            lblMessage.Text = "updated Successfully";
+            lblMessage.Text = message;// "updated Successfully";
         }
         catch (Exception ex)
         {
@@ -330,12 +354,10 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
         }
 
     }
-
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         reset();
     }
-    
     public void reset()
     {
         btnAdd.Visible = true;
@@ -344,6 +366,7 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
         btnClear.Visible = true;
         ddlFinYear.ClearSelection();
         ddlHead.ClearSelection();
+        ddlEC.ClearSelection();
         bindDDLBlock();
         txtAllotment.Text = "";
         lblMessage.Text = "";
@@ -354,6 +377,8 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
         ddlTubewell.Enabled = true;
         lbDownload.Visible = false;
         rfvFU.Enabled = true;
+        ddlEC.Items.Clear();
+        ddlEC.Items.Insert(0, new ListItem("Select", "0"));
         bindgvTubewell();
         
     }
@@ -385,6 +410,43 @@ public partial class Nodal_TubewellAllotment : System.Web.UI.Page
         Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
         Response.WriteFile(filePath);
         Response.End();
-    }    
+    }
+    public void bindddlEC()
+    {        
+        lblMessage.Text = "";        
+        if (ddlHead.SelectedValue == "0")
+        {
+            lblMessage.Text = "Please select Head type!!!";
+            ddlTubewell.SelectedValue = "0";
+            return;
+        }
+        if (ddlHead.SelectedValue == "1") // For Plan
+        {
+            SqlParameter[] prm = new SqlParameter[]
+                    {
+                        new SqlParameter("@ID",ddlTubewell.SelectedValue),
+                        new SqlParameter("@HeadID","1")
+                    };
+            DataTable dt = gd.getDataTable("getTubewellEstimatedCost", prm);
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                lblMessage.Text = "Add Estimated Cost on selected tubewell!!!";
+            }
+            dt.Columns.Add("ddlText", typeof(System.String));
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (string.IsNullOrWhiteSpace(dr["RevisedEstimatedCost"].ToString()))
+                {
+                    dr["ddlText"] = "EC-" + dr["TEstimatedCost"].ToString() + ",FY-" + dr["FinaciyalYear"].ToString();
+                }
+                else
+                {
+                    dr["ddlText"] = "Revised EC-" + dr["RevisedEstimatedCost"].ToString() + ",FY-" + dr["FinaciyalYear"].ToString();
+                }
+            }
+            bc.bindDDL(ddlEC, dt, "ddlText", "EstID");
+        }
+    }
 
+    
 }

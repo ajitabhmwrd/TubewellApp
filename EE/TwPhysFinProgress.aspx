@@ -17,6 +17,7 @@
             height: 600px;
         }
     </style>
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <br />
@@ -58,16 +59,16 @@
                 <br />
                 <asp:Button ID="btnClear" runat="server" Text="Reset" CssClass="btn btn-primary btn-sm" OnClick="btnClear_Click" />
             </div>
-            <div class="col-md-12 p-2 table-responsive">
+            <div class="col-md-12 p-2 ">
                 <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
                     HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"
                     OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="50" AllowPaging="true">
                     <Columns>
-                        <asp:TemplateField HeaderText="SNo">
+                        <%--<asp:TemplateField HeaderText="SNo">
                             <ItemTemplate>
                                 <%#Container.DataItemIndex+1 %>
                             </ItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField>--%>
                         <asp:TemplateField HeaderText="ID" Visible="false">
                             <ItemTemplate>
                                 <asp:Label ID="lblPFID" runat="server" Text='<%# Bind("PFID") %>'></asp:Label>
@@ -105,14 +106,24 @@
                                 <asp:Label ID="lblHeadType" runat="server" Text='<%# Bind("HeadType") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="EC" ItemStyle-Wrap="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTEstimatedCost" runat="server" Text='<%# Bind("TEstimatedCost") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Revised EC" ItemStyle-Wrap="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblRevisedEstimatedCost" runat="server" Text='<%# Bind("RevisedEstimatedCost") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Work Name">
                             <ItemTemplate>
                                 <asp:Label ID="lblWorkName" runat="server" Text='<%# Bind("WorkName") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="MB No,Date" ItemStyle-Wrap="false">
+                        <asp:TemplateField HeaderText="MB No, Date" ItemStyle-Wrap="false">
                             <ItemTemplate>
-                                <asp:Label ID="lblMBNumber" runat="server" Text='<%# Bind("MBNumber") %>'></asp:Label>,
+                                <asp:Label ID="lblMBNumber" runat="server" Text='<%# Bind("MBNumber") %>'></asp:Label>,<br />
                                 <asp:Label ID="lblMBDate" runat="server" Text='<%# Eval("MBDate", "{0:dd/MM/yyyy}") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -126,13 +137,13 @@
                                 <asp:Label ID="lblWorkStatus" runat="server" Text='<%# Bind("WorkStatus") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Electrical Work Progress (%)">
+                        <asp:TemplateField HeaderText="Elect Work Progress (%)">
                             <ItemTemplate>
                                 <asp:Label ID="lblElectProgress" runat="server" Text='<%# Bind("ElectProgress") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                        <asp:TemplateField HeaderText="Mechanical Work Progress (%)">
+                        <asp:TemplateField HeaderText="Mech Work Progress (%)">
                             <ItemTemplate>
                                 <asp:Label ID="lblMechProgress" runat="server" Text='<%# Bind("MechProgress") %>'></asp:Label>
                             </ItemTemplate>
@@ -158,9 +169,9 @@
                                 <asp:Label ID="lblExpenditureAmount" runat="server" Text='<%# Bind("ExpenditureAmount") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField ItemStyle-Wrap="false" HeaderText="Uploaded pdf">
+                        <asp:TemplateField ItemStyle-Wrap="false" HeaderText="MB">
                             <ItemTemplate>
-                                <asp:LinkButton ID="lnkDownload" Text="Download" CommandArgument='<%# Eval("PdfPath") %>' runat="server" OnClick="lnkDownload_Click"></asp:LinkButton>
+                                <asp:LinkButton ID="lnkDownload" Text="" CommandArgument='<%# Eval("PdfPath") %>' runat="server" OnClick="lnkDownload_Click"><i class="fa fa-download" aria-hidden="true"  data-toggle="tooltip" data-placement="bottom" title="Download MB"></i></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="">
@@ -229,7 +240,14 @@
                     <div class="col-md-3 p-1">
                         Head Type*  
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator14" InitialValue="0" runat="server" ControlToValidate="ddlHead" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                        <asp:DropDownList ID="ddlHead" runat="server" CssClass="form-control form-control-sm">
+                        <asp:DropDownList ID="ddlHead" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlHead_SelectedIndexChanged">
+                            <asp:ListItem Value="0">Select</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <div id="divEC" runat="server" visible="false" class="col-md-2 p-1">
+                        Estimated Cost*
+                        <asp:RequiredFieldValidator ID="rvEC" Enabled="false" InitialValue="0" runat="server" ControlToValidate="ddlEC" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                        <asp:DropDownList ID="ddlEC" runat="server" CssClass="form-control form-control-sm">
                             <asp:ListItem Value="0">Select</asp:ListItem>
                         </asp:DropDownList>
                     </div>

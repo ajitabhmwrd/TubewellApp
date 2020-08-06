@@ -43,7 +43,7 @@
             <div class="col-md-3 p-1">
                 Head Type*  
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator14" InitialValue="0" runat="server" ControlToValidate="ddlHead" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                <asp:DropDownList ID="ddlHead" runat="server" CssClass="form-control form-control-sm">
+                <asp:DropDownList ID="ddlHead" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlHead_SelectedIndexChanged">
                     <asp:ListItem Value="0">Select</asp:ListItem>
                 </asp:DropDownList>
             </div>
@@ -78,7 +78,14 @@
             <div class="col-md-3 p-1">
                 Tubewell*
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" InitialValue="0" runat="server" ControlToValidate="ddlTubewell" Text="(Select)" ErrorMessage="Select Village" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
-                <asp:DropDownList ID="ddlTubewell" runat="server" CssClass="form-control form-control-sm">
+                <asp:DropDownList ID="ddlTubewell" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlTubewell_SelectedIndexChanged">
+                    <asp:ListItem Value="0">Select</asp:ListItem>
+                </asp:DropDownList>
+            </div>
+            <div id="divEC" runat="server" visible="false" class="col-md-2 p-1">
+                Estimated Cost*
+                <asp:RequiredFieldValidator ID="rvEC" Enabled="false" InitialValue="0" runat="server" ControlToValidate="ddlEC" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                <asp:DropDownList ID="ddlEC" runat="server" CssClass="form-control form-control-sm" >
                     <asp:ListItem Value="0">Select</asp:ListItem>
                 </asp:DropDownList>
             </div>

@@ -9,7 +9,7 @@
         <ContentTemplate>
             <br />
             <div class="container">
-                <span class="font-weight-bold small">Add new Tube Well Inspection</span>
+                <span class="font-weight-bold small">Add Tube Well Inspection</span>
                 <hr />
             </div>
 

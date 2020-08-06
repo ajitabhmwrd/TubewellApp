@@ -67,8 +67,7 @@
                 </asp:DropDownList>
             </div>
             <div class="col-md-3 p-1 ">
-                Administrative Approval Amount
-                
+                Administrative Approval Amount    
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ForeColor="Red" ControlToValidate="txtAA" ValidationGroup="TubewellEntry" Display="Dynamic"
                     ValidationExpression="^(\d{1,18})(.\d{1,2})?$" ErrorMessage="(Invalid)" Font-Size="Small" Font-Bold="true" />
                 <asp:TextBox ID="txtAA" runat="server" CssClass="form-control form-control-sm"  placeholder="For Plan Head Only (In Rs)"></asp:TextBox>

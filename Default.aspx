@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="jumbotron text-center" style="height:500px">
+    <div class="jumbotron text-center" style="height:500px;background-color:lightcyan">
         <h1>MWRD TUBEWELL</h1>
         <h6>For Tubewell Application User Guide <a href="Downloads/Tubewell%20PPT.pdf">click here</a></h6>
         <h6>For Login  <a href="Login.aspx">click here</a></h6><br />

@@ -1,13 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="LoinDistrictwise.aspx.cs" Inherits="Nodal_LoinDistrictwise" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="LoinDistrictwise.aspx.cs" Inherits="Nodal_LoinDistrictwise" EnableEventValidation="false" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <link href="../myContent/Style/printStyle.css" rel="stylesheet" />
+</asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <br />
-
-    <div class="container">
-        <span class="font-weight-bold small">Login District-wise Report</span>
-        <hr />
-    </div>
-
     <div class="container">
         <div class="row">
              <div class="col-md-3 p-1">
@@ -32,16 +30,26 @@
             <//div>
             <div class="col-md-3 p-1"></div>
         </div>
-        <div class="col-md-3 p-1"></div>
+        <div class="col-md-1 p-1"></div>
+        <div class="col-md-2">
+                <br />
+                <input id="btnPrint" type="button" class="btn btn-sm btn-primary" value="Print" onclick="window.print();"  />
+                <asp:Button ID="btnExportToExcel" runat="server" Text="Export" class="btn btn-sm btn-primary" OnClick="btnExportToExcel_Click" />
+            </div>
         <div class="row">           
-            <div class="col-md-12 table-responsive">
-                <div class="font-weight-bold small text-center">
-                    District wise Login Report (
+            <div id="section-to-print" class="col-md-12 table-responsive">
+                <div id="divHead" runat="server" class="row font-weight-bold" visible="false">
+                <div class="col-md-8">
+                        District wise Login Report
                     <asp:Label ID="lblDate" runat="server" Text=""></asp:Label>
-                    )
+                    (Report Date : <%= (DateTime.Now.ToString("dd MMM yyyy")) %>)               
+                    </div>
+                    <div class="col-md-4">
+                        <div class="color-Box" style="background-color: #ff8080;">0 (No Log in)</div>
+                    </div>                   
                 </div>
-                <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
-                    HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found">
+                <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="tableCust" GridLines="None"
+                     EmptyDataText="No Records Found" OnRowDataBound="gvTubewell_RowDataBound">
                     <Columns>
                         <asp:TemplateField HeaderText="SNo">
                             <ItemTemplate>

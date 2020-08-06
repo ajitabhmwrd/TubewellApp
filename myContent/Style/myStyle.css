@@ -1,4 +1,8 @@
-﻿.Pager span {
+﻿body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:14px;
+}
+.Pager span {
     color: #333;
     background-color: #F7F7F7;
     font-weight: bold;
@@ -26,7 +30,75 @@
     background-color: #FFFFAF;
 }
 
+.color-Box {
+    padding: 1px;
+    float: right;
+    margin-right: 10px;
+    border: solid 1px gray;
+}
 
+.tableCust{
+    width:100%;
+}
 
+    .tableCust tr {
+        font-size: 14px;
+        border: solid 1px black;
+    }
+.tableCust tr:hover {
+    background-color: lightblue !important;
+}
 
+.tableCust tr:hover td {
+    background-color: transparent !important;
+}
 
+    .tableCust td {
+        padding: 2px;
+        padding-left: 5px;
+        border: solid 1px black;
+    }
+    .tableCust th {
+        padding: 4px;
+        background-color: #008fcc;
+        color: white;
+        font-size: 12px;
+        border: solid black 1px;
+        text-align: center;
+    }
+        .tableCust th a {
+            color: white;
+        }
+            .tableCust th a:hover {
+                color: white;
+            }
+
+.btn-primary {
+    background-color: #008fcc;
+}
+
+.customBgColor {
+    background-color: #008fcc;
+    color: white;
+    font-size: 12px;
+}
+
+.customBgColor:not(.nohover):hover {
+    background-color: #008fcc;
+    color: white;
+    font-size: 12px;
+}
+
+.dropdown-item {
+    padding-bottom: 2px;
+    padding-top: 2px;
+    margin-bottom: -3px;
+    margin-top: -3px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.dropdown-menu {
+    background-color: #008fcc;
+}

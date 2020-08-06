@@ -237,7 +237,8 @@ public partial class EE_TwPhysFinProgress : System.Web.UI.Page
                     new SqlParameter("@EntryBy",Session["LoginId"].ToString()),
                     new SqlParameter("@EntryByIP",customVariables.GetIPAddress()),
                     new SqlParameter("@MBNumber",txtMBNo.Text.Trim()),
-                    new SqlParameter("@HeadID",ddlHead.SelectedValue)
+                    new SqlParameter("@HeadID",ddlHead.SelectedValue),
+                    new SqlParameter("@EstimatedCostID",ddlHead.SelectedValue=="1"?ddlEC.SelectedValue:(object)DBNull.Value)
                             };
         lblMessage.Text = gd.insExecuteSP("updTwPhysFinProgress", prm);
         bindgvTubewell();
@@ -275,7 +276,17 @@ public partial class EE_TwPhysFinProgress : System.Web.UI.Page
         ddlFinYearMP.SelectedValue = dt.Rows[0]["FinYear"].ToString();
         ddlWorkNature.SelectedValue = dt.Rows[0]["WorkNatureID"].ToString();
         lbDownloadMP.CommandArgument = dt.Rows[0]["PdfPath"].ToString();
-        ddlHead.SelectedValue= dt.Rows[0]["HeadID"].ToString();
+        ddlHead.SelectedValue= dt.Rows[0]["HeadID"].ToString();        
+        HideShowEC();
+        if (ddlHead.SelectedValue == "1")
+        {
+            bindddlEC();
+            try
+            {
+                ddlEC.SelectedValue = dt.Rows[0]["EstimatedCostID"].ToString();
+            }
+            catch (Exception ex) { }
+        }
     }
 
     protected void lnkDownload_Click(object sender, EventArgs e)
@@ -301,5 +312,59 @@ public partial class EE_TwPhysFinProgress : System.Web.UI.Page
     protected void ddlFinYear_SelectedIndexChanged(object sender, EventArgs e)
     {
         bindgvTubewell();
+    }
+    public void bindddlEC()
+    {
+        lblMessage.Text = "";
+        
+        if (ddlHead.SelectedValue == "1") // For Plan
+        {
+            SqlParameter[] prm = new SqlParameter[]
+                    {
+                        new SqlParameter("@ID",lblTubewellID.Text),
+                        new SqlParameter("@HeadID","1")
+                    };
+            DataTable dt = gd.getDataTable("getTubewellEstimatedCost", prm);
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                lblMessage.Text = "Add Estimated Cost on selected tubewell!!!";
+            }
+            dt.Columns.Add("ddlText", typeof(System.String));
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (string.IsNullOrWhiteSpace(dr["RevisedEstimatedCost"].ToString()))
+                {
+                    dr["ddlText"] = "EC-" + dr["TEstimatedCost"].ToString() + ",FY-" + dr["FinaciyalYear"].ToString();
+                }
+                else
+                {
+                    dr["ddlText"] = "Revised EC-" + dr["RevisedEstimatedCost"].ToString() + ",FY-" + dr["FinaciyalYear"].ToString();
+                }
+            }
+            bc.bindDDL(ddlEC, dt, "ddlText", "EstID");
+        }
+    }
+
+    protected void ddlHead_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        HideShowEC();
+        if (ddlHead.SelectedValue != "0")
+        {
+            bindddlEC();
+        }
+    }
+    public void HideShowEC()
+    {
+        lblMessage.Text = "";
+        if (ddlHead.SelectedValue == "1") //For Plan
+        {
+            divEC.Visible = true;
+            rvEC.Enabled = true;
+        }
+        else
+        {
+            divEC.Visible = false;
+            rvEC.Enabled = false;
+        }
     }
 }

@@ -11,6 +11,10 @@
 
     <div class="container">
         <div class="row">
+            <div class="col-md-3 p-1">
+                        <a class="btn btn-primary btn-sm" href="AddInspection.aspx">Add Inpection</a>
+                    </div>
+                    <div class="col-md-9 p-1"></div>
             <div class="col-md-2 p-1">
                 District               
                 <asp:DropDownList ID="ddlDist" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlDist_SelectedIndexChanged">

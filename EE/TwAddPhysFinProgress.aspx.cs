@@ -140,7 +140,7 @@ public partial class EE_TwAddPhysFinProgress : System.Web.UI.Page
                 lblMessage.Text = "Please Enter work progress(%) as required!!!";
                 return;
             }
-            
+
             int fileSize = fuPDF.PostedFile.ContentLength;
             if (fileSize > (10240 * 1024))
             {
@@ -177,7 +177,8 @@ public partial class EE_TwAddPhysFinProgress : System.Web.UI.Page
                     new SqlParameter("@EntryBy",Session["LoginId"].ToString()),
                     new SqlParameter("@EntryByIP",customVariables.GetIPAddress()),
                     new SqlParameter("@MBNumber",txtMBNo.Text.Trim()),
-                    new SqlParameter("@HeadType",ddlHead.SelectedValue)
+                    new SqlParameter("@HeadType",ddlHead.SelectedValue),
+                    new SqlParameter("@EstimatedCostID",ddlHead.SelectedValue=="1"?ddlEC.SelectedValue:(object)DBNull.Value)
                             };
             response r = gd.insExecuteSPReturnID("insAddPhysFinProgress", prm);
             if (r.success == "1")
@@ -196,10 +197,12 @@ public partial class EE_TwAddPhysFinProgress : System.Web.UI.Page
         //Page.Response.Redirect(Page.Request.Url.ToString(), true);
         clear();
         lblMessage.Text = "";
-        
+
     }
     public void clear()
     {
+        ddlEC.Items.Clear();
+        ddlEC.Items.Insert(0, new ListItem("Select", "0"));
         txtWorkName.Text = "";
         ddlFinYear.ClearSelection();
         txtMBNo.Text = "";
@@ -217,5 +220,72 @@ public partial class EE_TwAddPhysFinProgress : System.Web.UI.Page
         ddlWorkStatus.ClearSelection();
         ddlHead.ClearSelection();
 
+    }
+    public void bindddlEC()
+    {
+        lblMessage.Text = "";
+        if (ddlHead.SelectedValue == "0")
+        {
+            lblMessage.Text = "Please select Head type!!!";
+            ddlTubewell.SelectedValue = "0";
+            return;
+        }
+        if (ddlHead.SelectedValue == "1") // For Plan
+        {
+            SqlParameter[] prm = new SqlParameter[]
+                    {
+                        new SqlParameter("@ID",ddlTubewell.SelectedValue),
+                        new SqlParameter("@HeadID","1")
+                    };
+            DataTable dt = gd.getDataTable("getTubewellEstimatedCost", prm);
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                lblMessage.Text = "Add Estimated Cost on selected tubewell!!!";
+            }
+            dt.Columns.Add("ddlText", typeof(System.String));
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (string.IsNullOrWhiteSpace(dr["RevisedEstimatedCost"].ToString()))
+                {
+                    dr["ddlText"] = "EC-" + dr["TEstimatedCost"].ToString() + ",FY-" + dr["FinaciyalYear"].ToString();
+                }
+                else
+                {
+                    dr["ddlText"] = "Revised EC-" + dr["RevisedEstimatedCost"].ToString() + ",FY-" + dr["FinaciyalYear"].ToString();
+                }
+            }
+            bc.bindDDL(ddlEC, dt, "ddlText", "EstID");
+        }
+    }
+
+    protected void ddlHead_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        HideShowEC();
+        if (ddlTubewell.SelectedValue != "0" && ddlHead.SelectedValue != "0")
+        {
+            bindddlEC();
+        }
+    }
+    public void HideShowEC()
+    {
+        lblMessage.Text = "";
+        if (ddlHead.SelectedValue == "1") //For Plan
+        {
+            divEC.Visible = true;
+            rvEC.Enabled = true;
+        }
+        else
+        {
+            divEC.Visible = false;
+            rvEC.Enabled = false;
+        }
+    }
+
+    protected void ddlTubewell_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddlTubewell.SelectedValue != "0" && ddlHead.SelectedValue != "0")
+        {
+            bindddlEC();
+        }
     }
 }

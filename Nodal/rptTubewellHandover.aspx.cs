@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,30 +16,65 @@ public partial class Admin_rptTubewellHandover : System.Web.UI.Page
     bindControls bc = new bindControls();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
+            bindDdlZone();
             bindgvTubewellHandover();
         }
     }
+    public void bindDdlZone()
+    {
+        DataTable dt = gd.getDataTable("getZone");
+        bc.bindDDL(ddlZone, dt, "ZoneName", "ZoneCode");
+    }
+    public void bindDdlDivision()
+    {
+        SqlParameter[] prm = new SqlParameter[]
+                    {
+                        new SqlParameter("@ZoneCode",ddlZone.SelectedValue=="0"?(object)DBNull.Value:ddlZone.SelectedValue)
+                    };
+        DataTable dt = gd.getDataTable("getDivision", prm);
+        bc.bindDDL(ddlDivision, dt, "DivisionName", "DivisionCode");
 
-    public void bindgvTubewellHandover()
+    }
+    public void bindgvTubewellHandover(string sortExpression = null)
     {
         try
         {
-            DataTable dt = gd.getDataTable("getTubewellHandOver");            
-            bc.bindGV(gvTubewell, dt);
+            SqlParameter[] prm = new SqlParameter[]
+                    {
+                        new SqlParameter("@ZoneCode",ddlZone.SelectedValue=="0"?(object)DBNull.Value:ddlZone.SelectedValue),
+                        new SqlParameter("@DivisionCode",ddlDivision.SelectedValue=="0"?(object)DBNull.Value:ddlDivision.SelectedValue)
+                    };
+            DataTable dt = gd.getDataTable("getTubewellHandOver", prm);
+            if (sortExpression != null)
+            {
+                DataView dv = dt.AsDataView();
+                this.SortDirection = this.SortDirection == "ASC" ? "DESC" : "ASC";
+
+                dv.Sort = sortExpression + " " + this.SortDirection;
+                gvTubewell.DataSource = dv;
+            }
+            else
+            {
+                gvTubewell.DataSource = dt;
+            }
+            gvTubewell.DataBind();
+            //bc.bindGV(gvTubewell, dt);
             int TotalTubewell = dt.AsEnumerable().Sum(row => row.Field<int>("TotalTubewell"));
             int TotalCA = dt.AsEnumerable().Sum(row => row.Field<int>("TotalCA"));
             int TotalTubewellPanchayat = dt.AsEnumerable().Sum(row => row.Field<int>("TotalTubewellPanchayat"));
             int TotalTubewellFunctional = dt.AsEnumerable().Sum(row => row.Field<int>("TotalTubewellFunctional"));
             int TotalTubewellNonFunctional = dt.AsEnumerable().Sum(row => row.Field<int>("TotalTubewellNonFunctional"));
-            gvTubewell.FooterRow.Cells[3].Text = "Total";
-            gvTubewell.FooterRow.Cells[3].HorizontalAlign = HorizontalAlign.Right;
-            gvTubewell.FooterRow.Cells[4].Text = TotalTubewell.ToString();
-            gvTubewell.FooterRow.Cells[5].Text = TotalCA.ToString();
-            gvTubewell.FooterRow.Cells[6].Text = TotalTubewellPanchayat.ToString();
-            gvTubewell.FooterRow.Cells[7].Text = TotalTubewellFunctional.ToString();
-            gvTubewell.FooterRow.Cells[8].Text = TotalTubewellNonFunctional.ToString();
+            int avgFunPercent = (TotalTubewellFunctional * 100) / TotalTubewell;
+            gvTubewell.FooterRow.Cells[4].Text = "Total";
+            gvTubewell.FooterRow.Cells[4].HorizontalAlign = HorizontalAlign.Right;
+            gvTubewell.FooterRow.Cells[5].Text = TotalTubewell.ToString();
+            gvTubewell.FooterRow.Cells[6].Text = TotalCA.ToString();
+            gvTubewell.FooterRow.Cells[7].Text = TotalTubewellPanchayat.ToString();
+            gvTubewell.FooterRow.Cells[8].Text = TotalTubewellFunctional.ToString();
+            gvTubewell.FooterRow.Cells[9].Text = avgFunPercent.ToString() + " %";
+            gvTubewell.FooterRow.Cells[10].Text = TotalTubewellNonFunctional.ToString();
 
         }
         catch (Exception ex)
@@ -136,4 +174,87 @@ public partial class Admin_rptTubewellHandover : System.Web.UI.Page
         {
         }
     }
+
+    protected void ddlZone_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        bindDdlDivision();
+        bindgvTubewellHandover();
+    }
+
+    protected void ddlDivision_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        bindgvTubewellHandover();
+    }
+
+    private string SortDirection
+    {
+        get { return ViewState["SortDirection"] != null ? ViewState["SortDirection"].ToString() : "ASC"; }
+        set { ViewState["SortDirection"] = value; }
+    }
+    protected void gvTubewell_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        this.bindgvTubewellHandover(e.SortExpression);
+    }
+    protected void gvTubewell_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            DataRowView dr = (DataRowView)e.Row.DataItem;
+            if (int.Parse(dr["FunPercent"].ToString()) <= 30)
+            {
+                e.Row.Cells[9].BackColor = System.Drawing.ColorTranslator.FromHtml("#ff8080");
+            }
+            if (int.Parse(dr["FunPercent"].ToString()) > 30 && int.Parse(dr["FunPercent"].ToString()) < 60)
+            {
+                e.Row.Cells[9].BackColor = System.Drawing.ColorTranslator.FromHtml("#ffb833");
+            }
+            if (int.Parse(dr["FunPercent"].ToString()) >= 60)
+            {
+                e.Row.Cells[9].BackColor = System.Drawing.ColorTranslator.FromHtml("#4dff4d");
+            }
+        }
+    }
+
+    protected void btnReset_Click(object sender, EventArgs e)
+    {
+        ddlZone.ClearSelection();
+        bindDdlDivision();
+        bindgvTubewellHandover();
+    }
+    
+    private void ExportGridToExcel(GridView gv,string filename)
+    {
+        Response.Clear();
+        Response.Buffer = true;
+        Response.ClearContent();
+        Response.ClearHeaders();
+        Response.Charset = "";
+        string FileName = filename + DateTime.Now + ".xls";
+        StringWriter strwritter = new StringWriter();        
+        HtmlTextWriter htmltextwrtter = new HtmlTextWriter(strwritter);
+        gv.AllowPaging = false;
+        this.bindgvTubewellHandover();
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        Response.ContentType = "application/vnd.ms-excel";
+        Response.AddHeader("Content-Disposition", "attachment;filename=" + FileName);
+        gv.GridLines = GridLines.Both;
+        gv.HeaderStyle.Font.Bold = true;
+        gv.RenderControl(htmltextwrtter);
+        Response.Write(Regex.Replace(strwritter.ToString(), "</?(a|A).*?>", ""));
+        Response.End();
+
+    }
+    
+
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        /* Verifies that the control is rendered */
+    }
+
+    protected void btnExportToExcel_Click(object sender, EventArgs e)
+    {
+        ExportGridToExcel(gvTubewell,"FunctionalRpt");
+    }
+    
+
 }

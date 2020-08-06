@@ -26,7 +26,6 @@
             color:white;  
             font-size:12px;
         }
-        
 
     </style>
 </head>
@@ -56,31 +55,19 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="height: 30px">
                     <ul class="navbar-nav mr-auto">    
-                       <%-- <li class="nav-item active dropdown">
-                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Adminstration
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="BlockEmpList.aspx">Manage AE/JE</a>
-                                
-                                <a class="dropdown-item" href="BlockEmpList.aspx">Tranfer AE/JE</a> 
-                                <a class="dropdown-item" href="AssignBlockAEJE.aspx">Assign Block AE/JE</a>                                 
-                            </div>
-                        </li>--%>
-                        
+                       
+                             
                         <li class="nav-item active dropdown">
                             <a class="nav-link dropdown-toggle " href="#" id="navbarTubwell" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tube Well Report
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarTubwell">
                                 <a class="dropdown-item" href="rptTubewellHandover.aspx">Tube Well Functional Count Report</a>                               
-                                <a class="dropdown-item" href="TubewellAllotmentRpt.aspx">Tube Well Allotment Report</a>                             
+                                <a class="dropdown-item" href="TubewellAllotment.aspx">Tube Well Allotment Report</a>                             
                                 <a class="dropdown-item" href="TubewellwiseAllotmentRpt.aspx">Tube Well Wise Allotment Report</a>                            
                                 <a class="dropdown-item" href="TubewellInpectionCountDistRpt.aspx">Inspection District-wise Report</a>                            
                                 <a class="dropdown-item" href="TubwellInpectionList.aspx">Tube well-wise Inspection Report</a>                            
                                 <a class="dropdown-item" href="RptTubewellIrrigationTubewellwise.aspx">Tube well-wise Irrigation Report</a>                            
                                 <a class="dropdown-item" href="TubewellCompleteDetailRpt.aspx">Tube well Complete Detail Report</a>                            
-                                <a class="dropdown-item" href="RptTwEstimatedCost.aspx">Tube well Estimated Cost</a>                            
-                                <a class="dropdown-item" href="RptTwPysicalFinProgress.aspx">Tube well Physical and Financial Progress</a>                            
-                                <a class="dropdown-item" href="LoginLog.aspx">Login Log</a>                            
                             </div>
                         </li>          
                         <%--<li class="nav-item active">

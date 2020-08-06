@@ -62,6 +62,8 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="rptTubewellHandover.aspx">Tubewell Functional Report</a>
                                 <a class="dropdown-item" href="usernamePass.aspx">usernamePass</a>
+                                <a class="dropdown-item" href="rptTwDistwisePlanHeadHQ.aspx">Delete Allotment Plan (HQ)</a>
+                                <a class="dropdown-item" href="MapSafeBlock.aspx">Map Safe Block</a>
                             </div>
                         </li>
                         <%--<li class="nav-item active">

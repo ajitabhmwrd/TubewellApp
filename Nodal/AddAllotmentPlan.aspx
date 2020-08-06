@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="AddAllotmentPlan.aspx.cs" Inherits="Nodal_AddAllotmentPlan" MaintainScrollPositionOnPostback="true" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Accountant/Accountant.master" AutoEventWireup="true" CodeFile="AddAllotmentPlan.aspx.cs" Inherits="Nodal_AddAllotmentPlan" MaintainScrollPositionOnPostback="true" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
@@ -70,7 +70,7 @@
                 <asp:Button ID="btnClear" runat="server" Text="Reset" CssClass="btn btn-primary btn-sm" OnClick="btnClear_Click" />
             </div>
 
-            <div class="col-md-12 p-2 table-responsive">
+            <div class="col-md-12">
                 <asp:GridView ID="gvTubewell" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
                     HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"
                     OnPageIndexChanging="gvTubewell_PageIndexChanging" PageSize="100" AllowPaging="false" OnRowEditing="gvTubewell_RowEditing" OnRowCancelingEdit="gvTubewell_RowCancelingEdit"
@@ -120,8 +120,18 @@
                                 <asp:TextBox ID="txtEstimatedCost" runat="server" ValidationGroup="gvValidation" Text='<%# Bind("EstimatedCost") %>'></asp:TextBox>
                             </EditItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="">
+                        <asp:TemplateField HeaderText="Total Allotment">
                             <ItemTemplate>
+                                <asp:Label ID="lblTAllotmentAmount" runat="server" Text='<%# Bind("TAllotmentAmount") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Alotment Count">
+                            <ItemTemplate>
+                                <asp:Label ID="lblAlotmentCount" runat="server" Text='<%# Bind("AlotmentCount") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="" ItemStyle-Wrap="false">
+                            <ItemTemplate >
                                 <asp:Button ID="btnAddAllotment" runat="server" Text="Add Allotment" class="btn-primary" OnClick="btnAddAllotment_Click" />
                                 <asp:Button ID="BtnECEdit" runat="server" Text="Edit" class="btn-primary" CommandName="Edit" />
                             </ItemTemplate>
@@ -201,7 +211,7 @@
                         <asp:Label ID="lblMessageMP" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
                     </div>
                 </div>
-                <div class="col-md-12 p-2 table-responsive">
+                <div class="col-md-12 ">
                     <asp:GridView ID="gvAllotment" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
                         HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found">
                         <Columns>
@@ -220,7 +230,7 @@
                                     <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Estimated Cost (In Rs)">
+                            <asp:TemplateField HeaderText="Allotment Amount (In Rs)">
                                 <ItemTemplate>
                                     <asp:Label ID="lblAllotmentAmount" runat="server" Text='<%# Bind("AllotmentAmount") %>'></asp:Label>
                                 </ItemTemplate>

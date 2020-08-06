@@ -4,10 +4,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <br />
-    <%--<div class="container">
-        <span class="font-weight-bold small">Tube Well wise Irrigation Report</span>
+    <div class="container">
+        <span class="font-weight-bold small">Tube Well wise Irrigation</span>
         <hr />
-    </div>--%>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -42,24 +42,12 @@
                 </asp:DropDownList>
             </div>
             <div class="col-md-2 p-1">
-                Crop Type
-                <asp:DropDownList ID="ddlCropType" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlFinYear_SelectedIndexChanged">
-                    <asp:ListItem Value="0">Select</asp:ListItem>
-                </asp:DropDownList>
-            </div>
-            <div class="col-md-2 p-1">
+                <br />
                 <asp:Button ID="btnClear" runat="server" Text="Reset" CssClass="btn btn-primary btn-sm" OnClick="btnClear_Click" />
             </div>
             <div class="col-md-12 p-2 table-responsive">
-                <div class="font-weight-bold small text-center">
-                    Tube Well wise Irrigation Report (
-                    Financial Year : <asp:Label ID="lblFinYr" runat="server" Text=""></asp:Label>, 
-                    Crop Type : <asp:Label ID="lblCropType" runat="server" Text=""></asp:Label>, 
-                    Date : <%= (DateTime.Now.ToString("dd MMM yyyy")) %>
-                    )
-                </div>
                 <asp:GridView ID="gvIrrigation" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
-                    HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found" ShowFooter="true" FooterStyle-Font-Bold="true" AllowPaging="true" OnPageIndexChanging="gvIrrigation_PageIndexChanging" PageSize="1000">
+                    HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found" ShowFooter="true" FooterStyle-Font-Bold="true" AllowPaging="true" OnPageIndexChanging="gvIrrigation_PageIndexChanging" PageSize="100">
                     <Columns>
                         <asp:TemplateField HeaderText="SNo">
                             <ItemTemplate>
@@ -69,11 +57,6 @@
                         <asp:TemplateField HeaderText="Name">
                             <ItemTemplate>
                                 <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="District">
-                            <ItemTemplate>
-                                <asp:Label ID="lblDistName" runat="server" Text='<%# Bind("DistName") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Block">
@@ -91,9 +74,9 @@
                                 <asp:Label ID="lblVILLNAME" runat="server" Text='<%# Bind("VILLNAME") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Status">
+                        <asp:TemplateField HeaderText="Financial Year">
                             <ItemTemplate>
-                                <asp:Label ID="lblStatus" runat="server" Text='<%# Bind("Status") %>'></asp:Label>
+                                <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Duration" ItemStyle-Wrap="false">

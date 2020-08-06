@@ -5,10 +5,50 @@
 <html>
 <head runat="server">
     <title></title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="myContent/Style/myStyle.css" rel="stylesheet" />
-    
+    <link href="../bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../myContent/Style/myStyle.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-3.4.1.min.js"></script>
+    <script src="../bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script src="../myContent/JS/myJavaScript.js"></script>
+    <style>
+        table tr {
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .btn-primary {
+            background-color: #008fcc;
+        }
+
+        .customBgColor {
+            background-color: #008fcc;
+            color: white;
+            font-size: 12px;
+        }
+
+            .customBgColor:not(.nohover):hover {
+                background-color: #008fcc;
+                color: white;
+                font-size: 12px;
+            }
+
+        .dropdown-item {
+            padding-bottom: 2px;
+            padding-top: 2px;
+            margin-bottom: -3px;
+            margin-top: -3px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .dropdown-menu {
+            background-color: #008fcc;
+        }
+    </style>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -31,25 +71,22 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
                             <a class="nav-link" href="Downloads/Tubewell%20PPT.pdf" target="_new">User Guide</a>
                         </li>
-                        <%--<li class="nav-item active dropdown">
-                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="rptTubewellHandover.aspx">Tube Well Current Status Report</a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>--%>
-
+                            <a class="nav-link" href="TubewellComplain.aspx">Tube well Complain</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="http://mpc.smartkheti.com/" target="_blank">MPC</a>
+                        </li>
                     </ul>
+
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
                             <a class="nav-link" href="Login.aspx">Login</a>

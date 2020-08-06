@@ -29,9 +29,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <br />
-
     <div class="container">
-        <span class="font-weight-bold small">Tube well Inpection Detail</span>
+        <span class="font-weight-bold small">Tube well Inpection Detail </span>
         <hr />
     </div>
 
@@ -56,6 +55,10 @@
                         <asp:Label ID="lblName" runat="server" Font-Bold="True" ForeColor="Blue"></asp:Label>
             </div>
             <div class="col-md-3 p-1">
+                Tubewell District :
+                        <asp:Label ID="lblDistrict" runat="server" Font-Bold="True" ForeColor="Blue"></asp:Label>
+            </div>
+            <div class="col-md-3 p-1">
                 Tubewell Block :
                         <asp:Label ID="lblBlock" runat="server" Font-Bold="True" ForeColor="Blue"></asp:Label>
             </div>
@@ -72,7 +75,7 @@
                         <asp:Label ID="lblType" runat="server" Font-Bold="True" ForeColor="Blue"></asp:Label>
             </div>
             <div class="col-md-3 p-1">
-                Tubewell Status :
+                Tubewell Current Status :
                         <asp:Label ID="lblStatus" runat="server" Font-Bold="True" ForeColor="Blue"></asp:Label>
             </div>
         </div>
@@ -83,18 +86,32 @@
                 <Columns>
                     <asp:TemplateField HeaderText="">
                         <ItemTemplate>
-                            <span style="font-size: 15px; font-weight: bold; color: blue; padding-bottom: 8px"><%#Container.DataItemIndex+1 %>.
+                            <span style="font-size: 15px; font-weight: bold; padding-bottom: 8px">
+                                <%#Container.DataItemIndex+1 %>.
                                Inspection By : 
+                                <asp:Label ID="lblEntryBy" runat="server" Text='<%# Bind("Name") %>'></asp:Label>,
                                 <asp:Label ID="lblEntryByDesignation" runat="server" Text='<%# Bind("EntryByDesignation") %>'></asp:Label>,
                                  Date :
                                 <asp:Label ID="lblInspectionDate" runat="server" Text='<%# Eval("InspectionDate", "{0:dd/MM/yyyy}") %>'></asp:Label>
                             </span>
+                            <br />
+                            <b>Inspection Status : </b>
+                            <asp:Label ID="lblInspectionStatus" runat="server" Text='<%# Bind("InspectionStatus") %>'></asp:Label>
+                            <br />
+                            <br />
                             <div class="row">
                                 <asp:Repeater ID="rtImage" runat="server">
                                     <ItemTemplate>
                                         <div class="col-md-3">
-                                            <asp:Label ID="lblImageID" runat="server" Text='<%# Bind("ImageID") %>' Visible="false"></asp:Label>,
+                                            <asp:Label ID="lblImageID" runat="server" Text='<%# Bind("ImageID") %>' Visible="false"></asp:Label>
                                             <asp:ImageButton ID="ibImage" runat="server" AlternateText="No Image" ImageUrl='<%# GetImage(Eval("Image")) %>' Height="200px" Width="100%" OnClick="ibImage_Click" CssClass="rounded" />
+                                            <b>Comment (
+                                                <asp:Label ID="lblEntryBy" runat="server" Text='<%# Bind("Name") %>'></asp:Label>,
+                                                <asp:Label ID="lblCommentByDesignation" runat="server" Text='<%# Bind("CommentByDesignation") %>'></asp:Label>) : </b>
+                                            <asp:Label ID="lblComment" runat="server" Text='<%# Bind("Comment") %>'></asp:Label>
+                                            <br />
+                                            <asp:LinkButton ID="btnAddComment" runat="server" Text="Add Comment" OnClick="btnAddComment_Click" /><br />
+                                            <asp:LinkButton ID="lbTotalComments" runat="server" Text='<%# Bind("stTotalComment") %>' OnClick="lbTotalComments_Click" />
                                         </div>
                                     </ItemTemplate>
                                 </asp:Repeater>
@@ -113,6 +130,78 @@
     <asp:Panel ID="Panel1" runat="server" CssClass="modalPopup" align="center" Style="display: none">
         <asp:Image ID="imgMP" runat="server" CssClass="img-FullScr" /><br />
         <asp:Button ID="btnClose" runat="server" Text="Close" CssClass="btn btn-primary btn-sm" />
+    </asp:Panel>
+    <!-- ModalPopupExtender -->
+
+    <!-- ModalPopupExtender -->
+    <cc1:ModalPopupExtender ID="mpComment" runat="server" PopupControlID="pnlComment" TargetControlID="lnkFake"
+        CancelControlID="btnClose" BackgroundCssClass="modalBackground">
+    </cc1:ModalPopupExtender>
+    <asp:Panel ID="pnlComment" runat="server" CssClass="modalPopup" align="center" Style="display: none">
+        <div class="row p-5">
+            <div class="col-md-12 p-2">
+                <b>Comment</b>
+            </div>
+
+            <div class="col-md-12 p-2">
+                <asp:TextBox ID="txtComment" runat="server" TextMode="MultiLine" CssClass="form-control" Rows="5"></asp:TextBox>
+                <asp:Label ID="lblMessageComment" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
+                <asp:Label ID="lblImageID" runat="server" Text="" Visible="false"></asp:Label>
+            </div>
+            <div class="col-md-12 p-2">
+                <asp:Button ID="btnSave" runat="server" Text="Save" CssClass="btn btn-primary btn-sm" OnClick="btnSave_Click" />
+                <asp:Button ID="btnCommentClose" runat="server" Text="Close" CssClass="btn btn-primary btn-sm" />
+            </div>
+        </div>
+
+    </asp:Panel>
+    <!-- ModalPopupExtender -->
+
+    <!-- ModalPopupExtender -->
+    <cc1:ModalPopupExtender ID="mpCommentView" runat="server" PopupControlID="pnlCommentView" TargetControlID="lnkFake"
+        CancelControlID="btnClose" BackgroundCssClass="modalBackground">
+    </cc1:ModalPopupExtender>
+    <asp:Panel ID="pnlCommentView" runat="server" ScrollBars="Auto" CssClass="modalPopup" align="center" Style="display: none">
+        <div class="row p-5">
+            <div class="col-md-12 p-2">
+                <b>Comments</b>
+            </div>
+            <div class="col-md-12 p-2">
+                <asp:GridView ID="gvComment" runat="server" AutoGenerateColumns="false" CssClass="tableCust">
+                    <Columns>
+                        <asp:TemplateField HeaderText="SNo">
+                            <ItemTemplate>
+                                <%#Container.DataItemIndex+1 %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="ID" Visible="false">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCommentID" runat="server" Text='<%# Bind("CommentID") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Comment">
+                            <ItemTemplate>
+                                <asp:Label ID="lblComment" runat="server" Text='<%# Bind("Comment") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Comment by">
+                            <ItemTemplate>
+                                <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>'></asp:Label> 
+                                (<asp:Label ID="lblEntryByDesig" runat="server" Text='<%# Bind("EntryByDesig") %>'></asp:Label>)
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Comment Date">
+                            <ItemTemplate>
+                                <asp:Label ID="lblEntryDt" runat="server" Text='<%# Eval("EntryDt", "{0:dd MMM yyyy hh:mm tt }") %>' /></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+            </div>
+            <div class="col-md-12">
+                <asp:Button ID="Button1" runat="server" Text="Close" CssClass="btn btn-primary btn-sm" />
+            </div>
+        </div>
     </asp:Panel>
     <!-- ModalPopupExtender -->
 </asp:Content>

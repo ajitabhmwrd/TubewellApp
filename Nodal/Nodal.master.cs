@@ -14,9 +14,37 @@ public partial class EE_eeMaster : System.Web.UI.MasterPage
     {
         try
         {
-            if (Session["RoleName"].ToString() == "Nodal")
+            menuBlockEmp.Visible = false;
+            if (Session["RoleName"].ToString() == "HQ")
             {
-                lblDesignation.Text = "Welcome " + Session["Designation"].ToString();
+                if (Session["LoginId"].ToString() == "Nodal")
+                {
+                    menuBlockEmp.Visible = true;
+                    menuTw.Visible = true;
+                }
+                else if(Session["LoginId"].ToString() == "ashok")
+                {
+                    menuApprTw.Visible = false;
+                    menuTw.Visible = true;
+                }
+                else
+                {
+                    menuTw.Visible = false;
+                }
+                lblDesignation.Text = "Welcome " + Session["Name"].ToString() + ", " + Session["RoleName"].ToString();
+            }
+            else if (Session["RoleName"].ToString() == "Consultant")
+            {
+                menuBlockEmp.Visible = true;
+                menuApprTw.Visible = false;
+                menuTw.Visible = true;
+                lblDesignation.Text = "Welcome " + Session["Name"].ToString() + ", " + Session["RoleName"].ToString();
+            }
+            else if (Session["RoleName"].ToString() == "WAPCOS")
+            {
+                menuApprTw.Visible = false;
+                menuTw.Visible = true;
+                lblDesignation.Text = "Welcome " + Session["Name"].ToString() + ", " + Session["RoleName"].ToString();
             }
             else
             {
@@ -37,15 +65,15 @@ public partial class EE_eeMaster : System.Web.UI.MasterPage
     {
         Session.Clear();
         Session.Abandon();
-        
+
         try
         {
             Response.Redirect("~/Login.aspx");
         }
         catch (Exception)
         {
-            
+
         }
-        
+
     }
 }

@@ -64,6 +64,7 @@ public partial class Login : System.Web.UI.Page
             Session["LoginId"] = dt.Rows[0]["LoginId"].ToString();
             Session["RoleName"] = userrole;
             Session["Designation"] = dt.Rows[0]["Designation"].ToString();
+            Session["Name"] = dt.Rows[0]["Name"].ToString();
             if (dt.Rows.Count == 1)
             {
                 string returnUrl = "";
@@ -94,7 +95,23 @@ public partial class Login : System.Web.UI.Page
                     Session["DistCode"] = dt.Rows[0]["DistCode"].ToString();
                     returnUrl = "~/EE/default.aspx";
                 }
-                else if (userrole == "Nodal")
+                else if (userrole == "Operator")
+                {
+                    returnUrl = "~/Operator/default.aspx";
+                }
+                else if (userrole == "Accountant")
+                {
+                    returnUrl = "~/Accountant/default.aspx";
+                }
+                else if (userrole == "HQ")
+                {
+                    returnUrl = "~/Nodal/default.aspx";
+                }
+                else if (userrole == "WAPCOS")
+                {
+                    returnUrl = "~/Nodal/default.aspx";
+                }
+                else if (userrole == "Consultant")
                 {
                     returnUrl = "~/Nodal/default.aspx";
                 }

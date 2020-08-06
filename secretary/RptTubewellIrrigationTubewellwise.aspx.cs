@@ -15,23 +15,10 @@ public partial class Nodal_RptTubewellIrrigationTubewellwise : System.Web.UI.Pag
     {
         if(!IsPostBack)
         {
-            bindDDLCropType();
             bindDDLFinYr();
             bindDDLDistrict();
             bindgvIrrigation();
             
-        }
-    }
-    public void bindDDLCropType()
-    {
-        try
-        {
-
-            DataTable dt = gd.getDataTable("getCropType");
-            bc.bindDDL(ddlCropType, dt, "CropType", "CropTypeID");
-        }
-        catch (Exception ex)
-        {
         }
     }
     public void bindDDLFinYr()
@@ -130,32 +117,19 @@ public partial class Nodal_RptTubewellIrrigationTubewellwise : System.Web.UI.Pag
         ddlBlock.ClearSelection();
         bindDDLPanchyat();
         ddlFinYear.ClearSelection();
-        ddlCropType.ClearSelection();
         bindgvIrrigation();
-        
     }
     public void bindgvIrrigation()
     {
         try
         {
-            lblFinYr.Text = "All";
-            lblCropType.Text = "All";
-            if (ddlFinYear.SelectedValue!="0")
-            {
-                lblFinYr.Text = ddlFinYear.SelectedValue;
-            }
-            if (ddlCropType.SelectedValue != "0")
-            {
-                lblCropType.Text = ddlCropType.SelectedItem.Text;
-            }
             SqlParameter[] prm = new SqlParameter[]
                     {
                         new SqlParameter("@DistCode",ddlDist.SelectedValue=="0"?(object)DBNull.Value:ddlDist.SelectedValue),
                         new SqlParameter("@PanchyatID",ddlPanchayat.SelectedValue=="0"?(object)DBNull.Value:ddlPanchayat.SelectedValue),
                         new SqlParameter("@BlockID",ddlBlock.SelectedValue=="0"?(object)DBNull.Value:ddlBlock.SelectedValue),
                         new SqlParameter("@ID",ddlTubewell.SelectedValue=="0"?(object)DBNull.Value:ddlTubewell.SelectedValue),
-                        new SqlParameter("@FinancialYear",ddlFinYear.SelectedValue=="0"?(object)DBNull.Value:ddlFinYear.SelectedValue),
-                        new SqlParameter("@CropTypeID",ddlCropType.SelectedValue=="0"?(object)DBNull.Value:ddlCropType.SelectedValue)
+                        new SqlParameter("@FinancialYear",ddlFinYear.SelectedValue=="0"?(object)DBNull.Value:ddlFinYear.SelectedValue)
                     };
             DataTable dt = gd.getDataTable("getTubewellIrrigationByTubwellWise", prm);
             bc.bindGV(gvIrrigation, dt);
@@ -163,12 +137,12 @@ public partial class Nodal_RptTubewellIrrigationTubewellwise : System.Web.UI.Pag
             decimal TRevenueDemandRs = dt.AsEnumerable().Sum(row => row.Field<decimal>("RevenueDemandRs"));
             decimal TRevenueCollectionRs = dt.AsEnumerable().Sum(row => row.Field<decimal>("RevenueCollectionRs"));
             decimal TDepositedAmountInBank = dt.AsEnumerable().Sum(row => row.Field<decimal>("DepositedAmountInBank"));
-            gvIrrigation.FooterRow.Cells[6].Text = "Total";
-            gvIrrigation.FooterRow.Cells[6].HorizontalAlign = HorizontalAlign.Right;
-            gvIrrigation.FooterRow.Cells[8].Text = TAreaDecimal.ToString();
-            gvIrrigation.FooterRow.Cells[9].Text = TRevenueDemandRs.ToString();
-            gvIrrigation.FooterRow.Cells[10].Text = TRevenueCollectionRs.ToString();
-            gvIrrigation.FooterRow.Cells[11].Text = TDepositedAmountInBank.ToString();
+            gvIrrigation.FooterRow.Cells[5].Text = "Total";
+            gvIrrigation.FooterRow.Cells[5].HorizontalAlign = HorizontalAlign.Right;
+            gvIrrigation.FooterRow.Cells[7].Text = TAreaDecimal.ToString();
+            gvIrrigation.FooterRow.Cells[8].Text = TRevenueDemandRs.ToString();
+            gvIrrigation.FooterRow.Cells[9].Text = TRevenueCollectionRs.ToString();
+            gvIrrigation.FooterRow.Cells[10].Text = TDepositedAmountInBank.ToString();
         }
         catch (Exception ex)
         {

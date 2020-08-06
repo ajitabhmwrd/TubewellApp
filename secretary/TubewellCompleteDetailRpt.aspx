@@ -72,7 +72,7 @@
 
         </div>
     </div>
-    <div class="container">
+    <div id="divDetail" runat="server" class="container">
         <div id="accordion">
             <div class="card">
                 <div class="card-header">

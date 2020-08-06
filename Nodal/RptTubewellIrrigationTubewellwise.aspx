@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="RptTubewellIrrigationTubewellwise.aspx.cs" Inherits="Nodal_RptTubewellIrrigationTubewellwise" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" CodeFile="RptTubewellIrrigationTubewellwise.aspx.cs" EnableEventValidation="false" Inherits="Nodal_RptTubewellIrrigationTubewellwise" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -49,17 +49,18 @@
             </div>
             <div class="col-md-2 p-1">
                 <asp:Button ID="btnClear" runat="server" Text="Reset" CssClass="btn btn-primary btn-sm" OnClick="btnClear_Click" />
+                <asp:Button ID="btnExportToExcel" runat="server" Text="Export" class="btn btn-sm btn-primary" OnClick="btnExportToExcel_Click" />
             </div>
             <div class="col-md-12 p-2 table-responsive">
-                <div class="font-weight-bold small text-center">
+                <div class="font-weight-bold text-center">
                     Tube Well wise Irrigation Report (
                     Financial Year : <asp:Label ID="lblFinYr" runat="server" Text=""></asp:Label>, 
                     Crop Type : <asp:Label ID="lblCropType" runat="server" Text=""></asp:Label>, 
                     Date : <%= (DateTime.Now.ToString("dd MMM yyyy")) %>
                     )
                 </div>
-                <asp:GridView ID="gvIrrigation" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
-                    HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found" ShowFooter="true" FooterStyle-Font-Bold="true" AllowPaging="true" OnPageIndexChanging="gvIrrigation_PageIndexChanging" PageSize="1000">
+                <asp:GridView ID="gvIrrigation" runat="server" AutoGenerateColumns="False" CssClass="tableCust" GridLines="None"
+                    EmptyDataText="No Records Found" ShowFooter="true" FooterStyle-Font-Bold="true" AllowPaging="true" OnPageIndexChanging="gvIrrigation_PageIndexChanging" PageSize="50">
                     <Columns>
                         <asp:TemplateField HeaderText="SNo">
                             <ItemTemplate>

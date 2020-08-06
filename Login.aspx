@@ -4,7 +4,7 @@
     <link href="myContent/Style/myLogin.css" rel="stylesheet" />    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server"> 
-    <asp:Panel ID="Panel1" runat="server" DefaultButton="btnLogin">
+    <asp:Panel ID="Panel1" runat="server" DefaultButton="btnLogin" BackColor="LightCyan">
         <div class="container">
             <div class="row">
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">

@@ -18,6 +18,7 @@ public partial class Nodal_TubewellCompleteDetailRpt : System.Web.UI.Page
         {
             bindDDLDistrict();
             bindDDLFinYr();
+            divDetail.Visible = false;
         }
     }
     public void bindDDLFinYr()
@@ -45,7 +46,6 @@ public partial class Nodal_TubewellCompleteDetailRpt : System.Web.UI.Page
         {
         }
     }
-
     public void bindDDLBlock()
     {
         try
@@ -116,6 +116,7 @@ public partial class Nodal_TubewellCompleteDetailRpt : System.Web.UI.Page
         bindGVInspection();
         bindgvAllotment();
         bindgvIrrigation();
+        divDetail.Visible = true;
     }
     public void bindTubewellDetail()
     {
@@ -165,7 +166,6 @@ public partial class Nodal_TubewellCompleteDetailRpt : System.Web.UI.Page
 
         }
     }
-
     public void bindGVInspection()
     {
         try
@@ -227,7 +227,6 @@ public partial class Nodal_TubewellCompleteDetailRpt : System.Web.UI.Page
         imgMP.ImageUrl = imageUrl;
         mp1.Show();
     }
-
     public void bindgvAllotment()
     {
         try
@@ -281,7 +280,6 @@ public partial class Nodal_TubewellCompleteDetailRpt : System.Web.UI.Page
             ex.ToString();
         }
     }
-
     protected void ddlFinYear_SelectedIndexChanged(object sender, EventArgs e)
     {
         if(ddlTubewell.SelectedValue=="0")

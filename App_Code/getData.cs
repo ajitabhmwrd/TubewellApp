@@ -162,7 +162,9 @@ public class getData
         }
         catch (Exception ex)
         {
-            return new response{ success=success };
+            return new response { success = "0",
+                message = "Error Occured!!!"
+                };
         }
 
     }

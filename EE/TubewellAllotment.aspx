@@ -17,11 +17,13 @@
                 <asp:Label ID="lblMessage" runat="server" ForeColor="Red" Font-Bold="True"></asp:Label>
             </div>
             <div class="col-md-2 p-1">
-                Head Type  
+                Head Type*
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" InitialValue="0" runat="server" ControlToValidate="ddlHead" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
                 <asp:DropDownList ID="ddlHead" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlHead_SelectedIndexChanged">
                     <asp:ListItem Value="0">Select</asp:ListItem>
                 </asp:DropDownList>
             </div>
+            
             <div class="col-md-2 p-1">
                 Financial Year*
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" InitialValue="0" runat="server" ControlToValidate="ddlFinYear" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
@@ -51,6 +53,13 @@
                     <asp:ListItem Value="0">Select</asp:ListItem>
                 </asp:DropDownList>
             </div>
+            <div id="divEC" runat="server" visible="false" class="col-md-2 p-1">
+                Estimated Cost*
+                <asp:RequiredFieldValidator ID="rvEC" Enabled="false" InitialValue="0" runat="server" ControlToValidate="ddlEC" Display="Dynamic" Text="(Select)" ErrorMessage="Select Block" ForeColor="Red" ValidationGroup="TubewellEntry" Font-Bold="True"></asp:RequiredFieldValidator>
+                <asp:DropDownList ID="ddlEC" runat="server" CssClass="form-control form-control-sm" >
+                    <asp:ListItem Value="0">Select</asp:ListItem>
+                </asp:DropDownList>
+            </div>
             <div class="col-md-2 p-1 ">
                 Allotment(In Rs)*
                 <asp:RequiredFieldValidator ErrorMessage="(Enter)" ControlToValidate="txtAllotment" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" Font-Size="Small" />
@@ -74,7 +83,7 @@
             <div class="col-md-3 p-1 ">
                 Upload Allotment pdf*
                 <asp:RequiredFieldValidator ID="rfvFU" ErrorMessage="(Required)" ControlToValidate="fuPDF" runat="server" Display="Dynamic" ValidationGroup="TubewellEntry" ForeColor="Red" Font-Bold="true" />
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ValidationExpression="([a-zA-Z0-9\s_\\.\-:])+(.pdf)$" ValidationGroup="TubewellEntry" Font-Bold="true"
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ValidationExpression="([a-zA-Z0-9\s_\\.\-:()])+(.pdf)$" ValidationGroup="TubewellEntry" Font-Bold="true"
                     ControlToValidate="fuPDF" runat="server" ForeColor="Red" ErrorMessage="(.pdf file only)"
                     Display="Dynamic" />
                 <br /><asp:FileUpload ID="fuPDF" runat="server" />
@@ -99,6 +108,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Tube well ID">
                             <ItemTemplate>
+                                <asp:Label ID="lblEstimatedCostID" runat="server" Text='<%# Bind("EstimatedCostID") %>' Visible="false"></asp:Label>
                                 <asp:Label ID="lblAllotmentID" runat="server" Text='<%# Bind("AllotmentID") %>' Visible="false"></asp:Label>
                                 <asp:Label ID="lblTubewellID" runat="server" Text='<%# Bind("TubewellID") %>'></asp:Label>
                             </ItemTemplate>
@@ -130,6 +140,16 @@
                         <asp:TemplateField HeaderText="Head">
                             <ItemTemplate>
                                 <asp:Label ID="lblHeadType" runat="server" Text='<%# Bind("HeadType") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="EC">
+                            <ItemTemplate>
+                                <asp:Label ID="lblTEstimatedCost" runat="server" Text='<%# Bind("TEstimatedCost") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Revised EC">
+                            <ItemTemplate>
+                                <asp:Label ID="lblRevisedEstimatedCost" runat="server" Text='<%# Bind("RevisedEstimatedCost") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Financial Year">

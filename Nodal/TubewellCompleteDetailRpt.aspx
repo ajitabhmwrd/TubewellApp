@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Nodal/Nodal.master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeFile="TubewellCompleteDetailRpt.aspx.cs" Inherits="Nodal_TubewellCompleteDetailRpt" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -27,11 +28,11 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="container">
+    <div class="mr-5 ml-5">
         <br />
         <div class="row">
             <div class="col-md-12">
-                <span class="font-weight-bold small">Tube Well Complete Detail</span>
+                <span class="font-weight-bold">Tube Well Complete Detail</span>
                 <button type="button" id="btnClps" class="btn btn-link float-right">Collapse All</button>
                 <hr />
             </div>
@@ -72,23 +73,98 @@
 
         </div>
     </div>
-    <div class="container">
+    <div id="divDetail" runat="server" visible="false" class="mr-5 ml-5">
         <div id="accordion">
             <div class="card">
-                <div class="card-header">
-                    <a class="card-link" data-toggle="collapse" href="#TubDetail">Tube well Detail
-                    </a>
-                </div>
+                <a class="card-link" data-toggle="collapse" href="#TubDetail">
+                    <div class="card-header text-white font-weight-bold" style="padding: 4px; background-color: #008fcc;">
+                        Tube well Detail                    
+                    </div>
+                </a>
                 <div id="TubDetail" class="clToggle collapse show">
                     <div class="card-body">
                         <div class="row">
+                            <asp:GridView ID="gvDetail" runat="server" CssClass="tableCust" AutoGenerateColumns="false">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="Tube well">
+                                        <ItemTemplate>
+                                            ID :
+                                            <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>' ForeColor="Blue"></asp:Label><br />
+                                            CA No. : 
+                                            <asp:Label ID="lblConsumerID" runat="server" Text='<%# Bind("ConsumerID") %>' ForeColor="Blue"></asp:Label><br />
+                                            Tube well : 
+                                            <asp:Label ID="lblName" runat="server" Text='<%# Bind("Name") %>' ForeColor="Blue"></asp:Label>
 
-                            <div class="col-md-3 p-1">
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Tube well Address">
+                                        <ItemTemplate>
+                                            District : 
+                                            <asp:Label ID="lblDistName" runat="server" Text='<%# Bind("DistName") %>' ForeColor="Blue"></asp:Label><br />
+                                            Block : 
+                                            <asp:Label ID="lblBlockName" runat="server" Text='<%# Bind("BlockName") %>' ForeColor="Blue"></asp:Label><br />
+                                            Panchayat : 
+                                            <asp:Label ID="lblPanchayatName" runat="server" Text='<%# Bind("PanchayatName") %>' ForeColor="Blue"></asp:Label><br />
+                                            Village : 
+                                            <asp:Label ID="lblVILLNAME" runat="server" Text='<%# Bind("VILLNAME") %>' ForeColor="Blue"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Tube well Location">
+                                        <ItemTemplate>
+                                            Longitude : 
+                                            <asp:Label ID="lblLongitude" runat="server" Text='<%# Bind("Longitude") %>' ForeColor="Blue"></asp:Label><br />
+                                            Latitude : 
+                                            <asp:Label ID="lblLatitude" runat="server" Text='<%# Bind("Latitude") %>' ForeColor="Blue"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Status">
+                                        <ItemTemplate>
+                                            Status : 
+                                            <asp:Label ID="lblStatus" runat="server" Text='<%# Bind("Status") %>' ForeColor="Blue"></asp:Label><br />
+                                            Type : 
+                                            <asp:Label ID="lblType" runat="server" Text='<%# Bind("Type") %>' ForeColor="Blue"></asp:Label><br />
+                                            Scada Status : 
+                                            <asp:Label ID="lblScadaDetail" runat="server" Text='<%# Bind("ScadaDetail") %>' ForeColor="Blue"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:TemplateField HeaderText="Hand Over Details">
+                                        <ItemTemplate>
+                                            Is Handed Over : 
+                                            <asp:Label ID="lblIsHandedOver" runat="server" Text='<%# Bind("IsHandedOver") %>' ForeColor="Blue"></asp:Label><br />
+                                            Block : 
+                                            <asp:Label ID="lblHandedOverBlock" runat="server" Text='<%# Bind("HandedOverBlock") %>' ForeColor="Blue"></asp:Label><br />
+                                            Panchayat : 
+                                            <asp:Label ID="lblHandedOverPanchyat" runat="server" Text='<%# Bind("HandedOverPanchyat") %>' ForeColor="Blue"></asp:Label><br />
+                                            Date : 
+                                            <asp:Label ID="lblHandedOverDate" runat="server" Text='<%# Bind("HandedOverDate") %>' ForeColor="Blue"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="JE Details">
+                                        <ItemTemplate>
+                                            JE Name : 
+                                            <asp:Label ID="lblJEName" runat="server" Text='<%# Bind("JEName") %>' ForeColor="Blue"></asp:Label><br />
+                                            JE Mobile : 
+                                            <asp:Label ID="lblJEMobile" runat="server" Text='<%# Bind("JEMobile") %>' ForeColor="Blue"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="AE Details">
+                                        <ItemTemplate>
+                                            AE Name : 
+                                            <asp:Label ID="lblAEName" runat="server" Text='<%# Bind("AEName") %>' ForeColor="Blue"></asp:Label><br />
+                                            AE Mobile : 
+                                            <asp:Label ID="lblAEMobile" runat="server" Text='<%# Bind("AEMobile") %>' ForeColor="Blue"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    
+                                </Columns>
+                            </asp:GridView>
+                            <%--<div class="col-md-3 p-1">
                                 Tubewell ID :
                                  <asp:Label ID="lblTubewellID" runat="server" Text="" ForeColor="Blue"></asp:Label>
-                            </div>
+                            </div>--%>
                         </div>
-                        <div class="row">
+                        <%--<div class="row">
                             <div class="col-md-3 p-1">
                                 Block :
                             </div>
@@ -178,15 +254,16 @@
                                 <asp:Label ID="lblScadaStatus" runat="server" Font-Size="14px" ForeColor="Blue"></asp:Label>
                             </div>
 
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header">
-                    <a class="card-link" data-toggle="collapse" href="#TubContact">Tube well Contacts
-                    </a>
-                </div>
+            <%--<div class="card">
+                <a class="card-link" data-toggle="collapse" href="#TubContact">
+                    <div class="card-header text-white font-weight-bold" style="padding: 4px; background-color: #008fcc;">
+                        Tube well Contacts                    
+                    </div>
+                </a>
                 <div id="TubContact" class="clToggle collapse show">
                     <div class="card-body">
                         <div class="row">
@@ -242,117 +319,122 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--%>
             <div class="card">
-                <div class="card-header">
-                    <a class="card-link" data-toggle="collapse" href="#TubAllot">Tube well Allotment
-                    </a>
-                </div>
+                <a class="card-link" data-toggle="collapse" href="#TubAllot">
+                    <div class="card-header text-white font-weight-bold" style="padding: 4px; background-color: #008fcc;">
+                        Tube well Allotment
+                    </div>
+                </a>
                 <div id="TubAllot" class="clToggle collapse show">
-                    <div class="card-body">                        
+                    <div class="card-body">
                         <div class="col-md-12 p-2 table-responsive">
-                <asp:GridView ID="gvAllot" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
-                    HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"  ShowFooter="true" FooterStyle-Font-Bold="true">
-                    <Columns>
-                        <asp:TemplateField HeaderText="SNo">
-                            <ItemTemplate>
-                                <%#Container.DataItemIndex+1 %>
-                            </ItemTemplate>
-                        </asp:TemplateField>                                       
-                        <asp:TemplateField HeaderText="Financial Year">
-                            <ItemTemplate>
-                                <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Letter No">
-                            <ItemTemplate>
-                                <asp:Label ID="lblLetterNo" runat="server" Text='<%# Bind("LetterNo") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Letter Date" ItemStyle-Wrap="false" >
-                            <ItemTemplate>
-                                <asp:Label ID="lblLetterDate" runat="server" Text='<%# Bind("LetterDate","{0:dd-MM-yyyy}") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Head" ItemStyle-Wrap="false">
-                            <ItemTemplate>
-                                <asp:Label ID="lblHeadType" runat="server" Text='<%# Bind("HeadType") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Estimated Cost (In Rs)">
-                            <ItemTemplate>
-                                <asp:Label ID="lblEstimatedCost" runat="server" Text='<%# Bind("EstimatedCost") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Allotment (In Rs)">
-                            <ItemTemplate>
-                                <asp:Label ID="lblAllotmentAmount" runat="server" Text='<%# Bind("AllotmentAmount") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
-            </div>
+                            <asp:GridView ID="gvAllot" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
+                                HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found" ShowFooter="true" FooterStyle-Font-Bold="true">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="SNo">
+                                        <ItemTemplate>
+                                            <%#Container.DataItemIndex+1 %>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Financial Year">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Letter No">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblLetterNo" runat="server" Text='<%# Bind("LetterNo") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Letter Date" ItemStyle-Wrap="false">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblLetterDate" runat="server" Text='<%# Bind("LetterDate","{0:dd-MM-yyyy}") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Head" ItemStyle-Wrap="false">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblHeadType" runat="server" Text='<%# Bind("HeadType") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Estimated Cost (In Rs)">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblEstimatedCost" runat="server" Text='<%# Bind("EstimatedCost") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Allotment (In Rs)">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblAllotmentAmount" runat="server" Text='<%# Bind("AllotmentAmount") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="card">
-                <div class="card-header">
-                    <a class="card-link" data-toggle="collapse" href="#TubIrrigation">Tube well Irrigation
-                    </a>
-                </div>
+                <a class="card-link" data-toggle="collapse" href="#TubIrrigation">
+                    <div class="card-header text-white font-weight-bold" style="padding: 4px; background-color: #008fcc;">
+                        Tube well Irrigation                    
+                    </div>
+                </a>
                 <div id="TubIrrigation" class="clToggle collapse show">
-                    <div class="card-body">                        
+                    <div class="card-body">
                         <div class="col-md-12 p-2 table-responsive">
-                <asp:GridView ID="gvIrrigation" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
-                    HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found"  ShowFooter="false" FooterStyle-Font-Bold="true">
-                    <Columns>
-                        <asp:TemplateField HeaderText="SNo">
-                            <ItemTemplate>
-                                <%#Container.DataItemIndex+1 %>
-                            </ItemTemplate>
-                        </asp:TemplateField>                                       
-                        <asp:TemplateField HeaderText="Financial Year">
-                            <ItemTemplate>
-                                <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Duration">
-                            <ItemTemplate>
-                                <asp:Label ID="lblHour" runat="server" Text='<%# Bind("Hour") %>'></asp:Label> Hour
-                                <asp:Label ID="lblMinute" runat="server" Text='<%# Bind("Minute") %>'></asp:Label> Minute
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Irrigation Area">
-                            <ItemTemplate>
-                                <asp:Label ID="lblAreaDecimal" runat="server" Text='<%# Bind("AreaDecimal") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Demand(In Rs)">
-                            <ItemTemplate>
-                                <asp:Label ID="lblRevenueDemandRs" runat="server" Text='<%# Bind("RevenueDemandRs") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Collection(In Rs)">
-                            <ItemTemplate>
-                                <asp:Label ID="lblRevenueCollectionRs" runat="server" Text='<%# Bind("RevenueCollectionRs") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Deposited In Bank(In Rs)">
-                            <ItemTemplate>
-                                <asp:Label ID="lblDepositedAmountInBank" runat="server" Text='<%# Bind("DepositedAmountInBank") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
-            </div>
+                            <asp:GridView ID="gvIrrigation" runat="server" AutoGenerateColumns="False" CssClass="table table-hover table-bordered table-sm" GridLines="None"
+                                HeaderStyle-CssClass="customBgColor text-white" EmptyDataText="No Records Found" ShowFooter="false" FooterStyle-Font-Bold="true">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="SNo">
+                                        <ItemTemplate>
+                                            <%#Container.DataItemIndex+1 %>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Financial Year">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblFinancialYear" runat="server" Text='<%# Bind("FinancialYear") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Duration">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblHour" runat="server" Text='<%# Bind("Hour") %>'></asp:Label>
+                                            Hour
+                                <asp:Label ID="lblMinute" runat="server" Text='<%# Bind("Minute") %>'></asp:Label>
+                                            Minute
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Irrigation Area">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblAreaDecimal" runat="server" Text='<%# Bind("AreaDecimal") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Demand(In Rs)">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblRevenueDemandRs" runat="server" Text='<%# Bind("RevenueDemandRs") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Collection(In Rs)">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblRevenueCollectionRs" runat="server" Text='<%# Bind("RevenueCollectionRs") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Deposited In Bank(In Rs)">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblDepositedAmountInBank" runat="server" Text='<%# Bind("DepositedAmountInBank") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="card">
-                <div class="card-header">
-                    <a class="card-link" data-toggle="collapse" href="#TubInspect">Tube well Inspection
-                    </a>
-                </div>
+                <a class="card-link" data-toggle="collapse" href="#TubInspect">
+                    <div class="card-header text-white font-weight-bold" style="padding: 4px; background-color: #008fcc;">
+                        Tube well Inspection                    
+                    </div>
+                </a>
                 <div id="TubInspect" class="clToggle collapse show">
                     <div class="card-body">
                         <div class="col-md-12 p-2">
@@ -384,9 +466,9 @@
                         </div>
                         <asp:LinkButton Text="" ID="lnkFake" runat="server" />
                         <!-- ModalPopupExtender -->
-                        <cc1:modalpopupextender id="mp1" runat="server" popupcontrolid="Panel1" targetcontrolid="lnkFake"
-                            cancelcontrolid="btnClose" backgroundcssclass="modalBackground">
-                        </cc1:modalpopupextender>
+                        <cc1:ModalPopupExtender ID="mp1" runat="server" PopupControlID="Panel1" TargetControlID="lnkFake"
+                            CancelControlID="btnClose" BackgroundCssClass="modalBackground">
+                        </cc1:ModalPopupExtender>
                         <asp:Panel ID="Panel1" runat="server" CssClass="modalPopup" align="center" Style="display: none">
                             <asp:Image ID="imgMP" runat="server" CssClass="img-FullScr" /><br />
                             <asp:Button ID="btnClose" runat="server" Text="Close" CssClass="btn btn-primary btn-sm" />

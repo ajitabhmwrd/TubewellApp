@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -188,5 +190,38 @@ public partial class Nodal_RptTubewellIrrigationTubewellwise : System.Web.UI.Pag
     {
         gvIrrigation.PageIndex = e.NewPageIndex;
         bindgvIrrigation();
+    }
+    private void ExportGridToExcel(GridView gv, string filename)
+    {
+        Response.Clear();
+        Response.Buffer = true;
+        Response.ClearContent();
+        Response.ClearHeaders();
+        Response.Charset = "";
+        string FileName = filename + DateTime.Now + ".xls";
+        StringWriter strwritter = new StringWriter();
+        HtmlTextWriter htmltextwrtter = new HtmlTextWriter(strwritter);
+        gv.AllowPaging = false;
+        this.bindgvIrrigation();
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        Response.ContentType = "application/vnd.ms-excel";
+        Response.AddHeader("Content-Disposition", "attachment;filename=" + FileName);
+        gv.GridLines = GridLines.Both;
+        gv.HeaderStyle.Font.Bold = true;
+        gv.RenderControl(htmltextwrtter);
+        Response.Write(Regex.Replace(strwritter.ToString(), "</?(a|A).*?>", ""));
+        Response.End();
+
+    }
+
+
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        /* Verifies that the control is rendered */
+    }
+
+    protected void btnExportToExcel_Click(object sender, EventArgs e)
+    {
+        ExportGridToExcel(gvIrrigation, "FunctionalRpt");
     }
 }

@@ -45,7 +45,6 @@ public partial class Nodal_TubewellCompleteDetailRpt : System.Web.UI.Page
         {
         }
     }
-
     public void bindDDLBlock()
     {
         try
@@ -86,7 +85,6 @@ public partial class Nodal_TubewellCompleteDetailRpt : System.Web.UI.Page
             SqlParameter[] prm = new SqlParameter[]
                     {
                         new SqlParameter("@DistCode",ddlDist.SelectedValue),
-                        //new SqlParameter("@VILLCODE",ddlVillage.SelectedValue),
                         new SqlParameter("@PanchayatCode",ddlPanchayat.SelectedValue),
                         new SqlParameter("@BlockCode",ddlBlock.SelectedValue)
                     };
@@ -120,52 +118,53 @@ public partial class Nodal_TubewellCompleteDetailRpt : System.Web.UI.Page
     public void bindTubewellDetail()
     {
         
-        lblTubewellID.Text = ddlTubewell.SelectedValue;
+        //lblTubewellID.Text = ddlTubewell.SelectedValue;
         SqlParameter[] prm = new SqlParameter[]
             {
                     new SqlParameter("@ID",ddlTubewell.SelectedValue)
             };
         DataTable dt = gd.getDataTable("getTubewellByID", prm);
-        if (dt.Rows.Count == 1)
-        {
-            lblName.Text = dt.Rows[0]["Name"].ToString();
-            lblblock.Text = dt.Rows[0]["BlockName"].ToString();
-            lblPanchayat.Text = dt.Rows[0]["PanchayatName"].ToString();
-            lblVillage.Text = dt.Rows[0]["VILLNAME"].ToString();
-            lblStatus.Text = dt.Rows[0]["Status"].ToString();
-            lblType.Text = dt.Rows[0]["Type"].ToString();
-            if (dt.Rows[0]["IsHandedOver"].ToString() == "Y")
-            {
-                lblIsHandOverPanchayat.Text = "Yes";
-            }
-            else
-            {
-                lblIsHandOverPanchayat.Text = "No";
-            }
-            lblHandOverBlock.Text = dt.Rows[0]["HandedOverBlock"].ToString();
-            lblHandOverPanchayat.Text = dt.Rows[0]["HandedOverPanchyat"].ToString();
-            lblScadaStatus.Text = dt.Rows[0]["ScadaDetail"].ToString();
-            lblLong.Text = dt.Rows[0]["Longitude"].ToString();
-            lblLat.Text = dt.Rows[0]["Latitude"].ToString();
-            string HandedOverDate = dt.Rows[0]["HandedOverDate"].ToString();
-            if (string.IsNullOrWhiteSpace(HandedOverDate) == false)
-            {
-                DateTime date1 = DateTime.Parse(HandedOverDate);
-                lblHandOverDate.Text = date1.ToString("dd-MM-yyyy");
-            }
-            lblCANo.Text = dt.Rows[0]["ConsumerID"].ToString();
-            lblFarName.Text = dt.Rows[0]["ConsernFarmer1"].ToString();
-            lblFarMobile.Text = dt.Rows[0]["ConsernFarmer1Mobile"].ToString();
-            lblFar2Name.Text = dt.Rows[0]["ConsernFarmer2"].ToString();
-            lblFar2Mob.Text = dt.Rows[0]["ConsernFarmer2Mobile"].ToString();
-            lblJEName.Text = dt.Rows[0]["JEName"].ToString();
-            lblJEMobile.Text = dt.Rows[0]["JEMobile"].ToString();
-            lblAEName.Text = dt.Rows[0]["AEName"].ToString();
-            lblAEMobile.Text = dt.Rows[0]["AEMobile"].ToString();
+        bc.bindGV(gvDetail, dt);
+        divDetail.Visible = true;
+        //if (dt.Rows.Count == 1)
+        //{
+        //    lblName.Text = dt.Rows[0]["Name"].ToString();
+        //    lblblock.Text = dt.Rows[0]["BlockName"].ToString();
+        //    lblPanchayat.Text = dt.Rows[0]["PanchayatName"].ToString();
+        //    lblVillage.Text = dt.Rows[0]["VILLNAME"].ToString();
+        //    lblStatus.Text = dt.Rows[0]["Status"].ToString();
+        //    lblType.Text = dt.Rows[0]["Type"].ToString();
+        //    if (dt.Rows[0]["IsHandedOver"].ToString() == "Y")
+        //    {
+        //        lblIsHandOverPanchayat.Text = "Yes";
+        //    }
+        //    else
+        //    {
+        //        lblIsHandOverPanchayat.Text = "No";
+        //    }
+        //    lblHandOverBlock.Text = dt.Rows[0]["HandedOverBlock"].ToString();
+        //    lblHandOverPanchayat.Text = dt.Rows[0]["HandedOverPanchyat"].ToString();
+        //    lblScadaStatus.Text = dt.Rows[0]["ScadaDetail"].ToString();
+        //    lblLong.Text = dt.Rows[0]["Longitude"].ToString();
+        //    lblLat.Text = dt.Rows[0]["Latitude"].ToString();
+        //    string HandedOverDate = dt.Rows[0]["HandedOverDate"].ToString();
+        //    if (string.IsNullOrWhiteSpace(HandedOverDate) == false)
+        //    {
+        //        DateTime date1 = DateTime.Parse(HandedOverDate);
+        //        lblHandOverDate.Text = date1.ToString("dd-MM-yyyy");
+        //    }
+        //    lblCANo.Text = dt.Rows[0]["ConsumerID"].ToString();
+        //    lblFarName.Text = dt.Rows[0]["ConsernFarmer1"].ToString();
+        //    lblFarMobile.Text = dt.Rows[0]["ConsernFarmer1Mobile"].ToString();
+        //    lblFar2Name.Text = dt.Rows[0]["ConsernFarmer2"].ToString();
+        //    lblFar2Mob.Text = dt.Rows[0]["ConsernFarmer2Mobile"].ToString();
+        //    lblJEName.Text = dt.Rows[0]["JEName"].ToString();
+        //    lblJEMobile.Text = dt.Rows[0]["JEMobile"].ToString();
+        //    lblAEName.Text = dt.Rows[0]["AEName"].ToString();
+        //    lblAEMobile.Text = dt.Rows[0]["AEMobile"].ToString();
 
-        }
+        //}
     }
-
     public void bindGVInspection()
     {
         try
@@ -227,7 +226,6 @@ public partial class Nodal_TubewellCompleteDetailRpt : System.Web.UI.Page
         imgMP.ImageUrl = imageUrl;
         mp1.Show();
     }
-
     public void bindgvAllotment()
     {
         try
@@ -281,7 +279,6 @@ public partial class Nodal_TubewellCompleteDetailRpt : System.Web.UI.Page
             ex.ToString();
         }
     }
-
     protected void ddlFinYear_SelectedIndexChanged(object sender, EventArgs e)
     {
         if(ddlTubewell.SelectedValue=="0")
