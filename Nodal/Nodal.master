@@ -81,6 +81,7 @@
                                 <a class="dropdown-item" href="rptTubewellHandover.aspx">Tube Well Functional Count Report</a>
                                 <a class="dropdown-item" href="rptTubewellFunctionalDatewise.aspx">Tube Well Change in Functional Date-wise Report</a>
                                 <a class="dropdown-item" href="TubewellCompleteDetailRpt.aspx">Tube well Complete Detail Report</a>
+                                <a class="dropdown-item" href="rptBlockwiseWithJE.aspx">JE Wise Tubwell Report</a>
                                 <div class="dropdown-divider"></div>
                                 
                                 <a class="dropdown-item" href="rptCriticalZoneTubewellDistwiseReport.aspx">Tube Well District-wise Critical-Zone Report</a>

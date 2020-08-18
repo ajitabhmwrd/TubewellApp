@@ -20,6 +20,7 @@ public partial class Nodal_TubewellFunctionalDatewise : System.Web.UI.Page
         {
             bindDdlZone();
             bindgvTubewellHandover();
+           
         }
     }
     public void bindDdlZone()
@@ -41,7 +42,9 @@ public partial class Nodal_TubewellFunctionalDatewise : System.Web.UI.Page
     {
         try
         {
-            lblHeading.Text = "Tube Well Functonal and Status Change between "+DateTime.Parse(txtStartDate.Text).ToString("dd MMM yy")+" and "+ DateTime.Parse(txtEndDate.Text).ToString("dd MMM yy") + "";
+            lblDate1.Text = DateTime.Parse(txtStartDate.Text).ToString("dd MMM yy");
+            lblDate2.Text = DateTime.Parse(txtEndDate.Text).ToString("dd MMM yy");
+            lblHeading.Text = "Tube Well Functonal and Status Change between "+lblDate1.Text+" and "+lblDate2.Text+ "";
             SqlParameter[] prm = new SqlParameter[]
                     {
                         new SqlParameter("@ZoneCode",ddlZone.SelectedValue=="0"?(object)DBNull.Value:ddlZone.SelectedValue),
@@ -268,5 +271,41 @@ public partial class Nodal_TubewellFunctionalDatewise : System.Web.UI.Page
     protected void btnView_Click(object sender, EventArgs e)
     {
         bindgvTubewellHandover();
+    }
+
+    protected void lbNonFunctionalChange_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            LinkButton btnEdit = (LinkButton)sender;
+            GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+            Context.Items.Add("DistCode", ((Label)gvr.FindControl("lblDistCode")).Text.ToString());
+            Context.Items.Add("TubewellStatus", "Non Functional");
+            Context.Items.Add("FromDate", lblDate1.Text);
+            Context.Items.Add("ToDate", lblDate2.Text);
+            Server.Transfer("rptTwStatusChangeListBetDate.aspx");
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    protected void lbFunctionalChange_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            LinkButton btnEdit = (LinkButton)sender;
+            GridViewRow gvr = (GridViewRow)btnEdit.NamingContainer;
+            Context.Items.Add("DistCode", ((Label)gvr.FindControl("lblDistCode")).Text.ToString());
+            Context.Items.Add("TubewellStatus", "Functional");
+            Context.Items.Add("FromDate", lblDate1.Text);
+            Context.Items.Add("ToDate", lblDate2.Text);
+            Server.Transfer("rptTwStatusChangeListBetDate.aspx");
+        }
+        catch (Exception ex)
+        {
+
+        }
     }
 }

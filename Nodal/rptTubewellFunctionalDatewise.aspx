@@ -8,7 +8,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <br />
-
+    <asp:Label ID="lblDate1" runat="server" Text="" Visible="false"></asp:Label>
+    <asp:Label ID="lblDate2" runat="server" Text="" Visible="false"></asp:Label>
     <div id="divPage" class="container">
         <div class="row">
             <div class="col-md-3 p-1">
@@ -121,12 +122,12 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Change in Functional" SortExpression="FunctionalChange">
                             <ItemTemplate>
-                                <asp:Label ID="lbFunctionalChange" runat="server" Text='<%# Bind("FunctionalChange") %>' OnClick="lbNonFunctional_Click"></asp:Label>
+                                <asp:LinkButton ID="lbFunctionalChange" runat="server" Text='<%# Bind("FunctionalChange") %>' OnClick="lbFunctionalChange_Click"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Change in Non-Functional" SortExpression="NonFunctionalChange">
                             <ItemTemplate>
-                                <asp:Label ID="lbNonFunctionalChange" runat="server" Text='<%# Bind("NonFunctionalChange") %>' OnClick="lbNonFunctional_Click"></asp:Label>
+                                <asp:LinkButton ID="lbNonFunctionalChange" runat="server" Text='<%# Bind("NonFunctionalChange") %>' OnClick="lbNonFunctionalChange_Click"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

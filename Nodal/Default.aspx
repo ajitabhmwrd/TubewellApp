@@ -158,6 +158,7 @@
                                 <a href="rptTubewellHandover.aspx">Tube Well Functional Count Report</a><br />
                                 <a href="rptTubewellFunctionalDatewise.aspx">Tube Well Change in Functional Date-wise Report</a><br />
                                 <a href="TubewellCompleteDetailRpt.aspx">Tube well Complete Detail Report</a><br />
+                                <a href="rptBlockwiseWithJE.aspx">JE Wise Tubwell Report</a><br />
                             </div>
                         </div>
                     </div>
