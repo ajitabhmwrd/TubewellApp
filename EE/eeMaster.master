@@ -78,6 +78,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="BlockEmpList.aspx">Manage AE/JE</a>
                                 <a class="dropdown-item" href="AssignBlockAEJE.aspx">Assign Block AE/JE</a>     
+                                <a class="dropdown-item" href="AssignJETubewellwise.aspx">Assign JE Tubewell-wise</a>     
                                 <a class="dropdown-item" href="OtherEmloyee.aspx">Manage Mukhiya/Panchayat Sachiv</a>
                                 <a class="dropdown-item" href="AssignMukhiaPanchayatSachiv.aspx">Assign Panchayat Mukhiya/Panchayat Sachiv</a>
                             </div>
